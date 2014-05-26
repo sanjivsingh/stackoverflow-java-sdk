@@ -20,6 +20,7 @@ import java.util.List;
 
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.PostTimeline;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.TimePeriod;
 
 /**
@@ -55,4 +56,7 @@ public interface QuestionTimelineApiQuery extends StackExchangeApiQuery<PostTime
 	public QuestionTimelineApiQuery withTimePeriod(TimePeriod timePeriod);
 	
 	public QuestionTimelineApiQuery withPaging(Paging paging);
+	
+	public QuestionTimelineApiQuery withFilter(String filter);
+
 }

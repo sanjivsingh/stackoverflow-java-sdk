@@ -17,9 +17,12 @@
 package com.google.code.stackexchange.client.query;
 
 import com.google.code.stackexchange.schema.Site;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 
 /**
  * The Interface StatisticsApiQuery.
  */
 public interface StackAuthApiQuery extends StackExchangeApiQuery<Site> {
+
+
 }

@@ -20,6 +20,7 @@ import java.util.List;
 
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.Reputation;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.TimePeriod;
 
 /**
@@ -62,4 +63,6 @@ public interface ReputationApiQuery extends StackExchangeApiQuery<Reputation> {
 	 * @return the reputation api query
 	 */
 	public ReputationApiQuery withTimePeriod(TimePeriod timePeriod);
+	
+	public ReputationApiQuery withFilter(String filter);
 }

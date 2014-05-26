@@ -20,6 +20,7 @@ import java.util.List;
 
 import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Badge;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 
 /**
  * The Interface BadgeApiQuery.
@@ -64,4 +65,8 @@ public interface BadgeApiQuery extends StackExchangeApiQuery<Badge> {
 	 * @return the badge api query
 	 */
 	public BadgeApiQuery withUserIds(List<Long> userIds);
+	
+	public BadgeApiQuery withFilter(String filter);
+
+	
 }

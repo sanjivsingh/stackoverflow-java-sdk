@@ -25,40 +25,46 @@ import com.google.code.stackexchange.schema.TimePeriod;
  * The Interface RevisionApiQuery.
  */
 public interface RevisionApiQuery extends StackExchangeApiQuery<Revision> {
-	
+
 	/**
-	 * With question ids.
+	 * With post ids.
 	 * 
-	 * @param questionIds the question ids
+	 * @param postIds
+	 *            the post ids
 	 * 
 	 * @return the revision api query
 	 */
-	public RevisionApiQuery withQuestionIds(long... questionIds);
-	
+	public RevisionApiQuery withPostIds(long... postIds);
+
 	/**
-	 * With question ids.
+	 * With post ids.
 	 * 
-	 * @param questionIds the question ids
+	 * @param postIds
+	 *            the question ids
 	 * 
 	 * @return the revision api query
 	 */
-	public RevisionApiQuery withQuestionIds(List<Long> questionIds);
-	
+	public RevisionApiQuery withPostIds(List<Long> postIds);
+
 	/**
 	 * With time period.
 	 * 
-	 * @param timePeriod the time period
+	 * @param timePeriod
+	 *            the time period
 	 * 
 	 * @return the revision api query
 	 */
 	public RevisionApiQuery withTimePeriod(TimePeriod timePeriod);
-	
+
 	/**
 	 * With revision guid.
 	 * 
-	 * @param revisionGuid the revision guid
+	 * @param revisionGuid
+	 *            the revision guid
 	 * 
 	 * @return the revision api query
 	 */
 	public RevisionApiQuery withRevisionGuid(String revisionGuid);
+
+	public RevisionApiQuery withFilter(String filter);
 }

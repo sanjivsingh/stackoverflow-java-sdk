@@ -28,28 +28,28 @@ import com.google.code.stackexchange.schema.TimePeriod;
  * The Interface CommentApiQuery.
  */
 public interface CommentApiQuery extends StackExchangeApiQuery<Comment> {
-	
+
 	/**
 	 * List user comments.
 	 * 
 	 * @return the paged list< comment>
 	 */
 	public PagedList<Comment> listUserComments();
-	
+
 	/**
 	 * List user comments.
 	 * 
 	 * @return the paged list< comment>
 	 */
 	public PagedList<Comment> listQuestionComments();
-	
+
 	/**
 	 * List user comments.
 	 * 
 	 * @return the paged list< comment>
 	 */
 	public PagedList<Comment> listAnswerComments();
-	
+
 	/**
 	 * List user mentions.
 	 * 
@@ -63,83 +63,92 @@ public interface CommentApiQuery extends StackExchangeApiQuery<Comment> {
 	 * @return the paged list< comment>
 	 */
 	public PagedList<Comment> listUserCommentsToUser();
-	
+
 	/**
 	 * With comment ids.
 	 * 
-	 * @param commentIds the comment ids
+	 * @param commentIds
+	 *            the comment ids
 	 * 
 	 * @return the comment api query
 	 */
 	public CommentApiQuery withCommentIds(long... commentIds);
-	
+
 	/**
 	 * With user ids.
 	 * 
-	 * @param userIds the user ids
+	 * @param userIds
+	 *            the user ids
 	 * 
 	 * @return the comment api query
 	 */
 	public CommentApiQuery withUserIds(long... userIds);
-	
+
 	/**
 	 * With user ids.
 	 * 
-	 * @param userIds the user ids
+	 * @param userIds
+	 *            the user ids
 	 * 
 	 * @return the comment api query
 	 */
 	public CommentApiQuery withUserIds(List<Long> userIds);
-	
+
 	/**
 	 * With user ids.
 	 * 
-	 * @param userIds the user ids
+	 * @param userIds
+	 *            the user ids
 	 * 
 	 * @return the comment api query
 	 */
 	public CommentApiQuery withQuestionIds(long... questionIds);
-	
+
 	/**
 	 * With user ids.
 	 * 
-	 * @param userIds the user ids
+	 * @param userIds
+	 *            the user ids
 	 * 
 	 * @return the comment api query
 	 */
 	public CommentApiQuery withQuestionIds(List<Long> questionIds);
-	
+
 	/**
 	 * With user ids.
 	 * 
-	 * @param userIds the user ids
+	 * @param userIds
+	 *            the user ids
 	 * 
 	 * @return the comment api query
 	 */
 	public CommentApiQuery withAnswerIds(long... answerIds);
-	
+
 	/**
 	 * With user ids.
 	 * 
-	 * @param userIds the user ids
+	 * @param userIds
+	 *            the user ids
 	 * 
 	 * @return the comment api query
 	 */
 	public CommentApiQuery withAnswerIds(List<Long> answerIds);
-	
+
 	/**
 	 * With to user id.
 	 * 
-	 * @param toUserId the to user id
+	 * @param toUserId
+	 *            the to user id
 	 * 
 	 * @return the comment api query
 	 */
 	public CommentApiQuery withToUserId(long toUserId);
-	
+
 	/**
 	 * With paging.
 	 * 
-	 * @param paging the paging
+	 * @param paging
+	 *            the paging
 	 * 
 	 * @return the comment api query
 	 */
@@ -148,7 +157,8 @@ public interface CommentApiQuery extends StackExchangeApiQuery<Comment> {
 	/**
 	 * With time period.
 	 * 
-	 * @param timePeriod the time period
+	 * @param timePeriod
+	 *            the time period
 	 * 
 	 * @return the comment api query
 	 */
@@ -157,7 +167,8 @@ public interface CommentApiQuery extends StackExchangeApiQuery<Comment> {
 	/**
 	 * With sort.
 	 * 
-	 * @param sort the sort
+	 * @param sort
+	 *            the sort
 	 * 
 	 * @return the comment api query
 	 */
@@ -166,9 +177,23 @@ public interface CommentApiQuery extends StackExchangeApiQuery<Comment> {
 	/**
 	 * With range.
 	 * 
-	 * @param range the range
+	 * @param range
+	 *            the range
 	 * 
 	 * @return the comment api query
 	 */
 	public CommentApiQuery withRange(Range range);
+
+	public PagedList<Comment> listPostComments();
+
+	public PagedList<Comment> listByIds();
+
+	public PagedList<Comment> listMyComments();
+
+	public PagedList<Comment> listMyCommentsToUser();
+
+	public PagedList<Comment> listMyMentionComments();
+	
+	public CommentApiQuery withFilter(String filter);
+
 }
