@@ -50,6 +50,7 @@ import com.google.code.stackexchange.schema.RevisionType;
 import com.google.code.stackexchange.schema.SchemaEntity;
 import com.google.code.stackexchange.schema.Site;
 import com.google.code.stackexchange.schema.SiteState;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.Statistics;
 import com.google.code.stackexchange.schema.Tag;
 import com.google.code.stackexchange.schema.TagRestriction;
@@ -71,158 +72,188 @@ import com.google.gson.JsonParser;
 /**
  * The Class BaseStackOverflowApiQuery.
  */
-public abstract class BaseStackOverflowApiQuery<T> extends StackExchangeApiGateway implements StackExchangeApiQuery<T> {
-	
+public abstract class BaseStackOverflowApiQuery<T> extends
+		StackExchangeApiGateway implements StackExchangeApiQuery<T> {
+
 	/** The api url builder. */
 	protected ApiUrlBuilder apiUrlBuilder;
-    
-	protected static final Charset UTF_8_CHAR_SET = Charset.forName(ApplicationConstants.CONTENT_ENCODING);
-	
-    /** The parser. */
-    private final JsonParser parser = new JsonParser();
-    
+
+	protected static final Charset UTF_8_CHAR_SET = Charset
+			.forName(ApplicationConstants.CONTENT_ENCODING);
+
+	/** The parser. */
+	private final JsonParser parser = new JsonParser();
+
 	private static final Map<Class<? extends SchemaEntity>, String> LIST_PLACE_HOLDERS = new HashMap<Class<? extends SchemaEntity>, String>();
-	
+
 	static {
-		LIST_PLACE_HOLDERS.put(Answer.class, "answers");
-		LIST_PLACE_HOLDERS.put(Badge.class, "badges");
-		LIST_PLACE_HOLDERS.put(Comment.class, "comments");
-		LIST_PLACE_HOLDERS.put(Question.class, "questions");
-		LIST_PLACE_HOLDERS.put(PostTimeline.class, "post_timelines");
-		LIST_PLACE_HOLDERS.put(Reputation.class, "rep_changes");
-		LIST_PLACE_HOLDERS.put(Statistics.class, "statistics");
-		LIST_PLACE_HOLDERS.put(Tag.class, "tags");
-		LIST_PLACE_HOLDERS.put(User.class, "users");
-		LIST_PLACE_HOLDERS.put(UserTimeline.class, "user_timelines");
-		LIST_PLACE_HOLDERS.put(Revision.class, "revisions");
-		LIST_PLACE_HOLDERS.put(Site.class, "api_sites");
+		LIST_PLACE_HOLDERS.put(Answer.class, "items");
+		LIST_PLACE_HOLDERS.put(Badge.class, "items");
+		LIST_PLACE_HOLDERS.put(Comment.class, "items");
+		LIST_PLACE_HOLDERS.put(Question.class, "items");
+		LIST_PLACE_HOLDERS.put(PostTimeline.class, "items");
+		LIST_PLACE_HOLDERS.put(Reputation.class, "items");
+		LIST_PLACE_HOLDERS.put(Statistics.class, "items");
+		LIST_PLACE_HOLDERS.put(Tag.class, "items");
+		LIST_PLACE_HOLDERS.put(User.class, "items");
+		LIST_PLACE_HOLDERS.put(UserTimeline.class, "items");
+		LIST_PLACE_HOLDERS.put(Revision.class, "items");
+		LIST_PLACE_HOLDERS.put(Site.class, "items");
 	}
-    
-    /** The handlers. */
-    private List<AsyncResponseHandler<PagedList<T>>> handlers = new ArrayList<AsyncResponseHandler<PagedList<T>>>();
-	
+
+	/** The handlers. */
+	private List<AsyncResponseHandler<PagedList<T>>> handlers = new ArrayList<AsyncResponseHandler<PagedList<T>>>();
+
 	/**
 	 * Instantiates a new base stack overflow api query.
 	 * 
-	 * @param applicationId the application id
+	 * @param applicationId
+	 *            the application id
 	 */
-	public BaseStackOverflowApiQuery(String applicationId) {
+	public BaseStackOverflowApiQuery(String applicationId,
+			StackExchangeSite stackExchangeSite) {
 		super.setApplicationKey(applicationId);
-        requestHeaders = new HashMap<String, String>();
+		super.setSite(stackExchangeSite);
+		requestHeaders = new HashMap<String, String>();
 
-        // by default we compress contents
-        requestHeaders.put("Accept-Encoding", "gzip, deflate");
-        this.reset();
-	}
-	
-	@Override
-	public void setApiProvider(ApiProvider apiProvider) {
-		super.setApiProvider(apiProvider);
+		// by default we compress contents
+		requestHeaders.put("Accept-Encoding", "gzip, deflate");
 		this.reset();
 	}
 
 	/**
 	 * Instantiates a new base stack overflow api query.
 	 * 
-	 * @param applicationId the application id
-	 * @param apiVersion the api version
+	 * @param applicationId
+	 *            the application id
+	 * @param apiVersion
+	 *            the api version
 	 */
-	public BaseStackOverflowApiQuery(String applicationId, String apiVersion) {
-		this(applicationId);
+	public BaseStackOverflowApiQuery(String applicationId, String apiVersion,
+			StackExchangeSite stackExchangeSite) {
+		this(applicationId, stackExchangeSite);
 		super.setApiVersion(apiVersion);
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.StackOverflowApiQuery#list()
+
+	@Override
+	public void setApiProvider(ApiProvider apiProvider) {
+		super.setApiProvider(apiProvider);
+		this.reset();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.StackOverflowApiQuery#list()
 	 */
 	@Override
 	public PagedList<T> list() {
 		InputStream jsonContent = null;
-        try {
-        	jsonContent = callApiMethod(apiUrlBuilder.buildUrl());
-        	JsonElement response = parser.parse(new InputStreamReader(jsonContent, UTF_8_CHAR_SET));
-        	if (response.isJsonObject()) {
-        		PagedList<T> responseList = unmarshall(response.getAsJsonObject());
-        		notifyObservers(responseList);
+		try {
+			String buildUrl = apiUrlBuilder.buildUrl();
+			jsonContent = callApiMethod(buildUrl);
+			JsonElement response = parser.parse(new InputStreamReader(
+					jsonContent, UTF_8_CHAR_SET));
+			if (response.isJsonObject()) {
+				PagedList<T> responseList = unmarshall(response
+						.getAsJsonObject());
+				notifyObservers(responseList);
 				return responseList;
-        	}
-        	throw new StackExchangeApiException("Unknown content found in response:" + response.toString());
-        } catch (Exception e) {
-            throw new StackExchangeApiException(e);
-        } finally {
-	        closeStream(jsonContent);
-	    }
+			}
+			throw new StackExchangeApiException(
+					"Unknown content found in response:" + response.toString());
+		} catch (Exception e) {
+			throw new StackExchangeApiException(e);
+		} finally {
+			closeStream(jsonContent);
+		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.StackOverflowApiQuery#singleResult()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.StackOverflowApiQuery#singleResult
+	 * ()
 	 */
 	@Override
 	public T singleResult() {
 		InputStream jsonContent = null;
-        try {
-        	jsonContent = callApiMethod(apiUrlBuilder.buildUrl());
-        	JsonElement response = parser.parse(new InputStreamReader(jsonContent, UTF_8_CHAR_SET));
-        	if (response.isJsonObject()) {
-        		PagedList<T> responseList = unmarshall(response.getAsJsonObject());
-        		notifyObservers(responseList);
+		try {
+			jsonContent = callApiMethod(apiUrlBuilder.buildUrl());
+			JsonElement response = parser.parse(new InputStreamReader(
+					jsonContent, UTF_8_CHAR_SET));
+			if (response.isJsonObject()) {
+				PagedList<T> responseList = unmarshall(response
+						.getAsJsonObject());
+				notifyObservers(responseList);
 				return getFirstElement(responseList);
-        	}
-        	throw new StackExchangeApiException("Unknown content found in response:" + response.toString());
-        } catch (Exception e) {
-            throw new StackExchangeApiException(e);
-        } finally {
-	        closeStream(jsonContent);
-	    }
+			}
+			throw new StackExchangeApiException(
+					"Unknown content found in response:" + response.toString());
+		} catch (Exception e) {
+			throw new StackExchangeApiException(e);
+		} finally {
+			closeStream(jsonContent);
+		}
 	}
-	
+
 	/**
 	 * Notify observers.
 	 * 
-	 * @param response the response
+	 * @param response
+	 *            the response
 	 */
 	protected void notifyObservers(PagedList<T> response) {
-		for(AsyncResponseHandler<PagedList<T>> handler : handlers) {
+		for (AsyncResponseHandler<PagedList<T>> handler : handlers) {
 			handler.handleResponse(response);
 		}
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.StackExchangeApiQuery#addResonseHandler(com.google.code.stackexchange.client.AsyncResponseHandler)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.code.stackexchange.client.query.StackExchangeApiQuery#
+	 * addResonseHandler
+	 * (com.google.code.stackexchange.client.AsyncResponseHandler)
 	 */
 	public void addResonseHandler(AsyncResponseHandler<PagedList<T>> handler) {
 		handlers.add(handler);
 	}
-	
-	
+
 	protected <A> A unmarshallObject(Class<A> clazz, InputStream jsonContent) {
-    	if (clazz.equals(Error.class)) {
-            try {
-            	JsonElement response = parser.parse(new InputStreamReader(jsonContent, UTF_8_CHAR_SET));
-            	if (response.isJsonObject()) {
-            		JsonObject adaptee = response.getAsJsonObject();
-            		Gson gson = getGsonBuilder().create();
-            		return gson.fromJson(adaptee.get("error"), clazz);
-            	}
-            } catch (Exception e) {
-                throw new StackExchangeApiException(e);
-            }
-    	}
-    	return null;
-    }
-    
-    protected <A> PagedList<A> unmarshallList(Class<A> clazz, InputStream jsonContent) {
-        try {
-        	JsonElement response = parser.parse(new InputStreamReader(jsonContent, UTF_8_CHAR_SET));
-        	if (response.isJsonObject()) {
-        		JsonObject adaptee = response.getAsJsonObject();
-        		return unmarshallList(clazz, adaptee);
-        	}
-        	throw new StackExchangeApiException("Unknown content found in response:" + response.toString());
-        } catch (Exception e) {
-            throw new StackExchangeApiException(e);
-        }
-    }
+
+		if (clazz.equals(Error.class)) {
+			try {
+				JsonElement response = parser.parse(new InputStreamReader(
+						jsonContent, UTF_8_CHAR_SET));
+				if (response.isJsonObject()) {
+					Gson gson = getGsonBuilder().create();
+					return gson.fromJson(response, clazz);
+				}
+			} catch (Exception e) {
+				throw new StackExchangeApiException(e);
+			}
+		}
+		return null;
+	}
+
+	protected <A> PagedList<A> unmarshallList(Class<A> clazz,
+			InputStream jsonContent) {
+		try {
+			JsonElement response = parser.parse(new InputStreamReader(
+					jsonContent, UTF_8_CHAR_SET));
+			if (response.isJsonObject()) {
+				JsonObject adaptee = response.getAsJsonObject();
+				return unmarshallList(clazz, adaptee);
+			}
+			throw new StackExchangeApiException(
+					"Unknown content found in response:" + response.toString());
+		} catch (Exception e) {
+			throw new StackExchangeApiException(e);
+		}
+	}
 
 	/**
 	 * @param <A>
@@ -246,7 +277,7 @@ public abstract class BaseStackOverflowApiQuery<T> extends StackExchangeApiGatew
 			JsonArray elements = adaptee.get(placeHolder).getAsJsonArray();
 			if (elements != null) {
 				Gson gson = getGsonBuilder().create();
-				for (JsonElement o : elements) {			
+				for (JsonElement o : elements) {
 					list.add(gson.fromJson(o, clazz));
 				}
 			}
@@ -254,26 +285,31 @@ public abstract class BaseStackOverflowApiQuery<T> extends StackExchangeApiGatew
 		return list;
 	}
 
-    /* (non-Javadoc)
-     * @see com.google.code.stackexchange.client.impl.StackOverflowApiGateway#marshallObject(java.lang.Object)
-     */
-    protected String marshallObject(Object element) {
-    	return null;
-    }
-	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.code.stackexchange.client.impl.StackOverflowApiGateway#
+	 * marshallObject(java.lang.Object)
+	 */
+	protected String marshallObject(Object element) {
+		return null;
+	}
+
 	/**
 	 * Unmarshall.
 	 * 
-	 * @param json the json
+	 * @param json
+	 *            the json
 	 * 
 	 * @return the paged list< t>
 	 */
 	protected abstract PagedList<T> unmarshall(JsonObject json);
-	
+
 	/**
 	 * Gets the first element.
 	 * 
-	 * @param list the list
+	 * @param list
+	 *            the list
 	 * 
 	 * @return the first element
 	 */
@@ -283,7 +319,7 @@ public abstract class BaseStackOverflowApiQuery<T> extends StackExchangeApiGatew
 		}
 		return list.get(0);
 	}
-	
+
 	protected GsonBuilder getGsonBuilder() {
 		GsonBuilder builder = new GsonBuilder();
 		builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
@@ -293,82 +329,98 @@ public abstract class BaseStackOverflowApiQuery<T> extends StackExchangeApiGatew
 					JsonDeserializationContext arg2) throws JsonParseException {
 				return new Date(source.getAsLong() * 1000);
 			}
-			
-		});
-		builder.registerTypeAdapter(BadgeRank.class, new JsonDeserializer<BadgeRank>() {
 
-			@Override
-			public BadgeRank deserialize(JsonElement arg0, Type arg1,
-					JsonDeserializationContext arg2) throws JsonParseException {
-				return BadgeRank.fromValue(arg0.getAsString());
-			}
-			
 		});
-		builder.registerTypeAdapter(PostType.class, new JsonDeserializer<PostType>() {
+		builder.registerTypeAdapter(BadgeRank.class,
+				new JsonDeserializer<BadgeRank>() {
 
-			@Override
-			public PostType deserialize(JsonElement arg0, Type arg1,
-					JsonDeserializationContext arg2) throws JsonParseException {
-				return PostType.fromValue(arg0.getAsString());
-			}
-			
-		});
-		builder.registerTypeAdapter(PostTimelineType.class, new JsonDeserializer<PostTimelineType>() {
+					@Override
+					public BadgeRank deserialize(JsonElement arg0, Type arg1,
+							JsonDeserializationContext arg2)
+							throws JsonParseException {
+						return BadgeRank.fromValue(arg0.getAsString());
+					}
 
-			@Override
-			public PostTimelineType deserialize(JsonElement arg0, Type arg1,
-					JsonDeserializationContext arg2) throws JsonParseException {
-				return PostTimelineType.fromValue(arg0.getAsString());
-			}
-			
-		});
-		builder.registerTypeAdapter(UserTimelineType.class, new JsonDeserializer<UserTimelineType>() {
+				});
+		builder.registerTypeAdapter(PostType.class,
+				new JsonDeserializer<PostType>() {
 
-			@Override
-			public UserTimelineType deserialize(JsonElement arg0, Type arg1,
-					JsonDeserializationContext arg2) throws JsonParseException {
-				return UserTimelineType.fromValue(arg0.getAsString());
-			}
-			
-		});
-		builder.registerTypeAdapter(UserType.class, new JsonDeserializer<UserType>() {
+					@Override
+					public PostType deserialize(JsonElement arg0, Type arg1,
+							JsonDeserializationContext arg2)
+							throws JsonParseException {
+						return PostType.fromValue(arg0.getAsString());
+					}
 
-			@Override
-			public UserType deserialize(JsonElement arg0, Type arg1,
-					JsonDeserializationContext arg2) throws JsonParseException {
-				return UserType.fromValue(arg0.getAsString());
-			}
-			
-		});
-		builder.registerTypeAdapter(RevisionType.class, new JsonDeserializer<RevisionType>() {
+				});
+		builder.registerTypeAdapter(PostTimelineType.class,
+				new JsonDeserializer<PostTimelineType>() {
 
-			@Override
-			public RevisionType deserialize(JsonElement arg0, Type arg1,
-					JsonDeserializationContext arg2) throws JsonParseException {
-				return RevisionType.fromValue(arg0.getAsString());
-			}
-			
-		});
-		builder.registerTypeAdapter(TagRestriction.class, new JsonDeserializer<TagRestriction>() {
+					@Override
+					public PostTimelineType deserialize(JsonElement arg0,
+							Type arg1, JsonDeserializationContext arg2)
+							throws JsonParseException {
+						return PostTimelineType.fromValue(arg0.getAsString());
+					}
 
-			@Override
-			public TagRestriction deserialize(JsonElement arg0, Type arg1,
-					JsonDeserializationContext arg2) throws JsonParseException {
-				return TagRestriction.fromValue(arg0.getAsString());
-			}
-			
-		});
-		builder.registerTypeAdapter(SiteState.class, new JsonDeserializer<SiteState>() {
+				});
+		builder.registerTypeAdapter(UserTimelineType.class,
+				new JsonDeserializer<UserTimelineType>() {
 
-			@Override
-			public SiteState deserialize(JsonElement arg0, Type arg1,
-					JsonDeserializationContext arg2) throws JsonParseException {
-				return SiteState.fromValue(arg0.getAsString());
-			}
-		});
-		
+					@Override
+					public UserTimelineType deserialize(JsonElement arg0,
+							Type arg1, JsonDeserializationContext arg2)
+							throws JsonParseException {
+						return UserTimelineType.fromValue(arg0.getAsString());
+					}
+
+				});
+		builder.registerTypeAdapter(UserType.class,
+				new JsonDeserializer<UserType>() {
+
+					@Override
+					public UserType deserialize(JsonElement arg0, Type arg1,
+							JsonDeserializationContext arg2)
+							throws JsonParseException {
+						return UserType.fromValue(arg0.getAsString());
+					}
+
+				});
+		builder.registerTypeAdapter(RevisionType.class,
+				new JsonDeserializer<RevisionType>() {
+
+					@Override
+					public RevisionType deserialize(JsonElement arg0,
+							Type arg1, JsonDeserializationContext arg2)
+							throws JsonParseException {
+						return RevisionType.fromValue(arg0.getAsString());
+					}
+
+				});
+		builder.registerTypeAdapter(TagRestriction.class,
+				new JsonDeserializer<TagRestriction>() {
+
+					@Override
+					public TagRestriction deserialize(JsonElement arg0,
+							Type arg1, JsonDeserializationContext arg2)
+							throws JsonParseException {
+						return TagRestriction.fromValue(arg0.getAsString());
+					}
+
+				});
+		builder.registerTypeAdapter(SiteState.class,
+				new JsonDeserializer<SiteState>() {
+
+					@Override
+					public SiteState deserialize(JsonElement arg0, Type arg1,
+							JsonDeserializationContext arg2)
+							throws JsonParseException {
+						return SiteState.fromValue(arg0.getAsString());
+					}
+				});
+
 		builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-		
-		return builder;		
+
+		return builder;
 	}
 }

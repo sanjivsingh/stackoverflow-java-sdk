@@ -20,35 +20,51 @@ import com.google.code.stackexchange.client.constant.StackExchangeApiMethods;
 import com.google.code.stackexchange.client.query.StackAuthApiQuery;
 import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Site;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.gson.JsonObject;
 
 /**
  * The Class StatisticsApiQueryImpl.
  */
-public class StackAuthApiQueryImpl extends BaseStackOverflowApiQuery<Site> implements StackAuthApiQuery {
+public class StackAuthApiQueryImpl extends BaseStackOverflowApiQuery<Site>
+		implements StackAuthApiQuery {
 
 	/**
 	 * Instantiates a new statistics api query impl.
 	 * 
-	 * @param applicationId the application id
+	 * 
+	 * @param applicationId
+	 *            the application id
+	 * @param site
+	 *            the stack exchange site
 	 */
-	public StackAuthApiQueryImpl(String applicationId) {
-		super(applicationId);
+	public StackAuthApiQueryImpl(String applicationId, StackExchangeSite site) {
+		super(applicationId, site);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery#unmarshall(org.json.simple.JSONObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery
+	 * #unmarshall(org.json.simple.JSONObject)
 	 */
 	@Override
 	protected PagedList<Site> unmarshall(JsonObject json) {
 		return unmarshallList(Site.class, json);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
 	 */
 	@Override
 	public void reset() {
-		apiUrlBuilder = getApiProvider().createApiUrlBuilder(StackExchangeApiMethods.GET_SITES, getApplicationKey(), getApiVersion());
+		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
+				StackExchangeApiMethods.GET_SITES, getApplicationKey(),
+				getSite(), getApiVersion());
 	}
+
 }

@@ -21,7 +21,7 @@ import java.util.List;
 
 import com.google.code.stackexchange.client.constant.StackExchangeApiMethods;
 import com.google.code.stackexchange.client.provider.url.DefaultApiUrlBuilder;
-import com.google.code.stackexchange.client.query.SearchApiQuery;
+import com.google.code.stackexchange.client.query.AdvanceSearchApiQuery;
 import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.Question;
@@ -32,10 +32,13 @@ import com.google.code.stackexchange.schema.User;
 import com.google.gson.JsonObject;
 
 /**
- * The Class SearchApiQueryImpl.
+ * The Class AdvanceSearchApiQueryImpl.
+ * 
+ * @author Sanjiv.Singh
+ * 
  */
-public class SearchApiQueryImpl extends BaseStackOverflowApiQuery<Question>
-		implements SearchApiQuery {
+public class AdvanceSearchApiQueryImpl extends
+		BaseStackOverflowApiQuery<Question> implements AdvanceSearchApiQuery {
 
 	/**
 	 * Instantiates a new question api query impl.
@@ -46,7 +49,8 @@ public class SearchApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 	 * @param site
 	 *            the stack exchange site
 	 */
-	public SearchApiQueryImpl(String applicationId, StackExchangeSite site) {
+	public AdvanceSearchApiQueryImpl(String applicationId,
+			StackExchangeSite site) {
 		super(applicationId, site);
 	}
 
@@ -58,7 +62,7 @@ public class SearchApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 	 * (com.google.code.stackexchange.schema.Paging)
 	 */
 	@Override
-	public SearchApiQuery withPaging(Paging paging) {
+	public AdvanceSearchApiQuery withPaging(Paging paging) {
 		apiUrlBuilder.withPaging(paging);
 		return this;
 	}
@@ -71,7 +75,7 @@ public class SearchApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 	 * com.google.code.stackexchange.schema.User.QuestionSortOrder)
 	 */
 	@Override
-	public SearchApiQuery withSort(User.QuestionSortOrder sort) {
+	public AdvanceSearchApiQuery withSort(User.QuestionSortOrder sort) {
 		apiUrlBuilder.withSort(sort);
 		return this;
 	}
@@ -84,13 +88,13 @@ public class SearchApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 	 * java.lang.String[])
 	 */
 	@Override
-	public SearchApiQuery withTags(String... tag) {
+	public AdvanceSearchApiQuery withTags(String... tag) {
 		apiUrlBuilder.withParameters("tagged", Arrays.asList(tag), ";");
 		return this;
 	}
 
 	@Override
-	public SearchApiQuery withOutTags(String... tag) {
+	public AdvanceSearchApiQuery withOutTags(String... tag) {
 		apiUrlBuilder.withParameters("nottagged", Arrays.asList(tag), ";");
 		return this;
 	}
@@ -103,7 +107,7 @@ public class SearchApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 	 * (com.google.code.stackexchange.schema.TimePeriod)
 	 */
 	@Override
-	public SearchApiQuery withTimePeriod(TimePeriod timePeriod) {
+	public AdvanceSearchApiQuery withTimePeriod(TimePeriod timePeriod) {
 		apiUrlBuilder.withTimePeriod(timePeriod);
 		return this;
 	}
@@ -141,7 +145,7 @@ public class SearchApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 	 * (com.google.code.stackexchange.schema.Range)
 	 */
 	@Override
-	public SearchApiQuery withRange(Range range) {
+	public AdvanceSearchApiQuery withRange(Range range) {
 		apiUrlBuilder.withRange(range);
 		return this;
 	}
@@ -150,48 +154,102 @@ public class SearchApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.google.code.stackexchange.client.query.QuestionApiQuery#withRange
-	 * (com.google.code.stackexchange.schema.Range)
-	 */
-	@Override
-	public SearchApiQuery withInTitle(String inTitle) {
-		apiUrlBuilder.withParameter("intitle", inTitle);
-		return this;
-	}
-
-	/*
-	 * Search Questions
-	 * 
-	 * Supported params : paging, fromDate, toDate,Sort, min , max , tagged,
-	 * nottaggged, intitle
-	 * 
-	 * Sort : activity,creation,votes,relevance
-	 * 
-	 * @see
 	 * com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery
 	 * #list()
 	 */
 	@Override
 	public PagedList<Question> list() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
-				.withMethod(StackExchangeApiMethods.SEARCH_QUESTIONS);
+				.withMethod(StackExchangeApiMethods.ADVANCE_SEARCH_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public SearchApiQuery withOutTags(List<String> tag) {
+	public AdvanceSearchApiQuery withOutTags(List<String> tag) {
 		apiUrlBuilder.withParameters("nottagged", tag, ";");
 		return this;
 	}
 
 	@Override
-	public SearchApiQuery withTags(List<String> tag) {
+	public AdvanceSearchApiQuery withTags(List<String> tag) {
 		apiUrlBuilder.withParameters("tagged", tag, ";");
 		return this;
 	}
 
 	@Override
-	public SearchApiQuery withFilter(String filter) {
+	public AdvanceSearchApiQuery withTitle(String title) {
+		apiUrlBuilder.withParameter("title", title);
+		return this;
+	}
+
+	@Override
+	public AdvanceSearchApiQuery withQuery(String query) {
+		apiUrlBuilder.withParameter("q", query);
+		return this;
+	}
+
+	@Override
+	public AdvanceSearchApiQuery withClosed(Boolean closed) {
+		apiUrlBuilder.withParameter("closed", closed.toString());
+		return this;
+	}
+
+	@Override
+	public AdvanceSearchApiQuery withMigrated(Boolean migrated) {
+		apiUrlBuilder.withParameter("migrated", migrated.toString());
+		return this;
+	}
+
+	@Override
+	public AdvanceSearchApiQuery withWiki(Boolean wiki) {
+		apiUrlBuilder.withParameter("wiki", wiki.toString());
+		return this;
+	}
+
+	@Override
+	public AdvanceSearchApiQuery withNotice(Boolean notice) {
+		apiUrlBuilder.withParameter("notice", notice.toString());
+		return this;
+	}
+
+	@Override
+	public AdvanceSearchApiQuery withAccepted(Boolean accepted) {
+		apiUrlBuilder.withParameter("accepted", accepted.toString());
+		return this;
+	}
+
+	@Override
+	public AdvanceSearchApiQuery withMinAnswers(Integer answers) {
+		apiUrlBuilder.withParameter("answers", answers.toString());
+		return this;
+	}
+
+	@Override
+	public AdvanceSearchApiQuery withBody(String body) {
+		apiUrlBuilder.withParameter("body", body);
+		return this;
+	}
+
+	@Override
+	public AdvanceSearchApiQuery withUser(Long user) {
+		apiUrlBuilder.withParameter("user", user.toString());
+		return this;
+	}
+
+	@Override
+	public AdvanceSearchApiQuery withURL(String url) {
+		apiUrlBuilder.withParameter("url", url);
+		return this;
+	}
+
+	@Override
+	public AdvanceSearchApiQuery withMinViews(Integer views) {
+		apiUrlBuilder.withParameter("views", views.toString());
+		return this;
+	}
+
+	@Override
+	public AdvanceSearchApiQuery withFilter(String filter) {
 		apiUrlBuilder.withParameter("filter", filter);
 		return this;
 	}

@@ -16,7 +16,6 @@
  */
 package com.google.code.stackexchange.client.query.impl;
 
-
 import java.util.List;
 
 import com.google.code.stackexchange.client.constant.StackExchangeApiMethods;
@@ -24,25 +23,36 @@ import com.google.code.stackexchange.client.query.QuestionTimelineApiQuery;
 import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.PostTimeline;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.TimePeriod;
 import com.google.gson.JsonObject;
 
 /**
  * The Class QuestionTimelineApiQueryImpl.
  */
-public class QuestionTimelineApiQueryImpl extends BaseStackOverflowApiQuery<PostTimeline> implements QuestionTimelineApiQuery {
+public class QuestionTimelineApiQueryImpl extends
+		BaseStackOverflowApiQuery<PostTimeline> implements
+		QuestionTimelineApiQuery {
 
 	/**
 	 * Instantiates a new question timeline api query impl.
 	 * 
-	 * @param applicationId the application id
+	 * 
+	 * @param applicationId
+	 *            the application id
+	 * @param site
+	 *            the stack exchange site
 	 */
-	public QuestionTimelineApiQueryImpl(String applicationId) {
-		super(applicationId);
+	public QuestionTimelineApiQueryImpl(String applicationId,
+			StackExchangeSite site) {
+		super(applicationId, site);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.QuestionTimelineApiQuery#withQuestionIds(long[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.code.stackexchange.client.query.QuestionTimelineApiQuery#
+	 * withQuestionIds(long[])
 	 */
 	@Override
 	public QuestionTimelineApiQuery withQuestionIds(long... questionIds) {
@@ -50,36 +60,47 @@ public class QuestionTimelineApiQueryImpl extends BaseStackOverflowApiQuery<Post
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.QuestionTimelineApiQuery#withTimePeriod(com.google.code.stackexchange.schema.TimePeriod)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.code.stackexchange.client.query.QuestionTimelineApiQuery#
+	 * withTimePeriod(com.google.code.stackexchange.schema.TimePeriod)
 	 */
 	@Override
 	public QuestionTimelineApiQuery withTimePeriod(TimePeriod timePeriod) {
 		apiUrlBuilder.withTimePeriod(timePeriod);
 		return this;
 	}
-	
+
 	@Override
 	public QuestionTimelineApiQuery withPaging(Paging paging) {
 		apiUrlBuilder.withPaging(paging);
 		return this;
 	}
-	
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery#unmarshall(org.json.simple.JSONObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery
+	 * #unmarshall(org.json.simple.JSONObject)
 	 */
 	@Override
 	protected PagedList<PostTimeline> unmarshall(JsonObject json) {
 		return unmarshallList(PostTimeline.class, json);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
 	 */
 	@Override
 	public void reset() {
-		apiUrlBuilder = getApiProvider().createApiUrlBuilder(StackExchangeApiMethods.GET_QUESTION_TIMELINE, getApplicationKey(), getApiVersion());
+		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
+				StackExchangeApiMethods.GET_QUESTION_TIMELINE,
+				getApplicationKey(), getSite(), getApiVersion());
 	}
 
 	@Override
@@ -87,4 +108,11 @@ public class QuestionTimelineApiQueryImpl extends BaseStackOverflowApiQuery<Post
 		apiUrlBuilder.withIds(questionIds);
 		return this;
 	}
+
+	@Override
+	public QuestionTimelineApiQuery withFilter(String filter) {
+		apiUrlBuilder.withParameter("filter", filter);
+		return this;
+	}
+
 }

@@ -31,6 +31,7 @@ import org.apache.commons.cli.ParseException;
 import com.google.code.stackexchange.client.AsyncStackExchangeApiClient;
 import com.google.code.stackexchange.client.StackExchangeApiClientFactory;
 import com.google.code.stackexchange.schema.Badge;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.Tag;
 
 /**
@@ -38,50 +39,65 @@ import com.google.code.stackexchange.schema.Tag;
  */
 public class AsyncApiExample {
 
-    /** The Constant APPLICATION_KEY_OPTION. */
-    private static final String APPLICATION_KEY_OPTION = "key";
-	
-    /** The Constant HELP_OPTION. */
-    private static final String HELP_OPTION = "help";
-    
-    /**
-     * The main method.
-     * 
-     * @param args the arguments
-     * 
-     * @throws Exception the exception
-     */
+	/** The Constant APPLICATION_KEY_OPTION. */
+	private static final String APPLICATION_KEY_OPTION = "key";
+
+	/** The Constant STACK_EXCHANGE_SITE. */
+	private static final String STACK_EXCHANGE_SITE = "site";
+
+	/** The Constant HELP_OPTION. */
+	private static final String HELP_OPTION = "help";
+
+	/**
+	 * The main method.
+	 * 
+	 * @param args
+	 *            the arguments
+	 * 
+	 * @throws Exception
+	 *             the exception
+	 */
 	public static void main(String[] args) throws Exception {
 		Options options = buildOptions();
-        try {
-            CommandLine line = new BasicParser().parse(options, args);
-            processCommandLine(line, options);
-        } catch(ParseException exp ) {
-            System.err.println(exp.getMessage());
-            printHelp(options);
-        }
+		try {
+			CommandLine line = new BasicParser().parse(options, args);
+			processCommandLine(line, options);
+		} catch (ParseException exp) {
+			System.err.println(exp.getMessage());
+			printHelp(options);
+		}
 	}
-	
-    /**
-     * Process command line.
-     * 
-     * @param line the line
-     * @param options the options
-     * 
-     * @throws Exception the exception
-     */
-    private static void processCommandLine(CommandLine line, Options options) throws Exception {
-        if(line.hasOption(HELP_OPTION)) {
-            printHelp(options);            
-        } else if(line.hasOption(APPLICATION_KEY_OPTION)) {
-    		final String keyValue = line.getOptionValue(APPLICATION_KEY_OPTION);
-    		
-    		final StackExchangeApiClientFactory factory = StackExchangeApiClientFactory.newInstance(keyValue);
-    		final AsyncStackExchangeApiClient client = factory.createAsyncStackExchangeApiClient();
+
+	/**
+	 * Process command line.
+	 * 
+	 * @param line
+	 *            the line
+	 * @param options
+	 *            the options
+	 * 
+	 * @throws Exception
+	 *             the exception
+	 */
+	private static void processCommandLine(CommandLine line, Options options)
+			throws Exception {
+		if (line.hasOption(HELP_OPTION)) {
+			printHelp(options);
+		} else if (line.hasOption(APPLICATION_KEY_OPTION)
+				&& line.hasOption(STACK_EXCHANGE_SITE)) {
+			final String keyValue = line.getOptionValue(APPLICATION_KEY_OPTION);
+			final String siteValue = line.getOptionValue(STACK_EXCHANGE_SITE);
+
+			final StackExchangeApiClientFactory factory = StackExchangeApiClientFactory
+					.newInstance(keyValue,
+							StackExchangeSite.fromValue(siteValue));
+			final AsyncStackExchangeApiClient client = factory
+					.createAsyncStackExchangeApiClient();
 			System.out.println("Fetching badges and tags asynchronously.");
-    		Future<List<Badge>> badgesFuture = client.getBadges();
-    		Future<List<Tag>> tagsFuture = client.getTags();
-			System.out.println("Done fetching badges and tags asynchronously. Now blocking for result.");
+			Future<List<Badge>> badgesFuture = client.getBadges();
+			Future<List<Tag>> tagsFuture = client.getTags();
+			System.out
+					.println("Done fetching badges and tags asynchronously. Now blocking for result.");
 			List<Badge> badges = badgesFuture.get();
 			System.out.println("============ Badges ============");
 			for (Badge badge : badges) {
@@ -92,16 +108,17 @@ public class AsyncApiExample {
 			for (Tag tag : tags) {
 				printResult(tag);
 			}
-    		
-        } else {
-            printHelp(options);
-        }
-    }
-	
+
+		} else {
+			printHelp(options);
+		}
+	}
+
 	/**
 	 * Prints the result.
 	 * 
-	 * @param tag the tag
+	 * @param tag
+	 *            the tag
 	 */
 	private static void printResult(Tag tag) {
 		System.out.println(tag.getName() + ":" + tag.getCount());
@@ -110,10 +127,12 @@ public class AsyncApiExample {
 	/**
 	 * Prints the result.
 	 * 
-	 * @param badge the badge
+	 * @param badge
+	 *            the badge
 	 */
 	private static void printResult(Badge badge) {
-		System.out.println(badge.getName() + ":" + badge.getRank() + ":" + badge.getAwardCount());
+		System.out.println(badge.getName() + ":" + badge.getRank() + ":"
+				+ badge.getAwardCount());
 	}
 
 	/**
@@ -121,34 +140,45 @@ public class AsyncApiExample {
 	 * 
 	 * @return the options
 	 */
-    private static Options buildOptions() {
-       
-        Options opts = new Options();
-        
-        String helpMsg = "Print this message.";
-        Option help = new Option(HELP_OPTION, helpMsg);
-        opts.addOption(help);
+	private static Options buildOptions() {
 
-        String consumerKeyMsg = "You API Key.";
-        OptionBuilder.withArgName("key");
-        OptionBuilder.hasArg();
-        OptionBuilder.withDescription(consumerKeyMsg);
-        Option consumerKey = OptionBuilder.create(APPLICATION_KEY_OPTION);
-        opts.addOption(consumerKey);
-        
-        return opts;
-    }
-    
-    /**
-     * Prints the help.
-     * 
-     * @param options the options
-     */
-    private static void printHelp(Options options) {
-        int width = 80;
-        String syntax = AsyncApiExample.class.getName() + " <options>";
-        String header = MessageFormat.format("\nThe -{0} option is required.", APPLICATION_KEY_OPTION);
-        String footer = "";
-        new HelpFormatter().printHelp(width, syntax, header, options, footer, false);
-    }
+		Options opts = new Options();
+
+		String helpMsg = "Print this message.";
+		Option help = new Option(HELP_OPTION, helpMsg);
+		opts.addOption(help);
+
+		String consumerKeyMsg = "You API Key.";
+		OptionBuilder.withArgName("key");
+		OptionBuilder.hasArg();
+		OptionBuilder.withDescription(consumerKeyMsg);
+		Option consumerKey = OptionBuilder.create(APPLICATION_KEY_OPTION);
+		opts.addOption(consumerKey);
+
+		String siteNameMsg = "Your site name.";
+		OptionBuilder.withArgName("site");
+		OptionBuilder.hasArg();
+		OptionBuilder.withDescription(siteNameMsg);
+		Option siteName = OptionBuilder.create(STACK_EXCHANGE_SITE);
+		opts.addOption(siteName);
+
+		return opts;
+	}
+
+	/**
+	 * Prints the help.
+	 * 
+	 * @param options
+	 *            the options
+	 */
+	private static void printHelp(Options options) {
+		int width = 80;
+		String syntax = AsyncApiExample.class.getName() + " <options>";
+		String header = MessageFormat.format(
+				"\nThe -{0} option is required.{1} option is required.",
+				APPLICATION_KEY_OPTION, STACK_EXCHANGE_SITE);
+		String footer = "";
+		new HelpFormatter().printHelp(width, syntax, header, options, footer,
+				false);
+	}
 }

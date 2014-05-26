@@ -16,13 +16,13 @@
  */
 package com.google.code.stackexchange.client.query.impl;
 
-
 import java.util.List;
 
 import com.google.code.stackexchange.client.constant.StackExchangeApiMethods;
 import com.google.code.stackexchange.client.query.UserTimelineApiQuery;
 import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Paging;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.TimePeriod;
 import com.google.code.stackexchange.schema.UserTimeline;
 import com.google.gson.JsonObject;
@@ -30,19 +30,27 @@ import com.google.gson.JsonObject;
 /**
  * The Class UserTimelineApiQueryImpl.
  */
-public class UserTimelineApiQueryImpl extends BaseStackOverflowApiQuery<UserTimeline> implements UserTimelineApiQuery {
+public class UserTimelineApiQueryImpl extends
+		BaseStackOverflowApiQuery<UserTimeline> implements UserTimelineApiQuery {
 
 	/**
 	 * Instantiates a new user timeline api query impl.
 	 * 
-	 * @param applicationId the application id
+	 * 
+	 * @param applicationId
+	 *            the application id
+	 * @param site
+	 *            Stack Exchange Site
 	 */
-	public UserTimelineApiQueryImpl(String applicationId) {
-		super(applicationId);
+	public UserTimelineApiQueryImpl(String applicationId, StackExchangeSite site) {
+		super(applicationId, site);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.UserTimelineApiQuery#withTimePeriod(com.google.code.stackexchange.schema.TimePeriod)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.code.stackexchange.client.query.UserTimelineApiQuery#
+	 * withTimePeriod(com.google.code.stackexchange.schema.TimePeriod)
 	 */
 	@Override
 	public UserTimelineApiQuery withTimePeriod(TimePeriod timePeriod) {
@@ -50,35 +58,48 @@ public class UserTimelineApiQueryImpl extends BaseStackOverflowApiQuery<UserTime
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.UserTimelineApiQuery#withUserIds(long[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.UserTimelineApiQuery#withUserIds
+	 * (long[])
 	 */
 	@Override
 	public UserTimelineApiQuery withUserIds(long... userIds) {
 		apiUrlBuilder.withIds(userIds);
 		return this;
 	}
-	
+
 	@Override
 	public UserTimelineApiQuery withPaging(Paging paging) {
 		apiUrlBuilder.withPaging(paging);
 		return this;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery#unmarshall(org.json.simple.JSONObject)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery
+	 * #unmarshall(org.json.simple.JSONObject)
 	 */
 	@Override
 	protected PagedList<UserTimeline> unmarshall(JsonObject json) {
 		return unmarshallList(UserTimeline.class, json);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
 	 */
 	@Override
 	public void reset() {
-		apiUrlBuilder = getApiProvider().createApiUrlBuilder(StackExchangeApiMethods.GET_USER_TIMELINE, getApplicationKey(), getApiVersion());
+		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
+				StackExchangeApiMethods.GET_USER_TIMELINE, getApplicationKey(),
+				getSite(), getApiVersion());
 	}
 
 	@Override
@@ -86,4 +107,11 @@ public class UserTimelineApiQueryImpl extends BaseStackOverflowApiQuery<UserTime
 		apiUrlBuilder.withIds(userIds);
 		return this;
 	}
+
+	@Override
+	public UserTimelineApiQuery withFilter(String filter) {
+		apiUrlBuilder.withParameter("filter", filter);
+		return this;
+	}
+
 }

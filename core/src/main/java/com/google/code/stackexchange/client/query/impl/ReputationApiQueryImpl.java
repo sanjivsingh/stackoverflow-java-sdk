@@ -16,33 +16,43 @@
  */
 package com.google.code.stackexchange.client.query.impl;
 
-
 import java.util.List;
 
 import com.google.code.stackexchange.client.constant.StackExchangeApiMethods;
+import com.google.code.stackexchange.client.provider.url.DefaultApiUrlBuilder;
 import com.google.code.stackexchange.client.query.ReputationApiQuery;
 import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.Reputation;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.TimePeriod;
 import com.google.gson.JsonObject;
 
 /**
  * The Class ReputationApiQueryImpl.
  */
-public class ReputationApiQueryImpl extends BaseStackOverflowApiQuery<Reputation> implements ReputationApiQuery {
+public class ReputationApiQueryImpl extends
+		BaseStackOverflowApiQuery<Reputation> implements ReputationApiQuery {
 
 	/**
 	 * Instantiates a new reputation api query impl.
 	 * 
-	 * @param applicationId the application id
+	 * 
+	 * @param applicationId
+	 *            the application id
+	 * @param site
+	 *            the stack exchange site
 	 */
-	public ReputationApiQueryImpl(String applicationId) {
-		super(applicationId);
+	public ReputationApiQueryImpl(String applicationId, StackExchangeSite site) {
+		super(applicationId, site);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.ReputationApiQuery#withPaging(com.google.code.stackexchange.schema.Paging)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.ReputationApiQuery#withPaging
+	 * (com.google.code.stackexchange.schema.Paging)
 	 */
 	@Override
 	public ReputationApiQuery withPaging(Paging paging) {
@@ -50,8 +60,12 @@ public class ReputationApiQueryImpl extends BaseStackOverflowApiQuery<Reputation
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.ReputationApiQuery#withTimePeriod(com.google.code.stackexchange.schema.TimePeriod)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.ReputationApiQuery#withTimePeriod
+	 * (com.google.code.stackexchange.schema.TimePeriod)
 	 */
 	@Override
 	public ReputationApiQuery withTimePeriod(TimePeriod timePeriod) {
@@ -59,8 +73,12 @@ public class ReputationApiQueryImpl extends BaseStackOverflowApiQuery<Reputation
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.ReputationApiQuery#withUserIds(long[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.ReputationApiQuery#withUserIds
+	 * (long[])
 	 */
 	@Override
 	public ReputationApiQuery withUserIds(long... userIds) {
@@ -68,20 +86,29 @@ public class ReputationApiQueryImpl extends BaseStackOverflowApiQuery<Reputation
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery#unmarshall(org.json.simple.JSONObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery
+	 * #unmarshall(org.json.simple.JSONObject)
 	 */
 	@Override
 	protected PagedList<Reputation> unmarshall(JsonObject json) {
 		return unmarshallList(Reputation.class, json);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
 	 */
 	@Override
 	public void reset() {
-		apiUrlBuilder = getApiProvider().createApiUrlBuilder(StackExchangeApiMethods.GET_USER_REPUTATIONS, getApplicationKey(), getApiVersion());
+		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
+				StackExchangeApiMethods.GET_USER_REPUTATIONS,
+				getApplicationKey(), getSite(), getApiVersion());
 	}
 
 	@Override
@@ -89,4 +116,25 @@ public class ReputationApiQueryImpl extends BaseStackOverflowApiQuery<Reputation
 		apiUrlBuilder.withIds(userIds);
 		return this;
 	}
+
+	@Override
+	public ReputationApiQuery withFilter(String filter) {
+		apiUrlBuilder.withParameter("filter", filter);
+		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery
+	 * #list()
+	 */
+	@Override
+	public PagedList<Reputation> list() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_USER_REPUTATIONS);
+		return super.list();
+	}
+
 }

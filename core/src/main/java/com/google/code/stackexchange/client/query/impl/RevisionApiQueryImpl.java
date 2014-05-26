@@ -16,41 +16,55 @@
  */
 package com.google.code.stackexchange.client.query.impl;
 
-
 import java.util.List;
 
 import com.google.code.stackexchange.client.constant.StackExchangeApiMethods;
+import com.google.code.stackexchange.client.provider.url.DefaultApiUrlBuilder;
 import com.google.code.stackexchange.client.query.RevisionApiQuery;
 import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Revision;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.TimePeriod;
 import com.google.gson.JsonObject;
 
 /**
  * The Class RevisionApiQueryImpl.
  */
-public class RevisionApiQueryImpl extends BaseStackOverflowApiQuery<Revision> implements RevisionApiQuery {
+public class RevisionApiQueryImpl extends BaseStackOverflowApiQuery<Revision>
+		implements RevisionApiQuery {
 
 	/**
 	 * Instantiates a new revision api query impl.
 	 * 
-	 * @param applicationId the application id
+	 * 
+	 * @param applicationId
+	 *            the application id
+	 * @param site
+	 *            the stack exchange site
 	 */
-	public RevisionApiQueryImpl(String applicationId) {
-		super(applicationId);
+	public RevisionApiQueryImpl(String applicationId, StackExchangeSite site) {
+		super(applicationId, site);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.RevisionApiQuery#withQuestionIds(long[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.RevisionApiQuery#withPostIds
+	 * (long[])
 	 */
 	@Override
-	public RevisionApiQuery withQuestionIds(long... questionIds) {
+	public RevisionApiQuery withPostIds(long... questionIds) {
 		apiUrlBuilder.withIds(questionIds);
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.RevisionApiQuery#withRevisionGuid(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.RevisionApiQuery#withRevisionGuid
+	 * (java.lang.String)
 	 */
 	@Override
 	public RevisionApiQuery withRevisionGuid(String revisionGuid) {
@@ -58,8 +72,12 @@ public class RevisionApiQueryImpl extends BaseStackOverflowApiQuery<Revision> im
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.RevisionApiQuery#withTimePeriod(com.google.code.stackexchange.schema.TimePeriod)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.RevisionApiQuery#withTimePeriod
+	 * (com.google.code.stackexchange.schema.TimePeriod)
 	 */
 	@Override
 	public RevisionApiQuery withTimePeriod(TimePeriod timePeriod) {
@@ -67,25 +85,55 @@ public class RevisionApiQueryImpl extends BaseStackOverflowApiQuery<Revision> im
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery#unmarshall(org.json.simple.JSONObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery
+	 * #unmarshall(org.json.simple.JSONObject)
 	 */
 	@Override
 	protected PagedList<Revision> unmarshall(JsonObject json) {
 		return unmarshallList(Revision.class, json);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
 	 */
 	@Override
 	public void reset() {
-		apiUrlBuilder = getApiProvider().createApiUrlBuilder(StackExchangeApiMethods.GET_REVISION_FOR_POST, getApplicationKey(), getApiVersion());
+		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
+				StackExchangeApiMethods.GET_REVISIONS, getApplicationKey(),
+				getSite(), getApiVersion());
 	}
 
 	@Override
-	public RevisionApiQuery withQuestionIds(List<Long> questionIds) {
-		apiUrlBuilder.withIds(questionIds);
+	public RevisionApiQuery withPostIds(List<Long> postIds) {
+		apiUrlBuilder.withIds(postIds);
 		return this;
 	}
+
+	@Override
+	public RevisionApiQuery withFilter(String filter) {
+		apiUrlBuilder.withFilter(filter);
+		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery
+	 * #list()
+	 */
+	@Override
+	public PagedList<Revision> list() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_REVISIONS);
+		return super.list();
+	}
+
 }

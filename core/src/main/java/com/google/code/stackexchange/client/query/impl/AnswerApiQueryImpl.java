@@ -17,34 +17,41 @@
 package com.google.code.stackexchange.client.query.impl;
 
 import java.util.List;
-import java.util.Set;
 
 import com.google.code.stackexchange.client.constant.StackExchangeApiMethods;
 import com.google.code.stackexchange.client.provider.url.DefaultApiUrlBuilder;
 import com.google.code.stackexchange.client.query.AnswerApiQuery;
 import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Answer;
-import com.google.code.stackexchange.schema.FilterOption;
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.Range;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.gson.JsonObject;
 
 /**
  * The Class AnswerApiQueryImpl.
  */
-public class AnswerApiQueryImpl extends BaseStackOverflowApiQuery<Answer> implements AnswerApiQuery {
+public class AnswerApiQueryImpl extends BaseStackOverflowApiQuery<Answer>
+		implements AnswerApiQuery {
 
 	/**
 	 * Instantiates a new answer api query impl.
 	 * 
-	 * @param applicationId the application id
+	 * @param applicationId
+	 *            the application id
+	 * @param site
+	 *            the stack exchange site
 	 */
-	public AnswerApiQueryImpl(String applicationId) {
-		super(applicationId);
+	public AnswerApiQueryImpl(String applicationId, StackExchangeSite site) {
+		super(applicationId, site);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.AnswerApiQuery#withAnswerIds(long[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.AnswerApiQuery#withAnswerIds
+	 * (long[])
 	 */
 	@Override
 	public AnswerApiQuery withAnswerIds(long... answerIds) {
@@ -52,17 +59,12 @@ public class AnswerApiQueryImpl extends BaseStackOverflowApiQuery<Answer> implem
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.AnswerApiQuery#withFetchOptions(java.util.Set)
-	 */
-	@Override
-	public AnswerApiQuery withFetchOptions(Set<FilterOption> fetchOptions) {
-		apiUrlBuilder.withFetchOptions(fetchOptions);
-		return this;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.AnswerApiQuery#withPaging(com.google.code.stackexchange.schema.Paging)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.AnswerApiQuery#withPaging(
+	 * com.google.code.stackexchange.schema.Paging)
 	 */
 	@Override
 	public AnswerApiQuery withPaging(Paging paging) {
@@ -70,8 +72,12 @@ public class AnswerApiQueryImpl extends BaseStackOverflowApiQuery<Answer> implem
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.AnswerApiQuery#withSort(com.google.code.stackexchange.schema.Answer.SortOrder)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.AnswerApiQuery#withSort(com
+	 * .google.code.stackexchange.schema.Answer.SortOrder)
 	 */
 	@Override
 	public AnswerApiQuery withSort(Answer.SortOrder sort) {
@@ -79,8 +85,12 @@ public class AnswerApiQueryImpl extends BaseStackOverflowApiQuery<Answer> implem
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.AnswerApiQuery#withUserIds(long[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.AnswerApiQuery#withUserIds
+	 * (long[])
 	 */
 	@Override
 	public AnswerApiQuery withUserIds(long... userIds) {
@@ -88,33 +98,50 @@ public class AnswerApiQueryImpl extends BaseStackOverflowApiQuery<Answer> implem
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.AnswerApiQuery#withQuestionIds(long[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.AnswerApiQuery#withQuestionIds
+	 * (long[])
 	 */
 	@Override
 	public AnswerApiQuery withQuestionIds(long... questionIds) {
 		apiUrlBuilder.withIds(questionIds);
 		return this;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery#unmarshall(org.json.simple.JSONObject)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery
+	 * #unmarshall(org.json.simple.JSONObject)
 	 */
 	@Override
 	protected PagedList<Answer> unmarshall(JsonObject json) {
 		return unmarshallList(Answer.class, json);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
 	 */
 	@Override
 	public void reset() {
-		apiUrlBuilder = getApiProvider().createApiUrlBuilder(StackExchangeApiMethods.GET_ANSWER, getApplicationKey(), getApiVersion());
+		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
+				StackExchangeApiMethods.GET_ANSWER, getApplicationKey(), site,
+				getApiVersion());
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.AnswerApiQuery#withRange(com.google.code.stackexchange.schema.Range)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.AnswerApiQuery#withRange(com
+	 * .google.code.stackexchange.schema.Range)
 	 */
 	@Override
 	public AnswerApiQuery withRange(Range range) {
@@ -122,30 +149,56 @@ public class AnswerApiQueryImpl extends BaseStackOverflowApiQuery<Answer> implem
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.AnswerApiQuery#listByQuestions()
+	/**
+	 * Gets the answers to a set of questions identified in id.
+	 * 
+	 * Sort supported: reputation, creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max, ids
+	 * 
+	 * Mandatory parameters : ids
+	 * 
+	 * @return the paged list< Answer>
 	 */
 	@Override
 	public PagedList<Answer> listByQuestions() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_ANSWERS_BY_QUESTION);
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_ANSWERS_BY_QUESTION);
 		return super.list();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.AnswerApiQuery#listByUsers()
+	/**
+	 * Returns the answers the users in {ids} have posted.
+	 * 
+	 * Sort supported: reputation, creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max, ids
+	 * 
+	 * Mandatory parameters : ids
+	 * 
+	 * @return the paged list< Answer>
 	 */
 	@Override
 	public PagedList<Answer> listByUsers() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_ANSWERS_BY_USER);
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_ANSWERS_BY_USER);
 		return super.list();
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery#list()
+
+	/**
+	 * Returns all the undeleted answers in the system.
+	 * 
+	 * Sort supported: reputation, creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max
+	 * 
+	 * 
+	 * @return the paged list< Answer>
 	 */
 	@Override
 	public PagedList<Answer> list() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_ANSWER);
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_ANSWERS);
 		return super.list();
 	}
 
@@ -166,4 +219,89 @@ public class AnswerApiQueryImpl extends BaseStackOverflowApiQuery<Answer> implem
 		apiUrlBuilder.withIds(userIds);
 		return this;
 	}
+
+	/**
+	 * Gets the set of answers identified by ids.
+	 * 
+	 * Sort supported: reputation, creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max, ids
+	 * 
+	 * Mandatory parameters : ids
+	 * 
+	 * @return the paged list< Answer>
+	 */
+	@Override
+	public PagedList<Answer> listByIds() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_ANSWER);
+		return super.list();
+	}
+
+	/**
+	 * Returns the top 30 answers a user has posted in response to questions
+	 * with the given tags.
+	 * 
+	 * Sort supported: reputation, creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max, ids
+	 * , tags
+	 * 
+	 * Mandatory parameters : ids , tags
+	 * 
+	 * @return the paged list< Answer>
+	 */
+	@Override
+	public PagedList<Answer> listTopUserAnswersByTag() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_TOP_USER_ANSWERS_WITH_TAG);
+		return super.list();
+	}
+
+	/**
+	 * Returns the answers owned by the user associated with the given
+	 * access_token
+	 * 
+	 * Sort supported: reputation, creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max,
+	 * accessToken
+	 * 
+	 * Mandatory parameters : accessToken
+	 * 
+	 * @return the paged list< Answer>
+	 */
+	@Override
+	public PagedList<Answer> listMyAnswers() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_MY_ANSWERS);
+		return super.list();
+	}
+
+	/**
+	 * Returns the top 30 answers the user associated with the given
+	 * access_token has posted in response to questions with the given tags
+	 * 
+	 * Sort supported: reputation, creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max,tags
+	 * , accessToken
+	 * 
+	 * Mandatory parameters : tags ,accessToken
+	 * 
+	 * @return the paged list< Answer>
+	 */
+	@Override
+	public PagedList<Answer> listMyTopAnswersWithTag() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_MY_TOP_ANSWERS_WITH_TAG);
+		return super.list();
+	}
+
+	@Override
+	public AnswerApiQuery withFilter(String filter) {
+		apiUrlBuilder.withParameter("filter", filter);
+		return this;
+	}
+
 }

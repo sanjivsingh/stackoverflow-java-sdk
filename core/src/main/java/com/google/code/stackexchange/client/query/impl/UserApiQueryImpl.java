@@ -16,7 +16,6 @@
  */
 package com.google.code.stackexchange.client.query.impl;
 
-
 import java.util.List;
 
 import com.google.code.stackexchange.client.constant.StackExchangeApiMethods;
@@ -25,6 +24,7 @@ import com.google.code.stackexchange.client.query.UserApiQuery;
 import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.Range;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.TimePeriod;
 import com.google.code.stackexchange.schema.User;
 import com.google.gson.JsonObject;
@@ -32,19 +32,28 @@ import com.google.gson.JsonObject;
 /**
  * The Class UserApiQueryImpl.
  */
-public class UserApiQueryImpl extends BaseStackOverflowApiQuery<User> implements UserApiQuery {
+public class UserApiQueryImpl extends BaseStackOverflowApiQuery<User> implements
+		UserApiQuery {
 
 	/**
 	 * Instantiates a new user api query impl.
 	 * 
-	 * @param applicationId the application id
+	 * 
+	 * @param applicationId
+	 *            the application id
+	 * @param site
+	 *            Stack Exchange Site
 	 */
-	public UserApiQueryImpl(String applicationId) {
-		super(applicationId);
+	public UserApiQueryImpl(String applicationId, StackExchangeSite site) {
+		super(applicationId, site);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.UserApiQuery#withFilter(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.UserApiQuery#withFilter(java
+	 * .lang.String)
 	 */
 	@Override
 	public UserApiQuery withFilter(String filter) {
@@ -52,8 +61,12 @@ public class UserApiQueryImpl extends BaseStackOverflowApiQuery<User> implements
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.UserApiQuery#withPaging(com.google.code.stackexchange.schema.Paging)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.UserApiQuery#withPaging(com
+	 * .google.code.stackexchange.schema.Paging)
 	 */
 	@Override
 	public UserApiQuery withPaging(Paging paging) {
@@ -61,8 +74,12 @@ public class UserApiQueryImpl extends BaseStackOverflowApiQuery<User> implements
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.UserApiQuery#withSort(com.google.code.stackexchange.schema.User.SortOrder)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.UserApiQuery#withSort(com.
+	 * google.code.stackexchange.schema.User.SortOrder)
 	 */
 	@Override
 	public UserApiQuery withSort(User.SortOrder sort) {
@@ -70,8 +87,12 @@ public class UserApiQueryImpl extends BaseStackOverflowApiQuery<User> implements
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.UserApiQuery#withUserIds(long[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.UserApiQuery#withUserIds(long
+	 * [])
 	 */
 	@Override
 	public UserApiQuery withUserIds(long... userIds) {
@@ -79,24 +100,37 @@ public class UserApiQueryImpl extends BaseStackOverflowApiQuery<User> implements
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery#unmarshall(org.json.simple.JSONObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery
+	 * #unmarshall(org.json.simple.JSONObject)
 	 */
 	@Override
 	protected PagedList<User> unmarshall(JsonObject json) {
 		return unmarshallList(User.class, json);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
 	 */
 	@Override
 	public void reset() {
-		apiUrlBuilder = getApiProvider().createApiUrlBuilder(StackExchangeApiMethods.GET_USERS, getApplicationKey(), getApiVersion());
+		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
+				StackExchangeApiMethods.GET_USERS, getApplicationKey(),
+				getSite(), getApiVersion());
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.UserApiQuery#withBadgeIds(long[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.UserApiQuery#withBadgeIds(
+	 * long[])
 	 */
 	@Override
 	public UserApiQuery withBadgeIds(long... badgeIds) {
@@ -104,54 +138,73 @@ public class UserApiQueryImpl extends BaseStackOverflowApiQuery<User> implements
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.UserApiQuery#withRange(com.google.code.stackexchange.schema.Range)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.UserApiQuery#withRange(com
+	 * .google.code.stackexchange.schema.Range)
 	 */
 	@Override
 	public UserApiQuery withRange(Range range) {
 		apiUrlBuilder.withRange(range);
 		return this;
 	}
-	
+
 	@Override
 	public UserApiQuery withTimePeriod(TimePeriod timePeriod) {
 		apiUrlBuilder.withTimePeriod(timePeriod);
 		return this;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.UserApiQuery#listByBadge()
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.UserApiQuery#listByBadge()
 	 */
 	@Override
 	public PagedList<User> listByBadge() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_BADGE_RECIPIENTS);
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_BADGE_RECIPIENTS);
 		return super.list();
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery#list()
+
+	/**
+	 * Gets the users.
+	 * 
+	 * Sort supported: reputation, creation , name, modified
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max,
+	 * inname
+	 * 
+	 * @return the paged list< User>
 	 */
 	@Override
 	public PagedList<User> list() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_USERS);
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_USERS);
 		return super.list();
 	}
 
 	@Override
 	public PagedList<User> listModerators() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_MODERATORS);
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_MODERATORS);
 		return super.list();
 	}
 
 	@Override
 	public PagedList<User> listAssociatedAccounts() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_ASSOCIATED_USERS);
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_ASSOCIATED_USERS);
 		return super.list();
 	}
 
 	@Override
 	public UserApiQuery withAssociationId(String associationId) {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withField("id", associationId, false);
+		((DefaultApiUrlBuilder) apiUrlBuilder).withField("id", associationId,
+				false);
 		return this;
 	}
 
@@ -166,4 +219,39 @@ public class UserApiQueryImpl extends BaseStackOverflowApiQuery<User> implements
 		apiUrlBuilder.withIds(userIds);
 		return this;
 	}
+
+	@Override
+	public UserApiQuery withName(String inname) {
+		apiUrlBuilder.withParameter("inname", inname);
+		return this;
+	}
+
+	@Override
+	public PagedList<User> listUserByIds() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_USER);
+		return super.list();
+	}
+
+	@Override
+	public PagedList<User> listModeratorUsers() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_MODERATOR_USERS);
+		return super.list();
+	}
+
+	@Override
+	public PagedList<User> listModeratorElectedUsers() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_MODERATOR_ELECTED_USERS);
+		return super.list();
+	}
+
+	@Override
+	public PagedList<User> listMe() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_ME);
+		return super.list();
+	}
+
 }

@@ -16,7 +16,6 @@
  */
 package com.google.code.stackexchange.client.query.impl;
 
-
 import java.util.List;
 
 import com.google.code.stackexchange.client.constant.StackExchangeApiMethods;
@@ -26,25 +25,34 @@ import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Comment;
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.Range;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.TimePeriod;
 import com.google.gson.JsonObject;
 
 /**
  * The Class CommentApiQueryImpl.
  */
-public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment> implements CommentApiQuery {
+public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment>
+		implements CommentApiQuery {
 
 	/**
 	 * Instantiates a new comment api query impl.
 	 * 
-	 * @param applicationId the application id
+	 * @param applicationId
+	 *            the application id
+	 * @param site
+	 *            the stack exchange site
 	 */
-	public CommentApiQueryImpl(String applicationId) {
-		super(applicationId);
+	public CommentApiQueryImpl(String applicationId, StackExchangeSite site) {
+		super(applicationId, site);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.CommentApiQuery#withCommentIds(long[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.CommentApiQuery#withCommentIds
+	 * (long[])
 	 */
 	@Override
 	public CommentApiQuery withCommentIds(long... commentIds) {
@@ -52,8 +60,12 @@ public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment> impl
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.CommentApiQuery#withPaging(com.google.code.stackexchange.schema.Paging)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.CommentApiQuery#withPaging
+	 * (com.google.code.stackexchange.schema.Paging)
 	 */
 	@Override
 	public CommentApiQuery withPaging(Paging paging) {
@@ -61,8 +73,12 @@ public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment> impl
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.CommentApiQuery#withSort(com.google.code.stackexchange.schema.Comment.SortOrder)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.CommentApiQuery#withSort(com
+	 * .google.code.stackexchange.schema.Comment.SortOrder)
 	 */
 	@Override
 	public CommentApiQuery withSort(Comment.SortOrder sort) {
@@ -70,8 +86,12 @@ public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment> impl
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.CommentApiQuery#withTimePeriod(com.google.code.stackexchange.schema.TimePeriod)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.CommentApiQuery#withTimePeriod
+	 * (com.google.code.stackexchange.schema.TimePeriod)
 	 */
 	@Override
 	public CommentApiQuery withTimePeriod(TimePeriod timePeriod) {
@@ -79,8 +99,12 @@ public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment> impl
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.CommentApiQuery#withToUserId(long)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.CommentApiQuery#withToUserId
+	 * (long)
 	 */
 	@Override
 	public CommentApiQuery withToUserId(long toUserId) {
@@ -88,8 +112,12 @@ public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment> impl
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.CommentApiQuery#withUserIds(long[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.CommentApiQuery#withUserIds
+	 * (long[])
 	 */
 	@Override
 	public CommentApiQuery withUserIds(long... userIds) {
@@ -102,31 +130,44 @@ public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment> impl
 		apiUrlBuilder.withIds(questionIds);
 		return this;
 	}
-	
+
 	@Override
 	public CommentApiQuery withAnswerIds(long... answerIds) {
 		apiUrlBuilder.withIds(answerIds);
 		return this;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery#unmarshall(org.json.simple.JSONObject)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery
+	 * #unmarshall(org.json.simple.JSONObject)
 	 */
 	@Override
 	protected PagedList<Comment> unmarshall(JsonObject json) {
 		return unmarshallList(Comment.class, json);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
 	 */
 	@Override
 	public void reset() {
-		apiUrlBuilder = getApiProvider().createApiUrlBuilder(StackExchangeApiMethods.GET_COMMENT, getApplicationKey(), getApiVersion());
+		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
+				StackExchangeApiMethods.GET_COMMENT, getApplicationKey(),
+				getSite(), getApiVersion());
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.CommentApiQuery#withRange(com.google.code.stackexchange.schema.Range)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.CommentApiQuery#withRange(
+	 * com.google.code.stackexchange.schema.Range)
 	 */
 	@Override
 	public CommentApiQuery withRange(Range range) {
@@ -134,51 +175,102 @@ public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment> impl
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.CommentApiQuery#listUserComments()
+	/**
+	 * Get the comments posted by users in {ids}.
+	 * 
+	 * Sort supported: creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max ,ids
+	 * 
+	 * Mandatory parameters : ids
+	 * 
+	 * @return the paged list< Comment>
 	 */
 	@Override
 	public PagedList<Comment> listUserComments() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_COMMENTS_BY_USER);
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_COMMENTS_BY_USER);
 		return super.list();
 	}
+
+	/**
+	 * Gets the comments on a question.
+	 * 
+	 * Sort supported: creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max ,ids
+	 * 
+	 * Mandatory parameters : ids
+	 * 
+	 * @return the paged list< Comment>
+	 */
 
 	@Override
 	public PagedList<Comment> listQuestionComments() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_COMMENTS_FOR_QUESTIONS);
-		return super.list();
-	}
-	
-	@Override
-	public PagedList<Comment> listAnswerComments() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_COMMENTS_FOR_ANSWERS);
-		return super.list();
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.CommentApiQuery#listUserCommentsToUser()
-	 */
-	@Override
-	public PagedList<Comment> listUserCommentsToUser() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_COMMENTS_BY_USER_TO_USER);
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_COMMENTS_FOR_QUESTIONS);
 		return super.list();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.CommentApiQuery#listUserMentions()
+	/**
+	 * Gets the comments on a set of answers.
+	 * 
+	 * Sort supported: creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max ,ids
+	 * 
+	 * Mandatory parameters : ids
+	 * 
+	 * @return the paged list< Comment>
+	 */
+	@Override
+	public PagedList<Comment> listAnswerComments() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_COMMENTS_FOR_ANSWERS);
+		return super.list();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.code.stackexchange.client.query.CommentApiQuery#
+	 * listUserCommentsToUser()
+	 */
+	@Override
+	public PagedList<Comment> listUserCommentsToUser() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_COMMENTS_BY_USER_TO_USER);
+		return super.list();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.CommentApiQuery#listUserMentions
+	 * ()
 	 */
 	@Override
 	public PagedList<Comment> listUserMentions() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_USER_MENTIONS);
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_USER_MENTIONS);
 		return super.list();
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery#list()
+
+	/**
+	 * Gets all the comments on the site.
+	 * 
+	 * Sort supported: creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max
+	 * 
+	 * 
+	 * @return the paged list< Comment>
 	 */
 	@Override
 	public PagedList<Comment> list() {
-		((DefaultApiUrlBuilder) apiUrlBuilder).withMethod(StackExchangeApiMethods.GET_COMMENT);
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_COMMENTS);
 		return super.list();
 	}
 
@@ -199,4 +291,110 @@ public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment> impl
 		apiUrlBuilder.withIds(userIds);
 		return this;
 	}
+
+	/**
+	 * Gets the comments on the posts identified in ids, regardless of the type
+	 * of the posts.
+	 * 
+	 * Sort supported: creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max ,ids
+	 * 
+	 * Mandatory parameters : ids
+	 * 
+	 * @return the paged list< Comment>
+	 */
+
+	@Override
+	public PagedList<Comment> listPostComments() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_COMMENTS_FOR_POSTS);
+		return super.list();
+	}
+
+	/**
+	 * Gets the comments identified in id.
+	 * 
+	 * Sort supported: creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max ,ids
+	 * 
+	 * Mandatory parameters : ids
+	 * 
+	 * @return the paged list< Comment>
+	 */
+
+	@Override
+	public PagedList<Comment> listByIds() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_COMMENT);
+		return super.list();
+	}
+
+	/**
+	 * Returns the comments owned by the user associated with the given
+	 * access_token.
+	 * 
+	 * Sort supported: creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max
+	 * ,accessToken
+	 * 
+	 * Mandatory parameters : accessToken
+	 * 
+	 * @return the paged list< Comment>
+	 */
+	@Override
+	public PagedList<Comment> listMyComments() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_MY_COMMENTS);
+		return super.list();
+	}
+
+	/**
+	 * Returns the comments owned by the user associated with the given
+	 * access_token that are in reply to the user identified by {toUser}
+	 * 
+	 * Sort supported: creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min,
+	 * max,toUser ,accessToken
+	 * 
+	 * Mandatory parameters : accessToken,toUser
+	 * 
+	 * @return the paged list< Comment>
+	 */
+	@Override
+	public PagedList<Comment> listMyCommentsToUser() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_MT_COMMENTS_TO_USER);
+		return super.list();
+	}
+
+	/**
+	 * Returns the comments mentioning the user associated with the given
+	 * access_token
+	 * 
+	 * Sort supported: creation , votes
+	 * 
+	 * Supported parameters: - paging , fromDate , toDate, Sort , min, max
+	 * ,accessToken
+	 * 
+	 * Mandatory parameters : accessToken
+	 * 
+	 * @return the paged list< Comment>
+	 */
+	@Override
+	public PagedList<Comment> listMyMentionComments() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_MY_MENTION_COMMENTS);
+		return super.list();
+	}
+
+	@Override
+	public CommentApiQuery withFilter(String filter) {
+		apiUrlBuilder.withParameter("filter", filter);
+		return this;
+	}
+
 }

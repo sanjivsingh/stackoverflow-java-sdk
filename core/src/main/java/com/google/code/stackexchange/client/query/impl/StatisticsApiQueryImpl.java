@@ -19,36 +19,51 @@ package com.google.code.stackexchange.client.query.impl;
 import com.google.code.stackexchange.client.constant.StackExchangeApiMethods;
 import com.google.code.stackexchange.client.query.StatisticsApiQuery;
 import com.google.code.stackexchange.common.PagedList;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.Statistics;
 import com.google.gson.JsonObject;
 
 /**
  * The Class StatisticsApiQueryImpl.
  */
-public class StatisticsApiQueryImpl extends BaseStackOverflowApiQuery<Statistics> implements StatisticsApiQuery {
+public class StatisticsApiQueryImpl extends
+		BaseStackOverflowApiQuery<Statistics> implements StatisticsApiQuery {
 
 	/**
 	 * Instantiates a new statistics api query impl.
 	 * 
-	 * @param applicationId the application id
+	 * @param applicationId
+	 *            the application id
+	 * @param site
+	 *            the stack exchange site
 	 */
-	public StatisticsApiQueryImpl(String applicationId) {
-		super(applicationId);
+	public StatisticsApiQueryImpl(String applicationId, StackExchangeSite site) {
+		super(applicationId, site);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery#unmarshall(org.json.simple.JSONObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.impl.BaseStackOverflowApiQuery
+	 * #unmarshall(org.json.simple.JSONObject)
 	 */
 	@Override
 	protected PagedList<Statistics> unmarshall(JsonObject json) {
 		return unmarshallList(Statistics.class, json);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
 	 */
 	@Override
 	public void reset() {
-		apiUrlBuilder = getApiProvider().createApiUrlBuilder(StackExchangeApiMethods.GET_STATISTICS, getApplicationKey(), getApiVersion());
+		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
+				StackExchangeApiMethods.GET_STATISTICS, getApplicationKey(),
+				getSite(), getApiVersion());
 	}
+
 }
