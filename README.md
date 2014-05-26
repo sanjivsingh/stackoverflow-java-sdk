@@ -4,7 +4,7 @@ stackoverflow-java-sdk
 This project aims to provide a Java wrapper to the StackOverflow? API.
 
 * Cloned from : http://code.google.com/p/stackoverflow-java-sdk/
-* It Support Stack Exchange API V2.2
+* SDK Support Stack Exchange API V2.2
 
 Getting Started
 There are two interfaces to the library.
@@ -27,6 +27,9 @@ A brief design of the API is described here. API Design.
 
 * **Switch Site** 
 Fetching records from different site are described here.
+
+* **Advance Search** 
+Advance search feature available in SDK.
 
 
 For complete stand-alone examples see Examples Source.
