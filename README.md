@@ -12,8 +12,8 @@ There are two interfaces to the library.
 * Query Interface
 * Facade Interface
 
-For complete stand-alone examples see Examples Source.
 
+### Feature 
 * **Asynchronous API** Examples of using the API asynchronously are described in Asynchronous API.
 
 * **Advanced Usage**
@@ -27,3 +27,6 @@ A brief design of the API is described here. API Design.
 
 * **Switch Site** 
 Fetching records from different site are described here.
+
+
+For complete stand-alone examples see Examples Source.
