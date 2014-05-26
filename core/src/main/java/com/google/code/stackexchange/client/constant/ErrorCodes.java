@@ -20,34 +20,41 @@ package com.google.code.stackexchange.client.constant;
  * The Interface ErrorCodes.
  */
 public interface ErrorCodes {
-	
-	/** The NO t_ found. */
-	public int NOT_FOUND = 404;
-	
-	/** The INTERNA l_ serve r_ error. */
-	public int INTERNAL_SERVER_ERROR = 500;
-	
-	/** The INVALI d_ applicatio n_ key. */
-	public int INVALID_APPLICATION_KEY = 4000;
-	
-	/** The INVALI d_ pag e_ size. */
-	public int INVALID_PAGE_SIZE = 4001;
-	
-	/** The INVALI d_ sort. */
-	public int INVALID_SORT = 4002;
-	
-	/** The INVALI d_ order. */
-	public int INVALID_ORDER = 4003;
-	
-	/** The REQUES t_ limi t_ exceeded. */
-	public int REQUEST_LIMIT_EXCEEDED = 4004;
-	
-	/** The INVALI d_ vecto r_ format. */
-	public int INVALID_VECTOR_FORMAT = 4005;
-	
-	/** The TO o_ man y_ ids. */
-	public int TOO_MANY_IDS = 4006;
-	
-	/** The UNCONSTRAINE d_ search. */
-	public int UNCONSTRAINED_SEARCH = 4007;
+
+	/** The bad_parameter. */
+	public int BAD_PARAMETER = 400;
+
+	/** The access_token_required. */
+	public int ACCESS_TOKEN_REQUIRED = 401;
+
+	/** The invalid_access_token. */
+	public int INVALID_ACCESS_TOKEN = 402;
+
+	/** The access_denied. */
+	public int ACCESS_DENIED = 403;
+
+	/** The no_method. */
+	public int NO_METHOD = 404;
+
+	/** The key_required. */
+	public int KEY_REQUIRED = 405;
+
+	/** The access_token_compromised. */
+	public int ACCESS_TOKEN_COMPROMISED = 406;
+
+	/** The write_failed. */
+	public int WRITE_FAILED = 407;
+
+	/** The duplicate_request. */
+	public int DUPLICATE_REQUEST = 409;
+
+	/** The internal_error. */
+	public int INTERNAL_ERROR = 500;
+
+	/** The throttle_violation. */
+	public int THROTTLE_VOILATION = 502;
+
+	/** The temporarily_unavailable. */
+	public int TEMPORARILY_UNAVAILABLE = 503;
+
 }
