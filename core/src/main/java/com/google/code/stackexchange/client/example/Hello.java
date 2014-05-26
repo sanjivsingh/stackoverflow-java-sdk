@@ -15,9 +15,10 @@ import com.google.code.stackexchange.schema.User;
 
 public class Hello {
 
+	
 	public static void main(String[] args) {
 		StackExchangeApiQueryFactory queryFactory = StackExchangeApiQueryFactory
-				.newInstance("rxqJ0szaOSXXwfWouBwMlg((",
+				.newInstance("",
 						StackExchangeSite.STACK_OVERFLOW);
 		Paging paging = new Paging(1, 100);
 		String filter = "default";
