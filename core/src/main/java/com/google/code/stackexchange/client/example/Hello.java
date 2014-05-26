@@ -15,11 +15,9 @@ import com.google.code.stackexchange.schema.User;
 
 public class Hello {
 
-	
 	public static void main(String[] args) {
 		StackExchangeApiQueryFactory queryFactory = StackExchangeApiQueryFactory
-				.newInstance("",
-						StackExchangeSite.STACK_OVERFLOW);
+				.newInstance("", StackExchangeSite.STACK_OVERFLOW);
 		Paging paging = new Paging(1, 100);
 		String filter = "default";
 		List<String> tag = new ArrayList<String>();
@@ -213,16 +211,31 @@ public class Hello {
 		 */
 
 		System.out.println("Get Advance Search ");
-		/*
-		 * PagedList<Question> question13s = queryFactory
-		 * .newAdvanceSearchApiQuery().withMinViews(100).list();
-		 * printQuestions(question13s);
-		 */
 
-		PagedList<Question> question13s = (PagedList<Question>) queryFactory
-				.newQuestionApiQuery().listMyQuestions();
-		System.out.println(question13s);
+		int minViews = 100;
+		int minAnswers = 10;
+		String filterName = "default";
+		String query = "mongodb";
+
+		List<String> tagged = new ArrayList<String>();
+		tagged.add("java");
+		tagged.add("mongodb");
+
+		List<String> nottagged = new ArrayList<String>();
+		nottagged.add("php");
+		PagedList<Question> question13s = queryFactory
+				.newAdvanceSearchApiQuery().withMinViews(100)
+				.withAccepted(true).withClosed(true).withMigrated(true)
+				.withMinViews(minViews).withMinAnswers(minAnswers)
+				.withNotice(true).withFilter(filterName).withQuery(query)
+				.withTags(tagged).withOutTags(nottagged).list();
+
 		printQuestions(question13s);
+
+		PagedList<Question> question14s = (PagedList<Question>) queryFactory
+				.newQuestionApiQuery().listMyQuestions();
+		System.out.println(question14s);
+		printQuestions(question14s);
 
 		System.out.println("Get posts ");
 		Range range = new Range(1, 2);

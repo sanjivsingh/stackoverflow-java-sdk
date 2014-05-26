@@ -9,8 +9,9 @@ This project aims to provide a Java wrapper to the StackOverflow? API.
 Getting Started
 There are two interfaces to the library.
 
-Query Interface
-Facade Interface
+* Query Interface
+* Facade Interface
+
 For complete stand-alone examples see Examples Source.
 
 Asynchronous API
