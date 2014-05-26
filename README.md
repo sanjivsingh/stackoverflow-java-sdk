@@ -25,6 +25,9 @@ If you plan to use the library in conjunction with Spring framework, this brief 
 * **API Design**
 A brief design of the API is described here. API Design.
 
+* **Query API**
+Query API provides a Builder like syntax to the StackOverflow? API.There are similar Query interfaces for Answers, Comments, Timelines, Badges etc.
+
 * **Switch Site** 
 Fetching records from different site are described here.
 
