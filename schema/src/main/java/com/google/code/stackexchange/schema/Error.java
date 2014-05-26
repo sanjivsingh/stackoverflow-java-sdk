@@ -22,51 +22,44 @@ import java.util.Date;
  * The Class ErrorImpl.
  */
 public class Error extends SchemaEntity {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5493694517895646459L;
-	
-	/** The error code. */
-	private int code;
-	
-	/** The status code. */
-	private int statusCode;
-	
-	/** The message. */
-	private String message;
-	
+
+	/** The error Id. */
+	private int errorId;
+
+	/** The error Message. */
+	private String errorMessage;
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+
+	/** The error Name. */
+	private String errorName;
+
 	/** The timestamp. */
 	private Date timestamp;
 
-	public int getErrorCode() {
-		return code;
+	public int getErrorId() {
+		return errorId;
 	}
 
-	public String getMessage() {
-		return message;
+	public void setErrorId(int errorId) {
+		this.errorId = errorId;
 	}
 
-	public Date getTimestamp() {
-		return timestamp;
+	public String getErrorName() {
+		return errorName;
 	}
 
-	public void setErrorCode(int value) {
-		code = value;
+	public void setErrorName(String errorName) {
+		this.errorName = errorName;
 	}
 
-	public void setMessage(String value) {
-		message = value;
-	}
-
-	public void setTimestamp(Date value) {
-		timestamp = value;
-	}
-
-	public int getStatusCode() {
-		return statusCode;
-	}
-
-	public void setStatusCode(int value) {
-		statusCode = value;
-	}
 }

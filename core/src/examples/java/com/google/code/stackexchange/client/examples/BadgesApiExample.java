@@ -27,15 +27,15 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.google.code.stackexchange.client.query.StackAuthApiQuery;
-import com.google.code.stackexchange.client.query.StackExchangeApiQueryFactory;
-import com.google.code.stackexchange.schema.Site;
+import com.google.code.stackexchange.client.StackExchangeApiClient;
+import com.google.code.stackexchange.client.StackExchangeApiClientFactory;
+import com.google.code.stackexchange.schema.Badge;
 import com.google.code.stackexchange.schema.StackExchangeSite;
 
 /**
- * The Class StatsApiExample.
+ * The Class BadgesApiExample.
  */
-public class StackAuthApiExample {
+public class BadgesApiExample {
 
 	/** The Constant APPLICATION_KEY_OPTION. */
 	private static final String APPLICATION_KEY_OPTION = "key";
@@ -79,13 +79,17 @@ public class StackAuthApiExample {
 			final String keyValue = line.getOptionValue(APPLICATION_KEY_OPTION);
 			final String siteValue = line.getOptionValue(STACK_EXCHANGE_SITE);
 
-			StackExchangeApiQueryFactory factory = StackExchangeApiQueryFactory
+			final StackExchangeApiClientFactory factory = StackExchangeApiClientFactory
 					.newInstance(keyValue,
 							StackExchangeSite.fromValue(siteValue));
-			StackAuthApiQuery query = factory.newStackAuthApiQuery();
-			List<Site> sites = query.list();
-			printResult(sites);
+			final StackExchangeApiClient client = factory
+					.createStackExchangeApiClient();
 
+			List<Badge> badges = client.getBadgesByName();
+			System.out.println("============ Badges ============");
+			for (Badge badge : badges) {
+				printResult(badge);
+			}
 		} else {
 			printHelp(options);
 		}
@@ -94,17 +98,12 @@ public class StackAuthApiExample {
 	/**
 	 * Prints the result.
 	 * 
-	 * @param stats
-	 *            the stats
+	 * @param badge
+	 *            the badge
 	 */
-	private static void printResult(List<Site> sites) {
-		for (Site site : sites) {
-			System.out.println("Site Name:" + site.getName());
-			System.out.println("API Endpoint:" + site.getApiEndpoint());
-			System.out.println("Site URL:" + site.getSiteUrl());
-			System.out.println("Site Styling:"
-					+ site.getStyling().getLinkColor());
-		}
+	private static void printResult(Badge badge) {
+		System.out.println(badge.getName() + ":" + badge.getRank() + ":"
+				+ badge.getAwardCount());
 	}
 
 	/**
@@ -127,7 +126,6 @@ public class StackAuthApiExample {
 		Option consumerKey = OptionBuilder.create(APPLICATION_KEY_OPTION);
 		opts.addOption(consumerKey);
 		
-		
 		String siteNameMsg = "Your site name.";
 		OptionBuilder.withArgName("site");
 		OptionBuilder.hasArg();
@@ -146,7 +144,7 @@ public class StackAuthApiExample {
 	 */
 	private static void printHelp(Options options) {
 		int width = 80;
-		String syntax = StackAuthApiExample.class.getName() + " <options>";
+		String syntax = BadgesApiExample.class.getName() + " <options>";
 		String header = MessageFormat.format(
 				"\nThe -{0} option is required.{1} option is required.",
 				APPLICATION_KEY_OPTION,STACK_EXCHANGE_SITE);

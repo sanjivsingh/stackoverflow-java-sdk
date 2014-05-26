@@ -20,24 +20,26 @@ package com.google.code.stackexchange.schema;
  * The Class Paging.
  */
 public final class Paging {
-	
+
 	/** The page number. */
-	private int pageNumber;
-	
+	private int pageNumber = 1;
+
 	/** The page size. */
-	private int pageSize;
-	
+	private int pageSize = 30;
+
 	/**
 	 * Instantiates a new paging.
 	 * 
-	 * @param pageNumber the page number
-	 * @param pageSize the page size
+	 * @param pageNumber
+	 *            the page number
+	 * @param pageSize
+	 *            the page size
 	 */
 	public Paging(int pageNumber, int pageSize) {
 		this.pageNumber = pageNumber;
 		this.pageSize = pageSize;
 	}
-	
+
 	/**
 	 * Gets the page number.
 	 * 
@@ -46,7 +48,7 @@ public final class Paging {
 	public int getPageNumber() {
 		return pageNumber;
 	}
-	
+
 	/**
 	 * Gets the page size.
 	 * 

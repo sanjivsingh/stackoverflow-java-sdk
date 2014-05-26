@@ -18,19 +18,28 @@ package com.google.code.stackexchange.client.provider;
 
 import com.google.code.stackexchange.client.provider.url.ApiUrlBuilder;
 import com.google.code.stackexchange.client.provider.url.DefaultApiUrlBuilder;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 
 /**
- * The Class StackOverflowApiProvider.
+ * The Class StackExchangeApiProvider.
  */
-public class CustomApiProvider implements ApiProvider {
-	private final String HOST_NAME;
-	
-	public CustomApiProvider(String apiEndPoint) {
-		this.HOST_NAME = apiEndPoint;
-	}
-	
+public class StackExchangeApiProvider implements ApiProvider {
+
+	/** The Constant HOST_NAME. */
+	private static final String HOST_NAME = "http://api.stackexchange.com";
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.provider.ApiProvider#createApiUrlBuilder
+	 * (java.lang.String, java.lang.String,
+	 * com.google.code.stackexchange.schema.StackExchangeSite, java.lang.String)
+	 */
 	@Override
-	public ApiUrlBuilder createApiUrlBuilder(String methodName, String applicationKey, String apiVersion) {
-		return new DefaultApiUrlBuilder(methodName, applicationKey, HOST_NAME, apiVersion);
+	public ApiUrlBuilder createApiUrlBuilder(String methodName,
+			String applicationKey, StackExchangeSite site, String apiVersion) {
+		return new DefaultApiUrlBuilder(methodName, applicationKey, site,
+				HOST_NAME, apiVersion);
 	}
 }

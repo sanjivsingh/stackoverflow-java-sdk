@@ -22,103 +22,103 @@ import java.util.Date;
  * The Class StackExchangeApiException.
  */
 public class StackExchangeApiException extends RuntimeException {
-	
-	/** The status code. */
-	private int statusCode;
-	
-	/** The error code. */
-	private int errorCode;
-	
+
+	/** The error Id. */
+	private int errorId;
+
+	/** The description. */
+	private String description;
+
+	/** The error Name. */
+	private String errorName;
+
 	/** The timestamp. */
 	private Date timestamp;
 
-    /** The Constant serialVersionUID. */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4345556572105572685L;
 
 	/**
 	 * Instantiates a new stack exchange api exception.
 	 */
-    public StackExchangeApiException() {
-        super();
-    }
-
-    /**
-     * Instantiates a new stack exchange api exception.
-     * 
-     * @param message the message
-     */
-    public StackExchangeApiException(String message) {
-        super(message);
-    }
-
-    /**
-     * Instantiates a new stack exchange api exception.
-     * 
-     * @param cause the cause
-     */
-    public StackExchangeApiException(Throwable cause) {
-        super(cause);
-    }
-
-    /**
-     * Instantiates a new stack exchange api exception.
-     * 
-     * @param message the message
-     * @param cause the cause
-     */
-    public StackExchangeApiException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    /**
-     * Instantiates a new stack exchange api exception.
-     * 
-     * @param message the message
-     * @param statusCode the status code
-     * @param errorCode the error code
-     * @param timestamp the timestamp
-     */
-    public StackExchangeApiException(String message, int statusCode , int errorCode, Date timestamp) {
-        super(message);
-        this.statusCode = statusCode;
-        this.errorCode = errorCode;
-        this.timestamp = timestamp;
-    }
-    
-	/**
-	 * Gets the status code.
-	 * 
-	 * @return the status code
-	 */
-	public int getStatusCode() {
-		return statusCode;
+	public StackExchangeApiException() {
+		super();
 	}
 
 	/**
-	 * Sets the status code.
+	 * Instantiates a new stack exchange api exception.
 	 * 
-	 * @param statusCode the new status code
+	 * @param description
+	 *            the description
 	 */
-	public void setStatusCode(int statusCode) {
-		this.statusCode = statusCode;
+	public StackExchangeApiException(String description) {
+		super(description);
 	}
 
 	/**
-	 * Gets the error code.
+	 * Instantiates a new stack exchange api exception.
 	 * 
-	 * @return the error code
+	 * @param cause
+	 *            the cause
 	 */
-	public int getErrorCode() {
-		return errorCode;
+	public StackExchangeApiException(Throwable cause) {
+		super(cause);
 	}
 
 	/**
-	 * Sets the error code.
+	 * Instantiates a new stack exchange api exception.
 	 * 
-	 * @param errorCode the new error code
+	 * @param description
+	 *            the description
+	 * @param cause
+	 *            the cause
 	 */
-	public void setErrorCode(int errorCode) {
-		this.errorCode = errorCode;
+	public StackExchangeApiException(String description, Throwable cause) {
+		super(description, cause);
+	}
+
+	/**
+	 * Instantiates a new stack exchange api exception.
+	 * 
+	 * @param description
+	 *            the description
+	 * @param errorId
+	 *            the error Id
+	 * @param errorName
+	 *            the error Name
+	 * @param timestamp
+	 *            the timestamp
+	 */
+	public StackExchangeApiException(String description, int errorId,
+			String errorName, Date timestamp) {
+		super(description);
+		this.errorId = errorId;
+		this.errorName = errorName;
+		this.timestamp = timestamp;
+	}
+
+	public int getErrorId() {
+		return errorId;
+	}
+
+	public void setErrorId(int errorId) {
+		this.errorId = errorId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getErrorName() {
+		return errorName;
+	}
+
+	public void setErrorName(String errorName) {
+		this.errorName = errorName;
 	}
 
 	/**
@@ -133,7 +133,8 @@ public class StackExchangeApiException extends RuntimeException {
 	/**
 	 * Sets the timestamp.
 	 * 
-	 * @param timestamp the new timestamp
+	 * @param timestamp
+	 *            the new timestamp
 	 */
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;

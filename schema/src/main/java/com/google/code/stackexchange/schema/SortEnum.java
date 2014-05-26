@@ -20,17 +20,17 @@ package com.google.code.stackexchange.schema;
  * The Interface SortEnum.
  */
 public interface SortEnum extends ValueEnum {
-	
+
 	/**
 	 * The Enum Order.
 	 */
 	public enum Order implements ValueEnum {
-		
+
 		/** The ASCENDING. */
-		DESCENDING("desc"), 
- 
- /** The DESCENDING. */
- ASCENDING("asc");
+		DESCENDING("desc"),
+
+		/** The DESCENDING. */
+		ASCENDING("asc");
 
 		/** The value. */
 		private final String value;
@@ -38,13 +38,16 @@ public interface SortEnum extends ValueEnum {
 		/**
 		 * Instantiates a new order.
 		 * 
-		 * @param value the value
+		 * @param value
+		 *            the value
 		 */
 		Order(String value) {
 			this.value = value;
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see com.google.code.stackexchange.schema.ValueEnum#value()
 		 */
 		@Override

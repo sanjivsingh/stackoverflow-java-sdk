@@ -17,7 +17,6 @@
 package com.google.code.stackexchange.client.examples;
 
 import java.text.MessageFormat;
-import java.util.EnumSet;
 import java.util.List;
 
 import org.apache.commons.cli.BasicParser;
@@ -30,91 +29,110 @@ import org.apache.commons.cli.ParseException;
 
 import com.google.code.stackexchange.client.StackExchangeApiClient;
 import com.google.code.stackexchange.client.StackExchangeApiClientFactory;
-import com.google.code.stackexchange.schema.FilterOption;
+import com.google.code.stackexchange.client.constant.TestConstants;
 import com.google.code.stackexchange.schema.PostTimeline;
 import com.google.code.stackexchange.schema.Question;
+import com.google.code.stackexchange.schema.StackExchangeSite;
 
 /**
  * The Class QuestionsApiExample.
  */
 public class QuestionsApiExample {
 
-    /** The Constant APPLICATION_KEY_OPTION. */
-    private static final String APPLICATION_KEY_OPTION = "key";
-	
-    /** The Constant ID_OPTION. */
-    private static final String ID_OPTION = "id";
-    
-    /** The Constant HELP_OPTION. */
-    private static final String HELP_OPTION = "help";
-    
-    /**
-     * The main method.
-     * 
-     * @param args the arguments
-     */
+	/** The Constant APPLICATION_KEY_OPTION. */
+	private static final String APPLICATION_KEY_OPTION = "key";
+
+	/** The Constant STACK_EXCHANGE_SITE. */
+	private static final String STACK_EXCHANGE_SITE = "site";
+
+	/** The Constant ID_OPTION. */
+	private static final String ID_OPTION = "2163";
+
+	/** The Constant HELP_OPTION. */
+	private static final String HELP_OPTION = "help";
+
+	/**
+	 * The main method.
+	 * 
+	 * @param args
+	 *            the arguments
+	 */
 	public static void main(String[] args) {
 		Options options = buildOptions();
-        try {
-            CommandLine line = new BasicParser().parse(options, args);
-            processCommandLine(line, options);
-        } catch(ParseException exp ) {
-            System.err.println(exp.getMessage());
-            printHelp(options);
-        }
+		try {
+			CommandLine line = new BasicParser().parse(options, args);
+			processCommandLine(line, options);
+		} catch (ParseException exp) {
+			System.err.println(exp.getMessage());
+			printHelp(options);
+		}
 	}
-	
-    /**
-     * Process command line.
-     * 
-     * @param line the line
-     * @param options the options
-     */
-    private static void processCommandLine(CommandLine line, Options options) {
-        if(line.hasOption(HELP_OPTION)) {
-            printHelp(options);            
-        } else if(line.hasOption(APPLICATION_KEY_OPTION)) {
-    		final String keyValue = line.getOptionValue(APPLICATION_KEY_OPTION);
-    		
-    		final StackExchangeApiClientFactory factory = StackExchangeApiClientFactory.newInstance(keyValue);
-    		final StackExchangeApiClient client = factory.createStackExchangeApiClient();
-    		
-    		if(line.hasOption(ID_OPTION)) {
-    			String idValue = line.getOptionValue(ID_OPTION);
-    			List<Question> question = client.getQuestions(Long.valueOf(idValue));
-    			printResult(question.get(0));
-    		} else {
-    			List<Question> questions = client.getQuestions(EnumSet.of(FilterOption.INCLUDE_BODY, FilterOption.INCLUDE_COMMENTS));
-    			for (Question question : questions) {
-    				printResult(question);
-    			}
-    			
-    			List<PostTimeline> questionTimeline = client.getQuestionsTimeline(2420689L);
-    			for (PostTimeline timeline : questionTimeline) {
+
+	/**
+	 * Process command line.
+	 * 
+	 * @param line
+	 *            the line
+	 * @param options
+	 *            the options
+	 */
+	private static void processCommandLine(CommandLine line, Options options) {
+		if (line.hasOption(HELP_OPTION)) {
+			printHelp(options);
+		} else if (line.hasOption(APPLICATION_KEY_OPTION)
+				&& line.hasOption(STACK_EXCHANGE_SITE)) {
+			final String keyValue = line.getOptionValue(APPLICATION_KEY_OPTION);
+			final String siteValue = line.getOptionValue(STACK_EXCHANGE_SITE);
+
+			final StackExchangeApiClientFactory factory = StackExchangeApiClientFactory
+					.newInstance(keyValue,
+							StackExchangeSite.fromValue(siteValue));
+			final StackExchangeApiClient client = factory
+					.createStackExchangeApiClient();
+
+			if (line.hasOption(ID_OPTION)) {
+				String idValue = line.getOptionValue(ID_OPTION);
+				List<Question> question = client.getQuestions(Long
+						.valueOf(idValue));
+				printResult(question.get(0));
+			} else {
+				List<Question> questions = client
+						.getQuestions(TestConstants.STACK_OVERFLOW_TEST_USER_FILTER);
+				for (Question question : questions) {
+					printResult(question);
+				}
+
+				List<PostTimeline> questionTimeline = client
+						.getQuestionsTimeline(2420689L);
+				for (PostTimeline timeline : questionTimeline) {
 					printResult(timeline);
 				}
-    		}
-        } else {
-            printHelp(options);
-        }
-    }
-	
-	/**
-	 * Prints the result.
-	 * 
-	 * @param timeline the timeline
-	 */
-	private static void printResult(PostTimeline timeline) {
-		System.out.println(timeline.getAction() + ":" + timeline.getTimelineType());
+			}
+		} else {
+			printHelp(options);
+		}
 	}
 
 	/**
 	 * Prints the result.
 	 * 
-	 * @param question the question
+	 * @param timeline
+	 *            the timeline
+	 */
+	private static void printResult(PostTimeline timeline) {
+		System.out.println(timeline.getAction() + ":"
+				+ timeline.getTimelineType());
+	}
+
+	/**
+	 * Prints the result.
+	 * 
+	 * @param question
+	 *            the question
 	 */
 	private static void printResult(Question question) {
-		System.out.println(question.getTitle() + ":" + question.getAnswerCount());
+		System.out.println(question.getTitle() + ":"
+				+ question.getAnswerCount());
 	}
 
 	/**
@@ -122,41 +140,52 @@ public class QuestionsApiExample {
 	 * 
 	 * @return the options
 	 */
-    private static Options buildOptions() {
-       
-        Options opts = new Options();
-        
-        String helpMsg = "Print this message.";
-        Option help = new Option(HELP_OPTION, helpMsg);
-        opts.addOption(help);
+	private static Options buildOptions() {
 
-        String consumerKeyMsg = "You API Key.";
-        OptionBuilder.withArgName("key");
-        OptionBuilder.hasArg();
-        OptionBuilder.withDescription(consumerKeyMsg);
-        Option consumerKey = OptionBuilder.create(APPLICATION_KEY_OPTION);
-        opts.addOption(consumerKey);
-        
-        String idMsg = "ID of the users to whom a message is to be sent (separated by comma).";
-        OptionBuilder.withArgName("id");
-        OptionBuilder.hasArg();
-        OptionBuilder.withDescription(idMsg);
-        Option id = OptionBuilder.create(ID_OPTION);
-        opts.addOption(id);
-        
-        return opts;
-    }
-    
-    /**
-     * Prints the help.
-     * 
-     * @param options the options
-     */
-    private static void printHelp(Options options) {
-        int width = 80;
-        String syntax = QuestionsApiExample.class.getName() + " <options>";
-        String header = MessageFormat.format("\nThe -{0} option is required. The -{1} option is optional.", APPLICATION_KEY_OPTION, ID_OPTION);
-        String footer = "";
-        new HelpFormatter().printHelp(width, syntax, header, options, footer, false);
-    }
+		Options opts = new Options();
+
+		String helpMsg = "Print this message.";
+		Option help = new Option(HELP_OPTION, helpMsg);
+		opts.addOption(help);
+
+		String consumerKeyMsg = "Your API Key.";
+		OptionBuilder.withArgName("key");
+		OptionBuilder.hasArg();
+		OptionBuilder.withDescription(consumerKeyMsg);
+		Option consumerKey = OptionBuilder.create(APPLICATION_KEY_OPTION);
+		opts.addOption(consumerKey);
+
+		String siteNameMsg = "Your site name.";
+		OptionBuilder.withArgName("site");
+		OptionBuilder.hasArg();
+		OptionBuilder.withDescription(siteNameMsg);
+		Option siteName = OptionBuilder.create(STACK_EXCHANGE_SITE);
+		opts.addOption(siteName);
+
+		String idMsg = "ID of the users to whom a message is to be sent (separated by comma).";
+		OptionBuilder.withArgName("id");
+		OptionBuilder.hasArg();
+		OptionBuilder.withDescription(idMsg);
+		Option id = OptionBuilder.create(ID_OPTION);
+		opts.addOption(id);
+
+		return opts;
+	}
+
+	/**
+	 * Prints the help.
+	 * 
+	 * @param options
+	 *            the options
+	 */
+	private static void printHelp(Options options) {
+		int width = 80;
+		String syntax = QuestionsApiExample.class.getName() + " <options>";
+		String header = MessageFormat.format(
+				"\nThe -{0} option is required.{1} option is required The -{2} option is optional.",
+				APPLICATION_KEY_OPTION,STACK_EXCHANGE_SITE, ID_OPTION);
+		String footer = "";
+		new HelpFormatter().printHelp(width, syntax, header, options, footer,
+				false);
+	}
 }

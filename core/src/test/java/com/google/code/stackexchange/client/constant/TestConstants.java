@@ -15,6 +15,7 @@
  * 
  */
 package com.google.code.stackexchange.client.constant;
+
 import java.io.IOException;
 import java.util.Properties;
 
@@ -23,54 +24,60 @@ import java.util.Properties;
  */
 public final class TestConstants {
 
-    /** The Constant TEST_CONSTANTS_FILE. */
-    public static final String TEST_CONSTANTS_FILE = "TestConstants.properties";
+	/** The Constant TEST_CONSTANTS_FILE. */
+	public static final String TEST_CONSTANTS_FILE = "TestConstants.properties";
 
-    /** The Constant testConstants. */
-    private static final Properties testConstants = new Properties();
+	/** The Constant testConstants. */
+	private static final Properties testConstants = new Properties();
 
-    static {
-        try {
-            testConstants.load(TestConstants.class.getResourceAsStream(TEST_CONSTANTS_FILE));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    /** The Constant STACK_OVERFLOW_TEST_API_KEY. */
-    public static final String STACK_OVERFLOW_TEST_API_KEY =
-        testConstants.getProperty("com.google.code.stackexchange.client.apiKey");
+	static {
+		try {
+			testConstants.load(TestConstants.class
+					.getResourceAsStream(TEST_CONSTANTS_FILE));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    /** The Constant STACK_OVERFLOW_TEST_USER_IDS. */
-    public static final String STACK_OVERFLOW_TEST_USER_IDS =
-        testConstants.getProperty("com.google.code.stackexchange.client.testUserIds");
-    
-    /** The Constant STACK_OVERFLOW_TEST_QUESTION_IDS. */
-    public static final String STACK_OVERFLOW_TEST_QUESTION_IDS =
-        testConstants.getProperty("com.google.code.stackexchange.client.testQuestionIds");
-    
-    /** The Constant STACK_OVERFLOW_TEST_ANSWER_ID. */
-    public static final String STACK_OVERFLOW_TEST_ANSWER_ID =
-        testConstants.getProperty("com.google.code.stackexchange.client.testAnswerId");
-    
-    /** The Constant STACK_OVERFLOW_TEST_PAGE_NO. */
-    public static final String STACK_OVERFLOW_TEST_PAGE_NO =
-        testConstants.getProperty("com.google.code.stackexchange.client.testPageNo");
-    
-    /** The Constant STACK_OVERFLOW_TEST_PAGE_SIZE. */
-    public static final String STACK_OVERFLOW_TEST_PAGE_SIZE =
-        testConstants.getProperty("com.google.code.stackexchange.client.testPageSize");
-    
-    /** The Constant STACK_OVERFLOW_TEST_TAGS. */
-    public static final String STACK_OVERFLOW_TEST_TAGS =
-        testConstants.getProperty("com.google.code.stackexchange.client.testTags");
-    
-    /** The Constant STACK_OVERFLOW_TEST_USER_FILTER. */
-    public static final String STACK_OVERFLOW_TEST_USER_FILTER =
-        testConstants.getProperty("com.google.code.stackexchange.client.testUserFilter");
+	/** The Constant STACK_OVERFLOW_TEST_API_KEY. */
+	public static final String STACK_OVERFLOW_TEST_API_KEY = testConstants
+			.getProperty("com.google.code.stackexchange.client.apiKey");
 
-    /**
-     * Instantiates a new test constants.
-     */
-    private TestConstants() {}
+	/** The Constant STACK_EXCHANGE_SITE. */
+	public static final String STACK_EXCHANGE_SITE = testConstants
+			.getProperty("com.google.code.stackexchange.client.stackexchangesite");
+
+	/** The Constant STACK_OVERFLOW_TEST_USER_IDS. */
+	public static final String STACK_OVERFLOW_TEST_USER_IDS = testConstants
+			.getProperty("com.google.code.stackexchange.client.testUserIds");
+
+	/** The Constant STACK_OVERFLOW_TEST_QUESTION_IDS. */
+	public static final String STACK_OVERFLOW_TEST_QUESTION_IDS = testConstants
+			.getProperty("com.google.code.stackexchange.client.testQuestionIds");
+
+	/** The Constant STACK_OVERFLOW_TEST_ANSWER_ID. */
+	public static final String STACK_OVERFLOW_TEST_ANSWER_ID = testConstants
+			.getProperty("com.google.code.stackexchange.client.testAnswerId");
+
+	/** The Constant STACK_OVERFLOW_TEST_PAGE_NO. */
+	public static final String STACK_OVERFLOW_TEST_PAGE_NO = testConstants
+			.getProperty("com.google.code.stackexchange.client.testPageNo");
+
+	/** The Constant STACK_OVERFLOW_TEST_PAGE_SIZE. */
+	public static final String STACK_OVERFLOW_TEST_PAGE_SIZE = testConstants
+			.getProperty("com.google.code.stackexchange.client.testPageSize");
+
+	/** The Constant STACK_OVERFLOW_TEST_TAGS. */
+	public static final String STACK_OVERFLOW_TEST_TAGS = testConstants
+			.getProperty("com.google.code.stackexchange.client.testTags");
+
+	/** The Constant STACK_OVERFLOW_TEST_USER_FILTER. */
+	public static final String STACK_OVERFLOW_TEST_USER_FILTER = testConstants
+			.getProperty("com.google.code.stackexchange.client.testUserFilter");
+
+	/**
+	 * Instantiates a new test constants.
+	 */
+	private TestConstants() {
+	}
 }
