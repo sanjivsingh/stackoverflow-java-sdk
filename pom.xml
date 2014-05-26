@@ -3,15 +3,15 @@
   <groupId>com.google.code.stackexchange</groupId>
   <artifactId>stackoverflow-java-sdk</artifactId>
   <packaging>pom</packaging>
-  <version>0.1</version>
+  <version>0.2</version>
   <name>StackExchange API Java SDK</name>
   <inceptionYear>2010</inceptionYear>
   <description>A Java wrapper for StackExchange API.</description>
-  <url>http://code.google.com/p/stackoverflow-java-sdk/</url>
+  <url>https://github.com/sanjivsingh/stackoverflow-java-sdk/</url>
 
   <issueManagement>
-    <system>google-code</system>
-    <url>http://code.google.com/p/stackoverflow-java-sdk/issues/list</url>
+    <system>GitHub</system>
+    <url>https://github.com/sanjivsingh/stackoverflow-java-sdk/issues</url>
   </issueManagement>
 
   <scm>
@@ -24,6 +24,10 @@
     <developer>
       <name>Nabeel Mukhtar</name>
       <id>nabeelmukhtar</id>
+    </developer>
+    <developer>
+      <name>Sanjiv Singh</name>
+      <id>sanjivsingh</id>
     </developer>
   </developers>
 	
