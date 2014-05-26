@@ -14,14 +14,18 @@ There are two interfaces to the library.
 
 For complete stand-alone examples see Examples Source.
 
-Asynchronous API
+* Asynchronous API
+
 Examples of using the API asynchronously are described in Asynchronous API.
 
-Advanced Usage
+* Advanced Usage
 Advanced usage like changing API providers or paging through the results are described in Advanced Usage.
 
-Spring Configuration
+* Spring Configuration
 If you plan to use the library in conjunction with Spring framework, this brief tutorial will guide you. Spring Configuration
 
-API Design
+* API Design
 A brief design of the API is described here. API Design.
+
+* Switch Site 
+Fetching records from different site are described here.
