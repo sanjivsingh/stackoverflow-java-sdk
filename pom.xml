@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.google.code.stackexchange</groupId>
+  <artifactId>stackoverflow-java-sdk</artifactId>
+  <packaging>pom</packaging>
+  <version>0.1</version>
+  <name>StackExchange API Java SDK</name>
+  <inceptionYear>2010</inceptionYear>
+  <description>A Java wrapper for StackExchange API.</description>
+  <url>http://code.google.com/p/stackoverflow-java-sdk/</url>
+
+  <issueManagement>
+    <system>google-code</system>
+    <url>http://code.google.com/p/stackoverflow-java-sdk/issues/list</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:svn:http://google-search-java-sdk.googlecode.com/svn/trunk</connection>
+    <developerConnection>scm:hg:https://stackoverflow-java-sdk.googlecode.com/hg</developerConnection>
+    <url>http://code.google.com/p/stackoverflow-java-sdk/source/browse/</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Nabeel Mukhtar</name>
+      <id>nabeelmukhtar</id>
+    </developer>
+  </developers>
+	
+  <modules>
+    <module>schema</module>
+    <module>core</module>
+	<module>dist</module>
+  </modules>
+  <build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.3.1</version>
+			<configuration>
+				<source>1.6</source>
+				<target>1.6</target>
+			</configuration>
+		</plugin>
+	</plugins>
+  </build>
+</project>

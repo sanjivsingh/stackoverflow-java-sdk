@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="stackoverflow-java-sdk">
+    <property environment="env"/>
+    <property name="junit.output.dir" value="junit"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="stackoverflow-java-sdk.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="dev-lib/junit-4.5.jar"/>
+        <pathelement location="dev-lib/commons-cli-1.2.jar"/>
+        <pathelement location="lib/gson-1.4.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="schema/src/main/java" excludes="**/*.launch, **/*.java"/>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="core/src/main/java" excludes="**/*.launch, **/*.java"/>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="core/src/main/resources" excludes="**/*.launch, **/*.java"/>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="core/src/test/java" excludes="**/*.launch, **/*.java"/>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="core/src/test/resources" excludes="**/*.launch, **/*.java"/>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="core/src/examples/java" excludes="**/*.launch, **/*.java"/>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="schema/src/main/java"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </javac>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="core/src/main/java"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </javac>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="core/src/main/resources"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </javac>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="core/src/test/java"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </javac>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="core/src/test/resources"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </javac>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="core/src/examples/java"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target name="AnswersApiExample">
+        <java classname="com.google.code.stackexchange.client.examples.AnswersApiExample" failonerror="true" fork="yes">
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </java>
+    </target>
+    <target name="AsyncApiExample (1)">
+        <java classname="com.google.code.stackexchange.client.examples.AsyncApiExample" failonerror="true" fork="yes">
+            <arg line="-key speakfriendandenter"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </java>
+    </target>
+    <target name="BadgesAndTagsApiExample">
+        <java classname="com.google.code.stackexchange.client.examples.BadgesAndTagsApiExample" failonerror="true" fork="yes">
+            <arg line="-key C9uyDMP_i0u1y7mXhB1GkQ"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </java>
+    </target>
+    <target name="CommentsApiExample">
+        <java classname="com.google.code.stackexchange.client.examples.CommentsApiExample" failonerror="true" fork="yes">
+            <arg line="-key  C9uyDMP_i0u1y7mXhB1GkQ"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </java>
+    </target>
+    <target name="QueryApiExample">
+        <java classname="com.google.code.stackexchange.client.examples.QueryApiExample" failonerror="true" fork="yes">
+            <arg line="-key 0xDEADBEEF"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </java>
+    </target>
+    <target name="QuestionsApiExample">
+        <java classname="com.google.code.stackexchange.client.examples.QuestionsApiExample" failonerror="true" fork="yes">
+            <arg line="-key C9uyDMP_i0u1y7mXhB1GkQ"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </java>
+    </target>
+    <target name="StackExchangeApiJsonClientTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.google.code.stackexchange.client.StackExchangeApiJsonClientTest" todir="${junit.output.dir}"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </junit>
+    </target>
+    <target name="StackExchangeApiJsonQueryTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.google.code.stackexchange.client.StackExchangeApiJsonQueryTest" todir="${junit.output.dir}"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </junit>
+    </target>
+    <target name="StatsApiExample">
+        <java classname="com.google.code.stackexchange.client.examples.StatsApiExample" failonerror="true" fork="yes">
+            <arg line="-key C9uyDMP_i0u1y7mXhB1GkQ"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </java>
+    </target>
+    <target name="UsersApiExample">
+        <java classname="com.google.code.stackexchange.client.examples.UsersApiExample" failonerror="true" fork="yes">
+            <arg line="-key  C9uyDMP_i0u1y7mXhB1GkQ -id 1288"/>
+            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        </java>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
+</project>
