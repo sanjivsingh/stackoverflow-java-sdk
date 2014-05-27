@@ -35,4 +35,4 @@ Fetching records from different site are described here.
 Advance search feature available in SDK.
 
 
-For complete stand-alone examples see Examples Source.
+For complete stand-alone examples see [Example Source](https://github.com/sanjivsingh/stackoverflow-java-sdk/tree/master/core/src/examples/java/com/google/code/stackexchange/client/examples).
