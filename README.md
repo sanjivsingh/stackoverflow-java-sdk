@@ -14,24 +14,24 @@ There are two interfaces to the library.
 
 
 ### Feature 
-* **Asynchronous API** Examples of using the API asynchronously are described in Asynchronous API.
+* **[Asynchronous API](https://github.com/sanjivsingh/stackoverflow-java-sdk/wiki/Asynchronous-API)** Examples of using the API asynchronously are described in Asynchronous API.
 
-* **Advanced Usage**
+* **[Advanced Usage](https://github.com/sanjivsingh/stackoverflow-java-sdk/wiki/AdvancedUsage)**
 Advanced usage like changing API providers or paging through the results are described in Advanced Usage.
 
-* **Spring Configuration**
+* **[Spring Configuration](https://github.com/sanjivsingh/stackoverflow-java-sdk/wiki/SpringConfiguration)**
 If you plan to use the library in conjunction with Spring framework, this brief tutorial will guide you. Spring Configuration
 
-* **API Design**
+* **[API Design](https://github.com/sanjivsingh/stackoverflow-java-sdk/wiki/API-Design)**
 A brief design of the API is described here. API Design.
 
-* **Query API**
+* **[Query API](https://github.com/sanjivsingh/stackoverflow-java-sdk/wiki/Query-API)**
 Query API provides a Builder like syntax to the StackOverflow? API.There are similar Query interfaces for Answers, Comments, Timelines, Badges etc.
 
-* **Switch Site** 
+* **[Switch Site](https://github.com/sanjivsingh/stackoverflow-java-sdk/wiki/Switch-Site)**
 Fetching records from different site are described here.
 
-* **Advance Search** 
+* **[Advance Search](https://github.com/sanjivsingh/stackoverflow-java-sdk/wiki/Advance-Search)** 
 Advance search feature available in SDK.
 
 
