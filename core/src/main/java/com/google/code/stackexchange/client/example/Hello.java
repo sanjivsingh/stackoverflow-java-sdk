@@ -16,7 +16,7 @@ public class Hello {
 
 	public static void main(String[] args) {
 		StackExchangeApiQueryFactory queryFactory = StackExchangeApiQueryFactory
-				.newInstance("applicationKey1",
+				.newInstance("applicationKey", "accessToken",
 						StackExchangeSite.STACK_OVERFLOW);
 		Paging paging = new Paging(1, 100);
 		String filter = "default";

@@ -50,6 +50,10 @@ public final class ApplicationConstants {
     /** The Constant DEFAULT_PAGE_SIZE. */
     public static final int DEFAULT_PAGE_SIZE =
         getIntProperty("com.google.code.stackexchange.client.defaultPageSize");
+    
+    
+    /** The Constant HOST_NAME. */
+    public static final String HOST_NAME = getProperty("com.google.code.stackexchange.client.hostName");
 
     /** The Constant CONTENT_ENCODING. */
     public static final String CONTENT_ENCODING = getProperty("com.google.code.stackexchange.client.encoding");

@@ -16,6 +16,7 @@
  */
 package com.google.code.stackexchange.client.provider;
 
+import com.google.code.stackexchange.client.constant.ApplicationConstants;
 import com.google.code.stackexchange.client.provider.url.ApiUrlBuilder;
 import com.google.code.stackexchange.client.provider.url.DefaultApiUrlBuilder;
 import com.google.code.stackexchange.schema.StackExchangeSite;
@@ -26,7 +27,7 @@ import com.google.code.stackexchange.schema.StackExchangeSite;
 public class StackExchangeApiProvider implements ApiProvider {
 
 	/** The Constant HOST_NAME. */
-	private static final String HOST_NAME = "http://api.stackexchange.com";
+	private static final String HOST_NAME = ApplicationConstants.HOST_NAME;
 
 	/**
 	 * 

@@ -103,7 +103,7 @@ public class DefaultApiUrlBuilder implements ApiUrlBuilder {
 				parametersMap.put("key", applicationId);
 			}
 			if (accessToken != null) {
-				parametersMap.put("accessToken", accessToken);
+				parametersMap.put("access_token", accessToken);
 			}
 			if (site != null) {
 				parametersMap.put("site", site.value());
@@ -140,7 +140,7 @@ public class DefaultApiUrlBuilder implements ApiUrlBuilder {
 				parametersMap.put("key", applicationId);
 			}
 			if (accessToken != null) {
-				parametersMap.put("accessToken", accessToken);
+				parametersMap.put("access_token", accessToken);
 			}
 			if (site != null) {
 				parametersMap.put("site", site.value());
