@@ -1,7 +1,7 @@
 stackoverflow-java-sdk
 ======================
 
-This project aims to provide a Java wrapper to the StackOverflow? API.
+This project aims to provide a Java wrapper to the Stack Exchange ? API.
 
 * Cloned from : http://code.google.com/p/stackoverflow-java-sdk/
 * SDK supports **Stack Exchange API V2.2**
