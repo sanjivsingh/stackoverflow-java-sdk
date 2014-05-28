@@ -47,6 +47,16 @@ public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment>
 		super(applicationId, site);
 	}
 
+	public CommentApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	public CommentApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -159,7 +169,7 @@ public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment>
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.GET_COMMENT, getApplicationKey(),
-				getSite(), getApiVersion());
+				getAccessToken(), getSite(), getApiVersion());
 	}
 
 	/*

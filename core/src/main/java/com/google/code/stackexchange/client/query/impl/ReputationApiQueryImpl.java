@@ -47,6 +47,18 @@ public class ReputationApiQueryImpl extends
 		super(applicationId, site);
 	}
 
+	public ReputationApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+
+	}
+
+	public ReputationApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -108,7 +120,8 @@ public class ReputationApiQueryImpl extends
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.GET_USER_REPUTATIONS,
-				getApplicationKey(), getSite(), getApiVersion());
+				getApplicationKey(), getAccessToken(), getSite(),
+				getApiVersion());
 	}
 
 	@Override

@@ -141,6 +141,16 @@ public class AsyncStackExchangeApiClientAdapter implements
 		client.removeRequestHeader(headerName);
 	}
 
+	@Override
+	public void setAccessToken(String accessToken) {
+		client.setAccessToken(accessToken);
+	}
+
+	@Override
+	public String getAccessToken() {
+		return client.getAccessToken();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1668,4 +1678,5 @@ public class AsyncStackExchangeApiClientAdapter implements
 			}
 		});
 	}
+
 }

@@ -41,6 +41,16 @@ public class StatisticsApiQueryImpl extends
 		super(applicationId, site);
 	}
 
+	public StatisticsApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	public StatisticsApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -63,7 +73,7 @@ public class StatisticsApiQueryImpl extends
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.GET_STATISTICS, getApplicationKey(),
-				getSite(), getApiVersion());
+				getAccessToken(), getSite(), getApiVersion());
 	}
 
 }

@@ -46,6 +46,16 @@ public class AnswerApiQueryImpl extends BaseStackOverflowApiQuery<Answer>
 		super(applicationId, site);
 	}
 
+	public AnswerApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	public AnswerApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -132,8 +142,8 @@ public class AnswerApiQueryImpl extends BaseStackOverflowApiQuery<Answer>
 	@Override
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
-				StackExchangeApiMethods.GET_ANSWER, getApplicationKey(), site,
-				getApiVersion());
+				StackExchangeApiMethods.GET_ANSWER, getApplicationKey(),
+				getAccessToken(), getSite(), getApiVersion());
 	}
 
 	/*

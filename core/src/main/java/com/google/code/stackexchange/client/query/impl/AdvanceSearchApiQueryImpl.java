@@ -54,6 +54,16 @@ public class AdvanceSearchApiQueryImpl extends
 		super(applicationId, site);
 	}
 
+	public AdvanceSearchApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	public AdvanceSearchApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -134,7 +144,7 @@ public class AdvanceSearchApiQueryImpl extends
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.SEARCH_QUESTIONS, getApplicationKey(),
-				getSite(), getApiVersion());
+				getAccessToken(), getSite(), getApiVersion());
 	}
 
 	/*

@@ -21,11 +21,21 @@ public class PostApiQueryImpl extends BaseStackOverflowApiQuery<PostTimeline>
 		super(applicationId, stackExchangeSite);
 	}
 
+	public PostApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	public PostApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+	}
+
 	@Override
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.GET_POSTS, getApplicationKey(),
-				getSite(), getApiVersion());
+				getAccessToken(), getSite(), getApiVersion());
 
 	}
 

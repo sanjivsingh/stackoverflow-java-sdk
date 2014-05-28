@@ -44,6 +44,16 @@ public class BadgeApiQueryImpl extends BaseStackOverflowApiQuery<Badge>
 		super(applicationId, site);
 	}
 
+	public BadgeApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	public BadgeApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -79,7 +89,7 @@ public class BadgeApiQueryImpl extends BaseStackOverflowApiQuery<Badge>
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.GET_BADGES, getApplicationKey(),
-				getSite(), getApiVersion());
+				getAccessToken(), getSite(), getApiVersion());
 	}
 
 	/*

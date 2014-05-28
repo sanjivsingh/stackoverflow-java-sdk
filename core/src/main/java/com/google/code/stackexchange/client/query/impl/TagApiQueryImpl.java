@@ -47,6 +47,16 @@ public class TagApiQueryImpl extends BaseStackOverflowApiQuery<Tag> implements
 		super(applicationId, site);
 	}
 
+	public TagApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	public TagApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -108,7 +118,7 @@ public class TagApiQueryImpl extends BaseStackOverflowApiQuery<Tag> implements
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.GET_TAGS, getApplicationKey(),
-				getSite(), getApiVersion());
+				getAccessToken(), getSite(), getApiVersion());
 	}
 
 	/*

@@ -49,6 +49,16 @@ public class QuestionApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 		super(applicationId, site);
 	}
 
+	public QuestionApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	public QuestionApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+	}
+
 	@Override
 	public QuestionApiQuery withFilter(String filter) {
 		apiUrlBuilder.withParameter("filter", filter);
@@ -194,7 +204,7 @@ public class QuestionApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.GET_QUESTIONS, getApplicationKey(),
-				getSite(), getApiVersion());
+				getAccessToken(), getSite(), getApiVersion());
 	}
 
 	/*

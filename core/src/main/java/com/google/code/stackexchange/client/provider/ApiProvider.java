@@ -31,6 +31,8 @@ public interface ApiProvider {
 	 *            the method name
 	 * @param applicationKey
 	 *            the application key
+	 * @param accessToken
+	 *            the access Token
 	 * @param site
 	 *            the stack exchange site
 	 * @param apiVersion
@@ -39,5 +41,6 @@ public interface ApiProvider {
 	 * @return the api url builder
 	 */
 	public ApiUrlBuilder createApiUrlBuilder(String methodName,
-			String applicationKey, StackExchangeSite site, String apiVersion);
+			String applicationKey, String accessToken, StackExchangeSite site,
+			String apiVersion);
 }

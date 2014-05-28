@@ -50,6 +50,16 @@ public class SearchApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 		super(applicationId, site);
 	}
 
+	public SearchApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	public SearchApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -130,7 +140,7 @@ public class SearchApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.SEARCH_QUESTIONS, getApplicationKey(),
-				getSite(), getApiVersion());
+				getAccessToken(), getSite(), getApiVersion());
 	}
 
 	/*

@@ -28,18 +28,22 @@ public class StackExchangeApiProvider implements ApiProvider {
 	/** The Constant HOST_NAME. */
 	private static final String HOST_NAME = "http://api.stackexchange.com";
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see
-	 * com.google.code.stackexchange.client.provider.ApiProvider#createApiUrlBuilder
-	 * (java.lang.String, java.lang.String,
-	 * com.google.code.stackexchange.schema.StackExchangeSite, java.lang.String)
+	 * Get Api Url Builder
+	 * 
+	 * @param methodName
+	 * @param applicationKey
+	 * @param accessToken
+	 * @param site
+	 * @param apiVersion
+	 * @return ApiUrlBuilder
 	 */
 	@Override
 	public ApiUrlBuilder createApiUrlBuilder(String methodName,
-			String applicationKey, StackExchangeSite site, String apiVersion) {
-		return new DefaultApiUrlBuilder(methodName, applicationKey, site,
-				HOST_NAME, apiVersion);
+			String applicationKey, String accessToken, StackExchangeSite site,
+			String apiVersion) {
+		return new DefaultApiUrlBuilder(methodName, applicationKey,
+				accessToken, site, HOST_NAME, apiVersion);
 	}
 }

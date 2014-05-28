@@ -126,12 +126,38 @@ public abstract class BaseStackOverflowApiQuery<T> extends
 	 * 
 	 * @param applicationId
 	 *            the application id
+	 * @param stackExchangeSite
+	 *            the stack Exchange Site
+	 * @param accessToken
+	 *            the access Token
+	 */
+	public BaseStackOverflowApiQuery(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super.setApplicationKey(applicationId);
+		super.setSite(stackExchangeSite);
+		super.setAccessToken(accessToken);
+		requestHeaders = new HashMap<String, String>();
+
+		// by default we compress contents
+		requestHeaders.put("Accept-Encoding", "gzip, deflate");
+		this.reset();
+	}
+
+	/**
+	 * Instantiates a new base stack overflow api query.
+	 * 
+	 * @param applicationId
+	 *            the application id
 	 * @param apiVersion
 	 *            the api version
+	 * @param accessToken
+	 *            the access Token
+	 * @param stackExchangeSite
+	 *            the stack Exchange Site
 	 */
 	public BaseStackOverflowApiQuery(String applicationId, String apiVersion,
-			StackExchangeSite stackExchangeSite) {
-		this(applicationId, stackExchangeSite);
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		this(applicationId, stackExchangeSite, accessToken);
 		super.setApiVersion(apiVersion);
 	}
 

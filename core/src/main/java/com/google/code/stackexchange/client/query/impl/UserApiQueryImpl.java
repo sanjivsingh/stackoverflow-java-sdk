@@ -48,6 +48,16 @@ public class UserApiQueryImpl extends BaseStackOverflowApiQuery<User> implements
 		super(applicationId, site);
 	}
 
+	public UserApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	public UserApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -116,13 +126,13 @@ public class UserApiQueryImpl extends BaseStackOverflowApiQuery<User> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.google.code.stackexchange.client.query.StackOverflowApiQuery#reset()
+	 * com.google.code.stackexchange.client.query.StackExchangeApiQuery#reset()
 	 */
 	@Override
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.GET_USERS, getApplicationKey(),
-				getSite(), getApiVersion());
+				getAccessToken(), getSite(), getApiVersion());
 	}
 
 	/*

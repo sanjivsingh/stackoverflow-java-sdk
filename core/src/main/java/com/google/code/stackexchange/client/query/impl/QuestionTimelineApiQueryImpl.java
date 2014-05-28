@@ -48,6 +48,18 @@ public class QuestionTimelineApiQueryImpl extends
 		super(applicationId, site);
 	}
 
+	public QuestionTimelineApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	public QuestionTimelineApiQueryImpl(String applicationId,
+			String apiVersion, String accessToken,
+			StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -100,7 +112,8 @@ public class QuestionTimelineApiQueryImpl extends
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.GET_QUESTION_TIMELINE,
-				getApplicationKey(), getSite(), getApiVersion());
+				getApplicationKey(), getAccessToken(), getSite(),
+				getApiVersion());
 	}
 
 	@Override

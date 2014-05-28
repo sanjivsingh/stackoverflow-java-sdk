@@ -46,6 +46,16 @@ public class RevisionApiQueryImpl extends BaseStackOverflowApiQuery<Revision>
 		super(applicationId, site);
 	}
 
+	public RevisionApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	public RevisionApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -107,7 +117,7 @@ public class RevisionApiQueryImpl extends BaseStackOverflowApiQuery<Revision>
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.GET_REVISIONS, getApplicationKey(),
-				getSite(), getApiVersion());
+				getAccessToken(), getSite(), getApiVersion());
 	}
 
 	@Override

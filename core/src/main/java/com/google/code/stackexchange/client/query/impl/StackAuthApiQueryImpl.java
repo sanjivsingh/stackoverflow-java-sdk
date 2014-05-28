@@ -64,7 +64,7 @@ public class StackAuthApiQueryImpl extends BaseStackOverflowApiQuery<Site>
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.GET_SITES, getApplicationKey(),
-				getSite(), getApiVersion());
+				getAccessToken(), getSite(), getApiVersion());
 	}
 
 }

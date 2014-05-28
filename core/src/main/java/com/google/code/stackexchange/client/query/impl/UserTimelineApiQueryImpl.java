@@ -46,6 +46,27 @@ public class UserTimelineApiQueryImpl extends
 		super(applicationId, site);
 	}
 
+	/**
+	 * @param applicationId
+	 * @param stackExchangeSite
+	 * @param accessToken
+	 */
+	public UserTimelineApiQueryImpl(String applicationId,
+			StackExchangeSite stackExchangeSite, String accessToken) {
+		super(applicationId, stackExchangeSite, accessToken);
+	}
+
+	/**
+	 * @param applicationId
+	 * @param apiVersion
+	 * @param accessToken
+	 * @param stackExchangeSite
+	 */
+	public UserTimelineApiQueryImpl(String applicationId, String apiVersion,
+			String accessToken, StackExchangeSite stackExchangeSite) {
+		super(applicationId, apiVersion, accessToken, stackExchangeSite);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -99,7 +120,7 @@ public class UserTimelineApiQueryImpl extends
 	public void reset() {
 		apiUrlBuilder = getApiProvider().createApiUrlBuilder(
 				StackExchangeApiMethods.GET_USER_TIMELINE, getApplicationKey(),
-				getSite(), getApiVersion());
+				getAccessToken(), getSite(), getApiVersion());
 	}
 
 	@Override

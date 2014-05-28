@@ -16,23 +16,39 @@
  */
 package com.google.code.stackexchange.client;
 
-
 /**
  * The Interface StackExchangeAuthenticationClient.
  */
-public interface StackExchangeAuthenticationClient extends StackExchangeCommunicationClient {
+public interface StackExchangeAuthenticationClient extends
+		StackExchangeCommunicationClient {
 
-    /**
-     * Sets the application key.
-     * 
-     * @param applicationKey the new application key
-     */
-    public void setApplicationKey(String applicationKey);
+	/**
+	 * Sets the application key.
+	 * 
+	 * @param applicationKey
+	 *            the new application key
+	 */
+	public void setApplicationKey(String applicationKey);
 
-    /**
-     * Gets the application key.
-     * 
-     * @return the application key
-     */
-    public String getApplicationKey();
+	/**
+	 * Gets the application key.
+	 * 
+	 * @return the application key
+	 */
+	public String getApplicationKey();
+
+	/**
+	 * Sets the access Token.
+	 * 
+	 * @param accessToken
+	 *            the new access Token
+	 */
+	public void setAccessToken(String accessToken);
+
+	/**
+	 * Gets the access Token.
+	 * 
+	 * @return the access Token
+	 */
+	public String getAccessToken();
 }

@@ -9,7 +9,6 @@ import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.PostTimeline;
 import com.google.code.stackexchange.schema.Question;
 import com.google.code.stackexchange.schema.Range;
-import com.google.code.stackexchange.schema.Revision;
 import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.User;
 
@@ -17,15 +16,13 @@ public class Hello {
 
 	public static void main(String[] args) {
 		StackExchangeApiQueryFactory queryFactory = StackExchangeApiQueryFactory
-				.newInstance("applicationKey", StackExchangeSite.SERVER_FAULT);
+				.newInstance("applicationKey1",
+						StackExchangeSite.STACK_OVERFLOW);
 		Paging paging = new Paging(1, 100);
 		String filter = "default";
 		List<String> tag = new ArrayList<String>();
 		tag.add("java");
 
-		List<Revision> revisions = queryFactory.newRevisionApiQuery()
-				.withPostIds(getIds("23859624,21404323")).list();
-		System.out.println(revisions);
 		/*
 		 * List<Question> questions = queryFactory .newQuestionApiQuery()
 		 * .withPaging(paging) .withFilter(filter)
@@ -223,14 +220,16 @@ public class Hello {
 
 		List<String> nottagged = new ArrayList<String>();
 		nottagged.add("php");
-		PagedList<Question> question13s = queryFactory
-				.newAdvanceSearchApiQuery().withMinViews(100)
-				.withAccepted(true).withClosed(true).withMigrated(true)
-				.withMinViews(minViews).withMinAnswers(minAnswers)
-				.withNotice(true).withFilter(filterName).withQuery(query)
-				.withTags(tagged).withOutTags(nottagged).list();
-
-		printQuestions(question13s);
+		/*
+		 * PagedList<Question> question13s = queryFactory
+		 * .newAdvanceSearchApiQuery().withMinViews(100)
+		 * .withAccepted(true).withClosed(true).withMigrated(true)
+		 * .withMinViews(minViews).withMinAnswers(minAnswers)
+		 * .withNotice(true).withFilter(filterName).withQuery(query)
+		 * .withTags(tagged).withOutTags(nottagged).list();
+		 * 
+		 * printQuestions(question13s);
+		 */
 
 		PagedList<Question> question14s = (PagedList<Question>) queryFactory
 				.newQuestionApiQuery().listMyQuestions();

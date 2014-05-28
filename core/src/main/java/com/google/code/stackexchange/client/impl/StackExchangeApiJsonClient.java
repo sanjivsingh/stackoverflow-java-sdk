@@ -196,7 +196,8 @@ public class StackExchangeApiJsonClient extends BaseStackExchangeApiClient {
 	 */
 	protected ApiUrlBuilder createStackOverflowApiUrlBuilder(String methodName) {
 		return getApiProvider().createApiUrlBuilder(methodName,
-				getApplicationKey(), getSite(), getApiVersion());
+				getApplicationKey(), getAccessToken(), getSite(),
+				getApiVersion());
 	}
 
 	protected GsonBuilder getGsonBuilder() {

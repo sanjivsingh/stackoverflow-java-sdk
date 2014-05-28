@@ -86,17 +86,24 @@ public class DefaultApiUrlBuilder implements ApiUrlBuilder {
 	 *            the method name
 	 * @param applicationId
 	 *            the application id
+	 * @param accessToken
+	 *            the access Token
+	 * @param accessToken
+	 *            the access Token
 	 * @param site
 	 *            Stack Exchange Site
 	 * @param providerHost
 	 *            the provider host
 	 */
 	public DefaultApiUrlBuilder(String methodName, String applicationId,
-			StackExchangeSite site, String providerHost) {
+			String accessToken, StackExchangeSite site, String providerHost) {
 		if (stackOverflowApiUrls.containsKey(methodName)) {
 			this.urlFormat = stackOverflowApiUrls.getProperty(methodName);
 			if (applicationId != null) {
 				parametersMap.put("key", applicationId);
+			}
+			if (accessToken != null) {
+				parametersMap.put("accessToken", accessToken);
 			}
 			if (site != null) {
 				parametersMap.put("site", site.value());
@@ -125,11 +132,15 @@ public class DefaultApiUrlBuilder implements ApiUrlBuilder {
 	 */
 
 	public DefaultApiUrlBuilder(String methodName, String applicationId,
-			StackExchangeSite site, String providerHost, String apiVersion) {
+			String accessToken, StackExchangeSite site, String providerHost,
+			String apiVersion) {
 		if (stackOverflowApiUrls.containsKey(methodName)) {
 			this.urlFormat = stackOverflowApiUrls.getProperty(methodName);
 			if (applicationId != null) {
 				parametersMap.put("key", applicationId);
+			}
+			if (accessToken != null) {
+				parametersMap.put("accessToken", accessToken);
 			}
 			if (site != null) {
 				parametersMap.put("site", site.value());

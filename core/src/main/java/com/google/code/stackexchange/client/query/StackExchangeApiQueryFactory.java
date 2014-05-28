@@ -35,14 +35,20 @@ import com.google.code.stackexchange.schema.StackExchangeSite;
 
 /**
  * A factory for creating StackExchangeApiQuery objects.
+ * 
+ * @author Sanjiv.Singh , Nabeel.Mukhtar
  */
+
 public class StackExchangeApiQueryFactory {
 
 	/** The application key. */
-	private String applicationKey;
+	private String applicationKey = null;
 
 	/** The Stack Exchange Site . */
 	private StackExchangeSite site = StackExchangeSite.STACK_OVERFLOW;
+
+	/** The Access Token . */
+	private String accessToken = null;
 
 	/**
 	 * Instantiates a new stack exchange api query factory.
@@ -60,6 +66,41 @@ public class StackExchangeApiQueryFactory {
 	}
 
 	/**
+	 * Instantiates a new stack exchange api query factory.
+	 * 
+	 * 
+	 * @param applicationKey
+	 *            the application Key
+	 * @param site
+	 *            the stack exchange site
+	 */
+	private StackExchangeApiQueryFactory(String applicationKey,
+			String accessToken, StackExchangeSite site) {
+		this.applicationKey = applicationKey;
+		this.accessToken = accessToken;
+		this.site = site;
+
+	}
+
+	/**
+	 * New instance.
+	 * 
+	 * @param applicationKey
+	 *            the application key
+	 * @param accessToken
+	 *            the access Token
+	 * @param site
+	 *            The Stack Exchange Site
+	 * @return the stack exchange api query factory
+	 */
+
+	public static StackExchangeApiQueryFactory newInstance(
+			String applicationKey, String accessToken, StackExchangeSite site) {
+		return new StackExchangeApiQueryFactory(applicationKey, accessToken,
+				site);
+	}
+
+	/**
 	 * New instance.
 	 * 
 	 * @param applicationKey
@@ -68,7 +109,6 @@ public class StackExchangeApiQueryFactory {
 	 *            The Stack Exchange Site
 	 * @return the stack exchange api query factory
 	 */
-
 	public static StackExchangeApiQueryFactory newInstance(
 			String applicationKey, StackExchangeSite site) {
 		return new StackExchangeApiQueryFactory(applicationKey, site);
@@ -80,7 +120,11 @@ public class StackExchangeApiQueryFactory {
 	 * @return the answer api query
 	 */
 	public AnswerApiQuery newAnswerApiQuery() {
-		return new AnswerApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new AnswerApiQueryImpl(applicationKey, site, accessToken);
+		} else {
+			return new AnswerApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**
@@ -89,7 +133,11 @@ public class StackExchangeApiQueryFactory {
 	 * @return the badge api query
 	 */
 	public BadgeApiQuery newBadgeApiQuery() {
-		return new BadgeApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new BadgeApiQueryImpl(applicationKey, site, accessToken);
+		} else {
+			return new BadgeApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**
@@ -98,7 +146,11 @@ public class StackExchangeApiQueryFactory {
 	 * @return the comment api query
 	 */
 	public CommentApiQuery newCommentApiQuery() {
-		return new CommentApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new CommentApiQueryImpl(applicationKey, site, accessToken);
+		} else {
+			return new CommentApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**
@@ -107,7 +159,11 @@ public class StackExchangeApiQueryFactory {
 	 * @return the question api query
 	 */
 	public QuestionApiQuery newQuestionApiQuery() {
-		return new QuestionApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new QuestionApiQueryImpl(applicationKey, site, accessToken);
+		} else {
+			return new QuestionApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**
@@ -116,7 +172,11 @@ public class StackExchangeApiQueryFactory {
 	 * @return the search api query
 	 */
 	public SearchApiQuery newSearchApiQuery() {
-		return new SearchApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new SearchApiQueryImpl(applicationKey, site, accessToken);
+		} else {
+			return new SearchApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**
@@ -125,17 +185,25 @@ public class StackExchangeApiQueryFactory {
 	 * @return the Advance search api query
 	 */
 	public AdvanceSearchApiQuery newAdvanceSearchApiQuery() {
-		return new AdvanceSearchApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new AdvanceSearchApiQueryImpl(applicationKey, site,
+					accessToken);
+		} else {
+			return new AdvanceSearchApiQueryImpl(applicationKey, site);
+		}
 	}
-	
-	
+
 	/**
 	 * New post api query.
 	 * 
 	 * @return the post api query
 	 */
 	public PostApiQuery newPostApiQuery() {
-		return new PostApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new PostApiQueryImpl(applicationKey, site, accessToken);
+		} else {
+			return new PostApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**
@@ -144,7 +212,12 @@ public class StackExchangeApiQueryFactory {
 	 * @return the question timeline api query
 	 */
 	public QuestionTimelineApiQuery newQuestionTimelineApiQuery() {
-		return new QuestionTimelineApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new QuestionTimelineApiQueryImpl(applicationKey, site,
+					accessToken);
+		} else {
+			return new QuestionTimelineApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**
@@ -153,7 +226,11 @@ public class StackExchangeApiQueryFactory {
 	 * @return the reputation api query
 	 */
 	public ReputationApiQuery newReputationApiQuery() {
-		return new ReputationApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new ReputationApiQueryImpl(applicationKey, site, accessToken);
+		} else {
+			return new ReputationApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**
@@ -162,7 +239,11 @@ public class StackExchangeApiQueryFactory {
 	 * @return the revision api query
 	 */
 	public RevisionApiQuery newRevisionApiQuery() {
-		return new RevisionApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new RevisionApiQueryImpl(applicationKey, site, accessToken);
+		} else {
+			return new RevisionApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**
@@ -171,7 +252,11 @@ public class StackExchangeApiQueryFactory {
 	 * @return the statistics api query
 	 */
 	public StatisticsApiQuery newStatisticsApiQuery() {
-		return new StatisticsApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new StatisticsApiQueryImpl(applicationKey, site, accessToken);
+		} else {
+			return new StatisticsApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**
@@ -180,7 +265,11 @@ public class StackExchangeApiQueryFactory {
 	 * @return the tag api query
 	 */
 	public TagApiQuery newTagApiQuery() {
-		return new TagApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new TagApiQueryImpl(applicationKey, site, accessToken);
+		} else {
+			return new TagApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**
@@ -189,7 +278,11 @@ public class StackExchangeApiQueryFactory {
 	 * @return the user api query
 	 */
 	public UserApiQuery newUserApiQuery() {
-		return new UserApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new UserApiQueryImpl(applicationKey, site, accessToken);
+		} else {
+			return new UserApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**
@@ -198,7 +291,12 @@ public class StackExchangeApiQueryFactory {
 	 * @return the user timeline api query
 	 */
 	public UserTimelineApiQuery newUserTimelineApiQuery() {
-		return new UserTimelineApiQueryImpl(applicationKey, site);
+		if (null != accessToken) {
+			return new UserTimelineApiQueryImpl(applicationKey, site,
+					accessToken);
+		} else {
+			return new UserTimelineApiQueryImpl(applicationKey, site);
+		}
 	}
 
 	/**

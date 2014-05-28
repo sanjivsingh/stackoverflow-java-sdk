@@ -76,6 +76,9 @@ public abstract class StackExchangeApiGateway {
 	/** The application key. */
 	protected String applicationKey;
 
+	/** The Access Token. */
+	protected String accessToken;
+
 	/** The api version. */
 	protected String apiVersion = ApplicationConstants.DEFAULT_API_VERSION;
 
@@ -102,6 +105,14 @@ public abstract class StackExchangeApiGateway {
 	 */
 	public void setApiVersion(String apiVersion) {
 		this.apiVersion = apiVersion;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 
 	/**
