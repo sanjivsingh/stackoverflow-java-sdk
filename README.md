@@ -6,12 +6,16 @@ This project aims to provide a Java wrapper to the Stack Exchange ? API.
 * Cloned from : http://code.google.com/p/stackoverflow-java-sdk/
 * SDK supports **Stack Exchange API V2.2**
 
-Getting Started
+### Getting Started
 There are two interfaces to the library.
 
 * Query Interface
 * Facade Interface
 
+
+### Contributing
+
+Source code contributions can be submitted either by sumitting a [pull request](https://github.com/sanjivsingh/stackoverflow-java-sdk/pulls) 
 
 ### Feature 
 * **[Asynchronous API](https://github.com/sanjivsingh/stackoverflow-java-sdk/wiki/Asynchronous-API)** Examples of using the API asynchronously are described in Asynchronous API.
