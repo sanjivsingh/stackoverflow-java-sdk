@@ -15,7 +15,7 @@ There are two interfaces to the library.
 
 ### Contributing
 
-Source code contributions can be submitted either by sumitting a [pull request](https://github.com/sanjivsingh/stackoverflow-java-sdk/pulls) 
+  Source code contributions can be submitted sumitting a [pull request](https://github.com/sanjivsingh/stackoverflow-java-sdk/pulls) 
 
 ### Feature 
 * **[Asynchronous API](https://github.com/sanjivsingh/stackoverflow-java-sdk/wiki/Asynchronous-API)** Examples of using the API asynchronously are described in Asynchronous API.
