@@ -24,12 +24,12 @@ public class DevIntegration {
 		tag.add("java");
 
 		System.out.println("get hot questions");
-		/*
-		 * PagedList<Question> questions = queryFactory.newQuestionApiQuery()
-		 * .withPaging(paging).withFilter(filter)
-		 * .withSort(Question.SortOrder.MOST_HOT).withTags(tag)
-		 * .withFilter(filter).list(); printQuestions(questions);
-		 */
+
+		PagedList<Question> questions = queryFactory.newQuestionApiQuery()
+				.withPaging(paging).withFilter(filter)
+				.withSort(Question.SortOrder.MOST_HOT).withTags(tag)
+				.withFilter(filter).list();
+		printQuestions(questions);
 
 		System.out.println("Question by user ids ");
 		long userId = 2384778;

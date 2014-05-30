@@ -16,18 +16,16 @@
  */
 package com.google.code.stackexchange.schema;
 
-import com.google.code.stackexchange.client.constant.ApplicationConstants;
-
 /**
  * The Class Paging.
  */
 public final class Paging {
 
 	/** The page number. */
-	private int pageNumber = ApplicationConstants.DEFAULT_PAGE_NUMBER;
+	private int pageNumber = 1;
 
 	/** The page size. */
-	private int pageSize = ApplicationConstants.DEFAULT_PAGE_SIZE;
+	private int pageSize = 30;
 
 	/**
 	 * Instantiates a new paging.
