@@ -126,14 +126,21 @@ public class StackExchangeApiJsonClient extends BaseStackExchangeApiClient {
 			if (response.isJsonObject()) {
 				JsonObject adaptee = response.getAsJsonObject();
 				PagedList<T> list = new PagedArrayList<T>();
-				if (adaptee.has("total")) {
-					list.setTotal(adaptee.get("total").getAsLong());
+				if (adaptee.has("quota_max")) {
+					list.setQuotaMax(adaptee.get("quota_max").getAsInt());
+				}
+				if (adaptee.has("quota_remaining")) {
+					list.setQuotaRemaining(adaptee.get("quota_remaining")
+							.getAsInt());
 				}
 				if (adaptee.has("page")) {
 					list.setPage(adaptee.get("page").getAsInt());
 				}
 				if (adaptee.has("pagesize")) {
 					list.setPageSize(adaptee.get("pagesize").getAsInt());
+				}
+				if (adaptee.has("has_more")) {
+					list.setHasMore(adaptee.get("has_more").getAsBoolean());
 				}
 				String placeHolder = LIST_PLACE_HOLDERS.get(clazz);
 				if (adaptee.has(placeHolder)) {

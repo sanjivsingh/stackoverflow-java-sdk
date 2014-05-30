@@ -12,7 +12,7 @@ import com.google.code.stackexchange.schema.Range;
 import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.User;
 
-public class Hello {
+public class DevIntegration {
 
 	public static void main(String[] args) {
 		StackExchangeApiQueryFactory queryFactory = StackExchangeApiQueryFactory
@@ -23,11 +23,12 @@ public class Hello {
 		List<String> tag = new ArrayList<String>();
 		tag.add("java");
 
+		System.out.println("get hot questions");
 		/*
-		 * List<Question> questions = queryFactory .newQuestionApiQuery()
-		 * .withPaging(paging) .withFilter(filter)
-		 * .withSort(Question.SortOrder.MOST_HOT) .withTags(tag) .withFilter(
-		 * filter).list(); printQuestions(questions);
+		 * PagedList<Question> questions = queryFactory.newQuestionApiQuery()
+		 * .withPaging(paging).withFilter(filter)
+		 * .withSort(Question.SortOrder.MOST_HOT).withTags(tag)
+		 * .withFilter(filter).list(); printQuestions(questions);
 		 */
 
 		System.out.println("Question by user ids ");
@@ -55,7 +56,7 @@ public class Hello {
 
 		System.out.println("get Unanswered Questions");
 		/*
-		 * List<Question> question4s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question4s = queryFactory.newQuestionApiQuery()
 		 * .withPaging(paging).withFilter(filter)
 		 * .withSort(Question.SortOrder.MOST_RECENTLY_CREATED)
 		 * .withTags(tag).listUnansweredQuestions(); printQuestions(question4s);
@@ -63,7 +64,7 @@ public class Hello {
 
 		System.out.println("get Favorite Questions");
 		/*
-		 * List<Question> question5s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question5s = queryFactory.newQuestionApiQuery()
 		 * .withPaging(paging).withFilter(filter)
 		 * .withSort(Question.SortOrder.MOST_RECENTLY_CREATED)
 		 * .withTags(tag).withUserIds(userId).listFavoriteQuestions();
@@ -73,7 +74,7 @@ public class Hello {
 		System.out.println("get Similer Questions");
 		String title = "How to design";
 		/*
-		 * List<Question> question6s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question6s = queryFactory.newQuestionApiQuery()
 		 * .withPaging(paging).withFilter(filter)
 		 * .withSort(Question.SortOrder.MOST_RELEVANT)
 		 * .withTags(tag).withTitle(title).listSimilarQuestions();
@@ -82,7 +83,7 @@ public class Hello {
 
 		System.out.println("Search Questions");
 		/*
-		 * List<Question> question7s = queryFactory.newSearchApiQuery()
+		 * PagedList<Question> question7s = queryFactory.newSearchApiQuery()
 		 * .withInTitle(title).withTags(tag)
 		 * .withSort(QuestionSortOrder.LEAST_RECENTLY_UPDATED).list();
 		 * printQuestions(question7s);
@@ -94,7 +95,7 @@ public class Hello {
 		questionIds.add(new Long(2807613));
 		questionIds.add(new Long(11736681));
 		/*
-		 * List<Question> question8s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question8s = queryFactory.newQuestionApiQuery()
 		 * .withTags(tag).withSort(Question.SortOrder.LEAST_VOTED)
 		 * .withQuestionIds(questionIds).listLinkedQuestions();
 		 * printQuestions(question8s);
@@ -102,7 +103,7 @@ public class Hello {
 
 		System.out.println("get Related Questions");
 		/*
-		 * List<Question> question9s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question9s = queryFactory.newQuestionApiQuery()
 		 * .withTags(tag).withSort(Question.SortOrder.MOST_RANKED)
 		 * .withQuestionIds(questionIds).listRelatedQuestions();
 		 * printQuestions(question9s);
@@ -110,14 +111,14 @@ public class Hello {
 
 		System.out.println("get UnAnswered Questions");
 		/*
-		 * List<Question> question9s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question9s = queryFactory.newQuestionApiQuery()
 		 * .withTags(tag).withSort(Question.SortOrder.MOST_VOTED)
 		 * .listUnAnsweredQuestions(); printQuestions(question9s);
 		 */
 
 		System.out.println("get UnAnswered Questions posted By User");
 		/*
-		 * List<Question> question10s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question10s = queryFactory.newQuestionApiQuery()
 		 * .withTags(tag).withSort(Question.SortOrder.MOST_VOTED)
 		 * .withUserIds(userId).listUnAnsweredQuestionsByUser();
 		 * printQuestions(question10s);
@@ -125,7 +126,7 @@ public class Hello {
 
 		System.out.println("get UnAccepted Questions posted By User");
 		/*
-		 * List<Question> question11s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question11s = queryFactory.newQuestionApiQuery()
 		 * .withTags(tag).withSort(Question.SortOrder.MOST_VOTED)
 		 * .withUserIds(userId).listUnAcceptedQuestionsByUser();
 		 * printQuestions(question11s);
@@ -133,7 +134,7 @@ public class Hello {
 
 		System.out.println("get No-answer Questions posted By User");
 		/*
-		 * List<Question> question11s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question11s = queryFactory.newQuestionApiQuery()
 		 * .withTags(tag).withSort(Question.SortOrder.MOST_VOTED)
 		 * .withUserIds(userId).listQuestionsWithNoAnswerByUser();
 		 * printQuestions(question11s);
@@ -142,7 +143,7 @@ public class Hello {
 		System.out
 				.println("get Top Questions posted By User with the given tags");
 		/*
-		 * List<Question> question11s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question11s = queryFactory.newQuestionApiQuery()
 		 * .withTags(tag).withSort(Question.SortOrder.MOST_VOTED)
 		 * .withUserIds(userId).listTopQuestionsWithTagPostedByUser();
 		 * printQuestions(question11s);
@@ -151,14 +152,14 @@ public class Hello {
 		System.out
 				.println("Gets the FEATURED questions on which the users in {ids} have active bounties()");
 		/*
-		 * List<Question> question11s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question11s = queryFactory.newQuestionApiQuery()
 		 * .withSort(Question.SortOrder.MOST_VOTED).withUserIds(userId)
 		 * .listUserFeaturedQuestions(); printQuestions(question11s);
 		 */
 
 		System.out.println("Get UnAnswered Questions With User favoritetags");
 		/*
-		 * List<Question> question12s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question12s = queryFactory.newQuestionApiQuery()
 		 * .withSort(Question.SortOrder.MOST_VOTED)
 		 * .listUnansweredUserQuestionWithFavoriteTags();
 		 * printQuestions(question12s);
@@ -167,7 +168,7 @@ public class Hello {
 		System.out
 				.println("Gets the FEATURED questions which have active bounties()");
 		/*
-		 * List<Question> question12s = queryFactory.newQuestionApiQuery()
+		 * PagedList<Question> question12s = queryFactory.newQuestionApiQuery()
 		 * .withSort(Question.SortOrder.MOST_VOTED).withUserIds(userId)
 		 * .listFeaturedQuestions(); printQuestions(question12s);
 		 */
@@ -231,6 +232,7 @@ public class Hello {
 		 * printQuestions(question13s);
 		 */
 
+		System.out.println("get My Questions");
 		PagedList<Question> question14s = (PagedList<Question>) queryFactory
 				.newQuestionApiQuery().listMyQuestions();
 		System.out.println(question14s);

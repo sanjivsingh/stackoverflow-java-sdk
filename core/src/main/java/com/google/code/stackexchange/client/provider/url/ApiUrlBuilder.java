@@ -244,4 +244,6 @@ public interface ApiUrlBuilder {
 
 	public ApiUrlBuilder withFilter(String filter);
 
+	public Paging getPaging();
+
 }

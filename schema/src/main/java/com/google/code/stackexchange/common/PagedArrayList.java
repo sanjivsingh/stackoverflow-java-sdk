@@ -18,63 +18,85 @@ package com.google.code.stackexchange.common;
 
 import java.util.ArrayList;
 
-
 /**
  * The Class PagedArrayList.
  */
 public class PagedArrayList<E> extends ArrayList<E> implements PagedList<E> {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 5011544152511118680L;
-	
-	/** The total. */
-	private long total;
-	
+
 	/** The page. */
 	private int page;
-	
+
 	/** The page size. */
 	private int pageSize;
-	
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.common.PagedList#getTotal()
-	 */
-	public long getTotal() {
-		return total;
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.google.code.stackexchange.common.PagedList#setTotal(long)
-	 */
-	public void setTotal(long total) {
-		this.total = total;
-	}
-	
-	/* (non-Javadoc)
+
+	/** The Has more records. */
+	private boolean hasMore;
+
+	private int quotaMax;
+
+	private int quotaRemaining;
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.code.stackexchange.common.PagedList#getPage()
 	 */
 	public int getPage() {
 		return page;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.code.stackexchange.common.PagedList#setPage(int)
 	 */
 	public void setPage(int page) {
 		this.page = page;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.code.stackexchange.common.PagedList#getPageSize()
 	 */
 	public int getPageSize() {
 		return pageSize;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.code.stackexchange.common.PagedList#setPageSize(int)
 	 */
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
+
+	public boolean isHasMore() {
+		return hasMore;
+	}
+
+	public void setHasMore(boolean hasMore) {
+		this.hasMore = hasMore;
+	}
+
+	public int getQuotaMax() {
+		return quotaMax;
+	}
+
+	public void setQuotaMax(int quotaMax) {
+		this.quotaMax = quotaMax;
+	}
+
+	public int getQuotaRemaining() {
+		return quotaRemaining;
+	}
+
+	public void setQuotaRemaining(int quotaRemaining) {
+		this.quotaRemaining = quotaRemaining;
+	}
+
 }

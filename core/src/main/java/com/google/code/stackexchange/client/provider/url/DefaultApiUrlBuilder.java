@@ -568,4 +568,25 @@ public class DefaultApiUrlBuilder implements ApiUrlBuilder {
 			return original;
 		}
 	}
+
+	@Override
+	public Paging getPaging() {
+		Integer page = null;
+		try {
+			page = Integer.parseInt(parametersMap.get("page"));
+		} catch (NumberFormatException e) {
+
+		}
+		Integer pagesize = null;
+		try {
+			pagesize = Integer.parseInt(parametersMap.get("pagesize"));
+		} catch (NumberFormatException e) {
+
+		}
+
+		if (null == page || null == pagesize) {
+			return new Paging();
+		}
+		return new Paging(page, pagesize);
+	}
 }

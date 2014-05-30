@@ -40,6 +40,7 @@ import com.google.code.stackexchange.schema.Badge;
 import com.google.code.stackexchange.schema.BadgeRank;
 import com.google.code.stackexchange.schema.Comment;
 import com.google.code.stackexchange.schema.Error;
+import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.PostTimeline;
 import com.google.code.stackexchange.schema.PostTimelineType;
 import com.google.code.stackexchange.schema.PostType;
@@ -184,6 +185,11 @@ public abstract class BaseStackOverflowApiQuery<T> extends
 			if (response.isJsonObject()) {
 				PagedList<T> responseList = unmarshall(response
 						.getAsJsonObject());
+
+				Paging paging = apiUrlBuilder.getPaging();
+				responseList.setPage(paging.getPageNumber());
+				responseList.setPageSize(paging.getPageSize());
+
 				notifyObservers(responseList);
 				return responseList;
 			}
@@ -289,14 +295,20 @@ public abstract class BaseStackOverflowApiQuery<T> extends
 	 */
 	protected <A> PagedList<A> unmarshallList(Class<A> clazz, JsonObject adaptee) {
 		PagedList<A> list = new PagedArrayList<A>();
-		if (adaptee.has("total")) {
-			list.setTotal(adaptee.get("total").getAsLong());
+		if (adaptee.has("quota_max")) {
+			list.setQuotaMax(adaptee.get("quota_max").getAsInt());
+		}
+		if (adaptee.has("quota_remaining")) {
+			list.setQuotaRemaining(adaptee.get("quota_remaining").getAsInt());
 		}
 		if (adaptee.has("page")) {
 			list.setPage(adaptee.get("page").getAsInt());
 		}
 		if (adaptee.has("pagesize")) {
 			list.setPageSize(adaptee.get("pagesize").getAsInt());
+		}
+		if (adaptee.has("has_more")) {
+			list.setHasMore(adaptee.get("has_more").getAsBoolean());
 		}
 		String placeHolder = LIST_PLACE_HOLDERS.get(clazz);
 		if (adaptee.has(placeHolder)) {

@@ -22,46 +22,52 @@ import java.util.List;
  * The Interface PagedList.
  */
 public interface PagedList<E> extends List<E> {
-	
+
 	/**
-	 * Gets the total.
-	 * 
-	 * @return the total
+	 * @return
 	 */
-	public long getTotal();
-	
+	public boolean isHasMore();
+
 	/**
-	 * Sets the total.
-	 * 
-	 * @param total the new total
+	 * @param hasMore
 	 */
-	public void setTotal(long total);
-	
+	public void setHasMore(boolean hasMore);
+
 	/**
 	 * Gets the page.
 	 * 
 	 * @return the page
 	 */
 	public int getPage();
-	
+
 	/**
 	 * Sets the page.
 	 * 
-	 * @param page the new page
+	 * @param page
+	 *            the new page
 	 */
 	public void setPage(int page);
-	
+
 	/**
 	 * Gets the page size.
 	 * 
 	 * @return the page size
 	 */
 	public int getPageSize();
-	
+
 	/**
 	 * Sets the page size.
 	 * 
-	 * @param pageSize the new page size
+	 * @param pageSize
+	 *            the new page size
 	 */
 	public void setPageSize(int pageSize);
+
+	public int getQuotaMax();
+
+	public void setQuotaMax(int quotaMax);
+
+	public int getQuotaRemaining();
+
+	public void setQuotaRemaining(int quotaRemaining);
 }
