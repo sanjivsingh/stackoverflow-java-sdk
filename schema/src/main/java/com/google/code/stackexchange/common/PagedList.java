@@ -26,7 +26,7 @@ public interface PagedList<E> extends List<E> {
 	/**
 	 * @return
 	 */
-	public boolean isHasMore();
+	public boolean hasMore();
 
 	/**
 	 * @param hasMore

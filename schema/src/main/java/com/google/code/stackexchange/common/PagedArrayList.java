@@ -75,7 +75,7 @@ public class PagedArrayList<E> extends ArrayList<E> implements PagedList<E> {
 		this.pageSize = pageSize;
 	}
 
-	public boolean isHasMore() {
+	public boolean hasMore() {
 		return hasMore;
 	}
 
