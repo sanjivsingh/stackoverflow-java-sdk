@@ -103,6 +103,19 @@ public class StackExchangeApiQueryFactory {
 	/**
 	 * New instance.
 	 * 
+	 * applicationKey is set to be null accessToken is set to be null Site The
+	 * default site : StackExchangeSite.STACK_OVERFLOW
+	 * 
+	 * @return the stack exchange api query factory
+	 */
+	public static StackExchangeApiQueryFactory newInstance() {
+		return new StackExchangeApiQueryFactory(null,
+				StackExchangeSite.STACK_OVERFLOW);
+	}
+
+	/**
+	 * New instance.
+	 * 
 	 * @param applicationKey
 	 *            the application key
 	 * @param site

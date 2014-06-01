@@ -15,21 +15,33 @@ import com.google.code.stackexchange.schema.User;
 public class DevIntegration {
 
 	public static void main(String[] args) {
-		StackExchangeApiQueryFactory queryFactory = StackExchangeApiQueryFactory
-				.newInstance("applicationKey", "accessToken",
-						StackExchangeSite.STACK_OVERFLOW);
+		boolean isAuth = true;
+		StackExchangeApiQueryFactory queryFactory = null;
+		if (isAuth) {
+			queryFactory = StackExchangeApiQueryFactory.newInstance(
+					"applicationKey", "accessToken",
+					StackExchangeSite.STACK_OVERFLOW);
+		} else {
+			queryFactory = StackExchangeApiQueryFactory.newInstance();
+		}
+
 		Paging paging = new Paging(1, 100);
-		String filter = "default";
+		String filter = "!.HyUZkWlofC7M_G9zj_hwoQeZj).-";
 		List<String> tag = new ArrayList<String>();
 		tag.add("java");
 
+		System.out.println("get user by Id");
+		PagedList<User> users = queryFactory.newUserApiQuery()
+				.withUserIds(1934044).listUserByIds();
+		printUsers(users);
 		System.out.println("get hot questions");
 
-		PagedList<Question> questions = queryFactory.newQuestionApiQuery()
-				.withPaging(paging).withFilter(filter)
-				.withSort(Question.SortOrder.MOST_HOT).withTags(tag)
-				.withFilter(filter).list();
-		printQuestions(questions);
+		/*
+		 * PagedList<Question> questions = queryFactory.newQuestionApiQuery()
+		 * .withPaging(paging).withFilter(filter)
+		 * .withSort(Question.SortOrder.MOST_HOT).withTags(tag)
+		 * .withFilter(filter).list(); printQuestions(questions);
+		 */
 
 		System.out.println("Question by user ids ");
 		long userId = 2384778;
