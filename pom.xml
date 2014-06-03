@@ -73,9 +73,6 @@
 						<goals>
 							<goal>perform</goal>
 						</goals>
-						<configuration>
-							<pomFileName>src/pom.xml</pomFileName>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
