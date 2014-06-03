@@ -142,6 +142,9 @@ public class StackExchangeApiJsonClient extends BaseStackExchangeApiClient {
 				if (adaptee.has("has_more")) {
 					list.setHasMore(adaptee.get("has_more").getAsBoolean());
 				}
+				if (adaptee.has("backoff")) {
+					list.setBackoff(adaptee.get("backoff").getAsInt());
+				}
 				String placeHolder = LIST_PLACE_HOLDERS.get(clazz);
 				if (adaptee.has(placeHolder)) {
 					JsonArray elements = adaptee.get(placeHolder)

@@ -1513,7 +1513,7 @@ public class AsyncStackExchangeApiClientAdapter implements
 		return execute(new Callable<Revision>() {
 			@Override
 			public Revision call() throws Exception {
-				return client.getRevisionForPost(postId, revisionGuid);
+				return client.getRevisionForPost(postId, revisionGuid).get(0);
 			}
 		});
 	}

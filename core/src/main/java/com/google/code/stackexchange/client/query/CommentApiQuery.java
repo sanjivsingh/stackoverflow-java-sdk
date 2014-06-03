@@ -103,6 +103,16 @@ public interface CommentApiQuery extends StackExchangeApiQuery<Comment> {
 	 * @return the comment api query
 	 */
 	public CommentApiQuery withQuestionIds(long... questionIds);
+	
+	/**
+	 * With post ids.
+	 * 
+	 * @param postIds
+	 *            the post ids
+	 * 
+	 * @return the comment api query
+	 */
+	public CommentApiQuery withPostIds(long... postIds);
 
 	/**
 	 * With user ids.

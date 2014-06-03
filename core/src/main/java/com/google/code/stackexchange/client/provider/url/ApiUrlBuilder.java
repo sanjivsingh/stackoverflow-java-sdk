@@ -121,6 +121,26 @@ public interface ApiUrlBuilder {
 	 * 
 	 * @return the api url builder
 	 */
+	public ApiUrlBuilder withIds(String param, long... ids);
+
+	/**
+	 * With ids.
+	 * 
+	 * @param ids
+	 *            the ids
+	 * 
+	 * @return the api url builder
+	 */
+	public ApiUrlBuilder withIds(String... ids);
+
+	/**
+	 * With ids.
+	 * 
+	 * @param ids
+	 *            the ids
+	 * 
+	 * @return the api url builder
+	 */
 	public ApiUrlBuilder withIds(List<Long> ids);
 
 	/**

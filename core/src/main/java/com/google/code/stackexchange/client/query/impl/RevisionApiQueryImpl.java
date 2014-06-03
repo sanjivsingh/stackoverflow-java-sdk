@@ -82,6 +82,13 @@ public class RevisionApiQueryImpl extends BaseStackOverflowApiQuery<Revision>
 		return this;
 	}
 
+	@Override
+	public RevisionApiQuery withRevisionGuids(String[] revisionGuIds) {
+
+		apiUrlBuilder.withField("revisionguid", getIds(revisionGuIds));
+		return this;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -144,6 +151,26 @@ public class RevisionApiQueryImpl extends BaseStackOverflowApiQuery<Revision>
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_REVISIONS);
 		return super.list();
+	}
+
+	@Override
+	public PagedList<Revision> listRevisionsForPost() {
+		((DefaultApiUrlBuilder) apiUrlBuilder)
+				.withMethod(StackExchangeApiMethods.GET_REVISIONS_FOR_POST);
+		return super.list();
+	}
+
+	protected String getIds(String[] ids) {
+
+		String retrunString = "";
+		for (int i = 0; i < ids.length; i++) {
+			if (i == 0) {
+				retrunString = ids[i];
+			} else {
+				retrunString = retrunString + ";" + ids[i];
+			}
+		}
+		return retrunString;
 	}
 
 }

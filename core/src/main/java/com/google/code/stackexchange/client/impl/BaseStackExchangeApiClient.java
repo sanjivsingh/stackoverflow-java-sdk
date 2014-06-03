@@ -573,7 +573,7 @@ public abstract class BaseStackExchangeApiClient extends
 	public PagedList<Comment> getUsersMentions(TimePeriod timePeriod,
 			long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_USER_MENTIONS);
-		String apiUrl = builder.withIds(userIds).withTimePeriod(timePeriod)
+		String apiUrl = builder.withIds("uid",userIds).withTimePeriod(timePeriod)
 				.buildUrl();
 
 		return unmarshallList(Comment.class, callApiMethod(apiUrl));
@@ -1116,7 +1116,7 @@ public abstract class BaseStackExchangeApiClient extends
 	@Override
 	public PagedList<Comment> getUsersMentions(long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_USER_MENTIONS);
-		String apiUrl = builder.withIds(userIds).buildUrl();
+		String apiUrl = builder.withIds("uid",userIds).buildUrl();
 
 		return unmarshallList(Comment.class, callApiMethod(apiUrl));
 	}
@@ -1254,7 +1254,7 @@ public abstract class BaseStackExchangeApiClient extends
 	@Override
 	public PagedList<Comment> getUsersComments(long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_COMMENTS_BY_USER);
-		String apiUrl = builder.withIds(userIds).buildUrl();
+		String apiUrl = builder.withIds("uid", userIds).buildUrl();
 
 		return unmarshallList(Comment.class, callApiMethod(apiUrl));
 	}
@@ -1270,7 +1270,8 @@ public abstract class BaseStackExchangeApiClient extends
 	public PagedList<Comment> getUsersComments(Comment.SortOrder sort,
 			long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_COMMENTS_BY_USER);
-		String apiUrl = builder.withIds(userIds).withSort(sort).buildUrl();
+		String apiUrl = builder.withIds("uid", userIds).withSort(sort)
+				.buildUrl();
 
 		return unmarshallList(Comment.class, callApiMethod(apiUrl));
 	}
@@ -1304,8 +1305,8 @@ public abstract class BaseStackExchangeApiClient extends
 	public PagedList<Comment> getUsersComments(TimePeriod timePeriod,
 			long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_COMMENTS_BY_USER);
-		String apiUrl = builder.withIds(userIds).withTimePeriod(timePeriod)
-				.buildUrl();
+		String apiUrl = builder.withIds("uid", userIds)
+				.withTimePeriod(timePeriod).buildUrl();
 
 		return unmarshallList(Comment.class, callApiMethod(apiUrl));
 	}
@@ -1320,7 +1321,8 @@ public abstract class BaseStackExchangeApiClient extends
 	@Override
 	public PagedList<Comment> getUsersComments(Paging paging, long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_COMMENTS_BY_USER);
-		String apiUrl = builder.withIds(userIds).withPaging(paging).buildUrl();
+		String apiUrl = builder.withIds("uid", userIds).withPaging(paging)
+				.buildUrl();
 
 		return unmarshallList(Comment.class, callApiMethod(apiUrl));
 	}
@@ -1338,7 +1340,7 @@ public abstract class BaseStackExchangeApiClient extends
 	public PagedList<Comment> getUsersComments(Comment.SortOrder sort,
 			Paging paging, TimePeriod timePeriod, long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_COMMENTS_BY_USER);
-		String apiUrl = builder.withIds(userIds).withSort(sort)
+		String apiUrl = builder.withIds("uid", userIds).withSort(sort)
 				.withPaging(paging).withTimePeriod(timePeriod).buildUrl();
 
 		return unmarshallList(Comment.class, callApiMethod(apiUrl));
@@ -1354,7 +1356,7 @@ public abstract class BaseStackExchangeApiClient extends
 	public PagedList<Comment> getUsersCommentsToUser(long toUserId,
 			long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_COMMENTS_BY_USER_TO_USER);
-		String apiUrl = builder.withIds(userIds)
+		String apiUrl = builder.withIds("uid", userIds)
 				.withField("toid", String.valueOf(toUserId)).buildUrl();
 
 		return unmarshallList(Comment.class, callApiMethod(apiUrl));
@@ -1371,7 +1373,7 @@ public abstract class BaseStackExchangeApiClient extends
 	public PagedList<Comment> getUsersCommentsToUser(long toUserId,
 			Comment.SortOrder sort, long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_COMMENTS_BY_USER_TO_USER);
-		String apiUrl = builder.withIds(userIds)
+		String apiUrl = builder.withIds("uid", userIds)
 				.withField("toid", String.valueOf(toUserId)).withSort(sort)
 				.buildUrl();
 
@@ -1389,7 +1391,7 @@ public abstract class BaseStackExchangeApiClient extends
 	public PagedList<Comment> getUsersCommentsToUser(long toUserId,
 			TimePeriod timePeriod, long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_COMMENTS_BY_USER_TO_USER);
-		String apiUrl = builder.withIds(userIds)
+		String apiUrl = builder.withIds("uid", userIds)
 				.withField("toid", String.valueOf(toUserId))
 				.withTimePeriod(timePeriod).buildUrl();
 
@@ -1407,7 +1409,7 @@ public abstract class BaseStackExchangeApiClient extends
 	public PagedList<Comment> getUsersCommentsToUser(long toUserId,
 			Paging paging, long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_COMMENTS_BY_USER_TO_USER);
-		String apiUrl = builder.withIds(userIds)
+		String apiUrl = builder.withIds("uid", userIds)
 				.withField("toid", String.valueOf(toUserId)).withPaging(paging)
 				.buildUrl();
 
@@ -1428,7 +1430,7 @@ public abstract class BaseStackExchangeApiClient extends
 			Comment.SortOrder sort, Paging paging, TimePeriod timePeriod,
 			long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_COMMENTS_BY_USER_TO_USER);
-		String apiUrl = builder.withIds(userIds)
+		String apiUrl = builder.withIds("uid", userIds)
 				.withField("toid", String.valueOf(toUserId)).withSort(sort)
 				.withPaging(paging).withTimePeriod(timePeriod).buildUrl();
 
@@ -1555,14 +1557,32 @@ public abstract class BaseStackExchangeApiClient extends
 	 * getRevisionForPost(long, java.lang.String)
 	 */
 	@Override
-	public Revision getRevisionForPost(long postId, String revisionGuid) {
+	public PagedList<Revision> getRevisionByRevisionGuid(String revisionGuid) {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_REVISIONS);
+		String apiUrl = builder.withField("revisionguid", revisionGuid)
+				.buildUrl();
+
+		PagedList<Revision> list = unmarshallList(Revision.class,
+				callApiMethod(apiUrl));
+		return (list.isEmpty()) ? null : list;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.code.stackexchange.client.StackOverflowApiClient#
+	 * getRevisionForPost(long, java.lang.String)
+	 */
+	@Override
+	public PagedList<Revision> getRevisionForPost(long postId,
+			String revisionGuid) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_REVISIONS_FOR_POST);
 		String apiUrl = builder.withId(postId)
 				.withField("revisionguid", revisionGuid).buildUrl();
 
 		PagedList<Revision> list = unmarshallList(Revision.class,
 				callApiMethod(apiUrl));
-		return (list.isEmpty()) ? null : list.get(0);
+		return (list.isEmpty()) ? null : list;
 	}
 
 	/*

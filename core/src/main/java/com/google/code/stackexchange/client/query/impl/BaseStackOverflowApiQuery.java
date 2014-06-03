@@ -32,6 +32,7 @@ import com.google.code.stackexchange.client.exception.StackExchangeApiException;
 import com.google.code.stackexchange.client.impl.StackExchangeApiGateway;
 import com.google.code.stackexchange.client.provider.ApiProvider;
 import com.google.code.stackexchange.client.provider.url.ApiUrlBuilder;
+import com.google.code.stackexchange.client.query.CommentApiQuery;
 import com.google.code.stackexchange.client.query.StackExchangeApiQuery;
 import com.google.code.stackexchange.common.PagedArrayList;
 import com.google.code.stackexchange.common.PagedList;
@@ -310,6 +311,9 @@ public abstract class BaseStackOverflowApiQuery<T> extends
 		if (adaptee.has("has_more")) {
 			list.setHasMore(adaptee.get("has_more").getAsBoolean());
 		}
+		if (adaptee.has("backoff")) {
+			list.setBackoff(adaptee.get("backoff").getAsInt());
+		}
 		String placeHolder = LIST_PLACE_HOLDERS.get(clazz);
 		if (adaptee.has(placeHolder)) {
 			JsonArray elements = adaptee.get(placeHolder).getAsJsonArray();
@@ -461,4 +465,5 @@ public abstract class BaseStackOverflowApiQuery<T> extends
 
 		return builder;
 	}
+
 }

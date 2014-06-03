@@ -8,4 +8,5 @@
 	</parent>
 	<artifactId>stackexchange-java-schema</artifactId>
 	<packaging>jar</packaging>
+	<version>0.2</version>
 </project>

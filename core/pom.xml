@@ -6,7 +6,9 @@
 		<artifactId>stackoverflow-java-sdk</artifactId>
 		<version>0.2</version>
 	</parent>
+	<groupId>com.google.code.stackexchange</groupId>
 	<artifactId>stackexchange-java-core</artifactId>
+	<version>0.2</version>
 	<build>
 		<pluginManagement>
 			<plugins>

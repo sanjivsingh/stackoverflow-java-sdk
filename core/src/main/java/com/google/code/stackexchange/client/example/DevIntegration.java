@@ -31,9 +31,10 @@ public class DevIntegration {
 		tag.add("java");
 
 		System.out.println("get user by Id");
-		PagedList<User> users = queryFactory.newUserApiQuery()
-				.withUserIds(1934044).listUserByIds();
-		printUsers(users);
+		/*
+		 * PagedList<User> users = queryFactory.newUserApiQuery()
+		 * .withUserIds(1934044).listUserByIds(); printUsers(users);
+		 */
 		System.out.println("get hot questions");
 
 		/*
@@ -233,16 +234,16 @@ public class DevIntegration {
 
 		List<String> nottagged = new ArrayList<String>();
 		nottagged.add("php");
-		/*
-		 * PagedList<Question> question13s = queryFactory
-		 * .newAdvanceSearchApiQuery().withMinViews(100)
-		 * .withAccepted(true).withClosed(true).withMigrated(true)
-		 * .withMinViews(minViews).withMinAnswers(minAnswers)
-		 * .withNotice(true).withFilter(filterName).withQuery(query)
-		 * .withTags(tagged).withOutTags(nottagged).list();
-		 * 
-		 * printQuestions(question13s);
-		 */
+		
+		  PagedList<Question> question13s = queryFactory
+		  .newAdvanceSearchApiQuery().withMinViews(100)
+		  .withAccepted(true).withClosed(true).withMigrated(true)
+		  .withMinViews(minViews).withMinAnswers(minAnswers)
+		  .withNotice(true).withFilter(filterName).withQuery(query)
+		  .withTags(tagged).withOutTags(nottagged).list();
+		 
+		  printQuestions(question13s);
+		 
 
 		System.out.println("get My Questions");
 		PagedList<Question> question14s = (PagedList<Question>) queryFactory

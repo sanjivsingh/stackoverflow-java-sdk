@@ -30,6 +30,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 import com.google.code.stackexchange.client.constant.TestConstants;
+import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.TimePeriod;
@@ -109,7 +110,7 @@ public abstract class StackExchangeApiClientTest extends TestCase {
 	 */
 	protected Date getLastWeekDate() {
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -7);
+		calendar.add(Calendar.DATE, -365);
 		return calendar.getTime();
 	}
 
@@ -194,4 +195,15 @@ public abstract class StackExchangeApiClientTest extends TestCase {
 		assertNotNull(message, value);
 		assertFalse(message, value.isEmpty());
 	}
+
+	protected static void handleBackoff(PagedList<?> value) {
+		if (value.getBackoff() > 0) {
+			try {
+				Thread.sleep(value.getBackoff() * 1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

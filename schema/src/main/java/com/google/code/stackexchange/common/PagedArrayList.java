@@ -40,6 +40,12 @@ public class PagedArrayList<E> extends ArrayList<E> implements PagedList<E> {
 	private int quotaRemaining;
 
 	/*
+	 * If an application receives a response with the backoff field set, it must
+	 * wait that many seconds before hitting the same method again
+	 */
+	private int backoff;
+
+	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see com.google.code.stackexchange.common.PagedList#getPage()
@@ -97,6 +103,16 @@ public class PagedArrayList<E> extends ArrayList<E> implements PagedList<E> {
 
 	public void setQuotaRemaining(int quotaRemaining) {
 		this.quotaRemaining = quotaRemaining;
+	}
+
+	@Override
+	public int getBackoff() {
+		return backoff;
+	}
+
+	@Override
+	public void setBackoff(int backoff) {
+		this.backoff = backoff;
 	}
 
 }

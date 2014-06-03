@@ -131,19 +131,25 @@ public class CommentApiQueryImpl extends BaseStackOverflowApiQuery<Comment>
 	 */
 	@Override
 	public CommentApiQuery withUserIds(long... userIds) {
-		apiUrlBuilder.withIds(userIds);
+		apiUrlBuilder.withIds("uid", userIds);
 		return this;
 	}
 
 	@Override
 	public CommentApiQuery withQuestionIds(long... questionIds) {
-		apiUrlBuilder.withIds(questionIds);
+		apiUrlBuilder.withIds("qid", questionIds);
 		return this;
 	}
 
 	@Override
 	public CommentApiQuery withAnswerIds(long... answerIds) {
-		apiUrlBuilder.withIds(answerIds);
+		apiUrlBuilder.withIds("aid", answerIds);
+		return this;
+	}
+
+	@Override
+	public CommentApiQuery withPostIds(long... postIds) {
+		apiUrlBuilder.withIds("pid", postIds);
 		return this;
 	}
 

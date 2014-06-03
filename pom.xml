@@ -9,15 +9,29 @@
   <description>A Java wrapper for StackExchange API.</description>
   <url>https://github.com/sanjivsingh/stackoverflow-java-sdk/</url>
 
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+  
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
   <issueManagement>
     <system>GitHub</system>
     <url>https://github.com/sanjivsingh/stackoverflow-java-sdk/issues</url>
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://google-search-java-sdk.googlecode.com/svn/trunk</connection>
-    <developerConnection>scm:hg:https://stackoverflow-java-sdk.googlecode.com/hg</developerConnection>
-    <url>http://code.google.com/p/stackoverflow-java-sdk/source/browse/</url>
+    <connection>scm:git:git@github.com:sanjivsingh/stackoverflow-java-sdk.git</connection>
+    <developerConnection>scm:git:git@github.com:sanjivsingh/stackoverflow-java-sdk.git</developerConnection>
+    <url>git@github.com:sanjivsingh/stackoverflow-java-sdk.git</url>
   </scm>
 
   <developers>
@@ -28,6 +42,7 @@
     <developer>
       <name>Sanjiv Singh</name>
       <id>sanjivsingh</id>
+      <email>sanjiv.is.on@gmail.com</email>
     </developer>
   </developers>
 	
@@ -47,6 +62,19 @@
 				<target>1.6</target>
 			</configuration>
 		</plugin>
+		<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 	</plugins>
   </build>
 </project>

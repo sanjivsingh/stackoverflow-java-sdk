@@ -43,6 +43,10 @@ public final class TestConstants {
 	public static final String STACK_OVERFLOW_TEST_API_KEY = testConstants
 			.getProperty("com.google.code.stackexchange.client.apiKey");
 
+	/** The Constant STACK_OVERFLOW_TEST_ACCESS_TOKEN. */
+	public static final String STACK_OVERFLOW_TEST_ACCESS_TOKEN = testConstants
+			.getProperty("com.google.code.stackexchange.client.accessToken");
+
 	/** The Constant STACK_EXCHANGE_SITE. */
 	public static final String STACK_EXCHANGE_SITE = testConstants
 			.getProperty("com.google.code.stackexchange.client.stackexchangesite");
@@ -51,9 +55,17 @@ public final class TestConstants {
 	public static final String STACK_OVERFLOW_TEST_USER_IDS = testConstants
 			.getProperty("com.google.code.stackexchange.client.testUserIds");
 
+	/** The Constant STACK_OVERFLOW_TEST_COMMENT_IDS. */
+	public static final String STACK_OVERFLOW_TEST_COMMENT_IDS = testConstants
+			.getProperty("com.google.code.stackexchange.client.testCommentIds");
+
 	/** The Constant STACK_OVERFLOW_TEST_QUESTION_IDS. */
 	public static final String STACK_OVERFLOW_TEST_QUESTION_IDS = testConstants
 			.getProperty("com.google.code.stackexchange.client.testQuestionIds");
+
+	/** The Constant STACK_OVERFLOW_TEST_REVISION_IDS. */
+	public static final String STACK_OVERFLOW_TEST_REVISION_GUIDS = testConstants
+			.getProperty("com.google.code.stackexchange.client.testRevisionGuids");
 
 	/** The Constant STACK_OVERFLOW_TEST_ANSWER_ID. */
 	public static final String STACK_OVERFLOW_TEST_ANSWER_ID = testConstants
@@ -70,6 +82,18 @@ public final class TestConstants {
 	/** The Constant STACK_OVERFLOW_TEST_TAGS. */
 	public static final String STACK_OVERFLOW_TEST_TAGS = testConstants
 			.getProperty("com.google.code.stackexchange.client.testTags");
+
+	/** The Constant STACK_OVERFLOW_TEST_MIN_VIEWS. */
+	public static final String STACK_OVERFLOW_TEST_MIN_VIEWS = testConstants
+			.getProperty("com.google.code.stackexchange.client.testMinViews");
+
+	/** The Constant STACK_OVERFLOW_TEST_MIN_ANSWERS. */
+	public static final String STACK_OVERFLOW_TEST_MIN_ANSWERS = testConstants
+			.getProperty("com.google.code.stackexchange.client.testMinAnswers");
+
+	/** The Constant STACK_OVERFLOW_TEST_QUERY. */
+	public static final String STACK_OVERFLOW_TEST_QUERY = testConstants
+			.getProperty("com.google.code.stackexchange.client.testQuery");
 
 	/** The Constant STACK_OVERFLOW_TEST_USER_FILTER. */
 	public static final String STACK_OVERFLOW_TEST_USER_FILTER = testConstants

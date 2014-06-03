@@ -18,6 +18,7 @@ package com.google.code.stackexchange.client.query;
 
 import java.util.List;
 
+import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Revision;
 import com.google.code.stackexchange.schema.TimePeriod;
 
@@ -66,5 +67,10 @@ public interface RevisionApiQuery extends StackExchangeApiQuery<Revision> {
 	 */
 	public RevisionApiQuery withRevisionGuid(String revisionGuid);
 
+	public RevisionApiQuery withRevisionGuids(String[] revisionGuIds);
+
 	public RevisionApiQuery withFilter(String filter);
+
+	public PagedList<Revision> listRevisionsForPost();
+
 }

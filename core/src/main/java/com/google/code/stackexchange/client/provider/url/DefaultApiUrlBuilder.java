@@ -342,6 +342,26 @@ public class DefaultApiUrlBuilder implements ApiUrlBuilder {
 		withField("id", builder.toString(), false);
 		return this;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.code.stackexchange.client.provider.url.ApiUrlBuilder#withIds
+	 * (long[])
+	 */
+	@Override
+	public ApiUrlBuilder withIds(String param, long... ids) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < ids.length; i++) {
+			builder.append(ids[i]);
+			if (i < ids.length - 1) {
+				builder.append(";");
+			}
+		}
+		withField(param, builder.toString(), false);
+		return this;
+	}
 
 	@Override
 	public ApiUrlBuilder withIds(List<Long> ids) {
@@ -588,5 +608,18 @@ public class DefaultApiUrlBuilder implements ApiUrlBuilder {
 			return new Paging();
 		}
 		return new Paging(page, pagesize);
+	}
+
+	@Override
+	public ApiUrlBuilder withIds(String... ids) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < ids.length; i++) {
+			builder.append(ids[i]);
+			if (i < ids.length - 1) {
+				builder.append(";");
+			}
+		}
+		withField("id", builder.toString(), false);
+		return this;
 	}
 }

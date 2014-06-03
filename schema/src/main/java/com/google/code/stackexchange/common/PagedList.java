@@ -70,4 +70,12 @@ public interface PagedList<E> extends List<E> {
 	public int getQuotaRemaining();
 
 	public void setQuotaRemaining(int quotaRemaining);
+
+	public int getBackoff();
+
+	/*
+	 * wait for that number of second before making next request.
+	 */
+	public void setBackoff(int backoff);
+
 }

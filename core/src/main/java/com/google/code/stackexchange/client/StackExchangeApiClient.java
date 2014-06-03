@@ -1225,6 +1225,18 @@ public interface StackExchangeApiClient extends
 	/**
 	 * Gets the revision for post.
 	 * 
+	 * @param revisionGuid
+	 *            the revision Guid
+	 * @param revisionGuid
+	 *            the revision guid
+	 * 
+	 * @return the revision for post
+	 */
+	public PagedList<Revision> getRevisionByRevisionGuid(String revisionGuid);
+	
+	/**
+	 * Gets the revision for post.
+	 * 
 	 * @param postId
 	 *            the post id
 	 * @param revisionGuid
@@ -1232,5 +1244,5 @@ public interface StackExchangeApiClient extends
 	 * 
 	 * @return the revision for post
 	 */
-	public Revision getRevisionForPost(long postId, String revisionGuid);
+	public PagedList<Revision> getRevisionForPost(long postId, String revisionGuid);
 }
