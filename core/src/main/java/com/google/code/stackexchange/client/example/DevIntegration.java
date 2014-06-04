@@ -22,6 +22,7 @@ public class DevIntegration {
 					"applicationKey", "accessToken",
 					StackExchangeSite.STACK_OVERFLOW);
 		} else {
+			
 			queryFactory = StackExchangeApiQueryFactory.newInstance();
 		}
 
