@@ -73,24 +73,25 @@
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
     <target name="AnswersApiExample">
         <java classname="com.google.code.stackexchange.client.examples.AnswersApiExample" failonerror="true" fork="yes">
-            <classpath refid="stackoverflow-java-sdk.classpath"/>
+        	 <arg line="-key  d*e3BW8LD1uD7ZxzWeY39g((  -site stackoverflow -id 23977469"/>
+        	<classpath refid="stackoverflow-java-sdk.classpath"/>
         </java>
     </target>
     <target name="AsyncApiExample (1)">
         <java classname="com.google.code.stackexchange.client.examples.AsyncApiExample" failonerror="true" fork="yes">
-            <arg line="-key speakfriendandenter"/>
+            <arg line="-key  d*e3BW8LD1uD7ZxzWeY39g((  -site stackoverflow"/>
             <classpath refid="stackoverflow-java-sdk.classpath"/>
         </java>
     </target>
     <target name="BadgesAndTagsApiExample">
         <java classname="com.google.code.stackexchange.client.examples.BadgesAndTagsApiExample" failonerror="true" fork="yes">
-            <arg line="-key C9uyDMP_i0u1y7mXhB1GkQ"/>
+            <arg line="-key  d*e3BW8LD1uD7ZxzWeY39g((  -site stackoverflow"/>
             <classpath refid="stackoverflow-java-sdk.classpath"/>
         </java>
     </target>
     <target name="CommentsApiExample">
         <java classname="com.google.code.stackexchange.client.examples.CommentsApiExample" failonerror="true" fork="yes">
-            <arg line="-key  C9uyDMP_i0u1y7mXhB1GkQ"/>
+            <arg line="-key  d*e3BW8LD1uD7ZxzWeY39g((  -site stackoverflow -id 23977469"/>
             <classpath refid="stackoverflow-java-sdk.classpath"/>
         </java>
     </target>
@@ -102,7 +103,7 @@
     </target>
     <target name="QuestionsApiExample">
         <java classname="com.google.code.stackexchange.client.examples.QuestionsApiExample" failonerror="true" fork="yes">
-            <arg line="-key C9uyDMP_i0u1y7mXhB1GkQ"/>
+            <arg line="-key  d*e3BW8LD1uD7ZxzWeY39g((  -site stackoverflow -id 23977469"/>
             <classpath refid="stackoverflow-java-sdk.classpath"/>
         </java>
     </target>
@@ -124,13 +125,13 @@
     </target>
     <target name="StatsApiExample">
         <java classname="com.google.code.stackexchange.client.examples.StatsApiExample" failonerror="true" fork="yes">
-            <arg line="-key C9uyDMP_i0u1y7mXhB1GkQ"/>
+            <arg line="-key  d*e3BW8LD1uD7ZxzWeY39g((  -site stackoverflow "/>
             <classpath refid="stackoverflow-java-sdk.classpath"/>
         </java>
     </target>
     <target name="UsersApiExample">
         <java classname="com.google.code.stackexchange.client.examples.UsersApiExample" failonerror="true" fork="yes">
-            <arg line="-key  C9uyDMP_i0u1y7mXhB1GkQ -id 1288"/>
+            <arg line="-key  d*e3BW8LD1uD7ZxzWeY39g(( -site stackoverflow -id 1288"/>
             <classpath refid="stackoverflow-java-sdk.classpath"/>
         </java>
     </target>

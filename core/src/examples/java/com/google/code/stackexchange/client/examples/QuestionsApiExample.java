@@ -182,7 +182,7 @@ public class QuestionsApiExample {
 		int width = 80;
 		String syntax = QuestionsApiExample.class.getName() + " <options>";
 		String header = MessageFormat.format(
-				"\nThe -{0} option is required.{1} option is required The -{2} option is optional.",
+				"\nThe -{0} option is required.\n -{1} option is required.\n -{2} option is optional.",
 				APPLICATION_KEY_OPTION,STACK_EXCHANGE_SITE, ID_OPTION);
 		String footer = "";
 		new HelpFormatter().printHelp(width, syntax, header, options, footer,

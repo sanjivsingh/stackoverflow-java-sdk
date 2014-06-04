@@ -168,7 +168,7 @@ public class StatsApiExample {
 		int width = 80;
 		String syntax = StatsApiExample.class.getName() + " <options>";
 		String header = MessageFormat.format(
-				"\nThe -{0} option is required.{1} option is required.",
+				"\nThe -{0} option is required.\n -{1} option is required.",
 				APPLICATION_KEY_OPTION,STACK_EXCHANGE_SITE);
 		String footer = "";
 		new HelpFormatter().printHelp(width, syntax, header, options, footer,
