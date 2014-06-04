@@ -64,22 +64,19 @@
 		</plugin>
 	</plugins>
   </build>
-	<profiles>
-	    <profile>
-	          <id>default</id>
-			  <distributionManagement>
-			        <snapshotRepository>
-			            <id>sonatype-nexus-snapshots</id>
-			            <name>Nexus Snapshots Repository</name>
-			            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-			            <uniqueVersion>false</uniqueVersion>
-			         </snapshotRepository>
-					 <repository>
-					      <id>sonatype-nexus-staging</id>
-					      <name>Nexus Staging Repository</name>
-					      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-				    </repository>
-			  </distributionManagement>
-	      </profile>
-	</profiles>
+
+  <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Nexus Snapshots Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
+         </snapshotRepository>
+		 <repository>
+		      <id>sonatype-nexus-staging</id>
+		      <name>Nexus Staging Repository</name>
+		      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+	    </repository>
+  </distributionManagement>
+
 </project>
