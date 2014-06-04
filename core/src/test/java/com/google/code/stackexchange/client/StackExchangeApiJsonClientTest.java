@@ -335,7 +335,7 @@ public class StackExchangeApiJsonClientTest extends StackExchangeApiClientTest {
 				TestConstants.STACK_OVERFLOW_TEST_TAGS);
 		assertNotNullOrEmpty(
 				String.format(RESOURCE_MISSING_MESSAGE, "Test min views."),
-				TestConstants.STACK_OVERFLOW_TEST_MIN_ANSWERS);
+				TestConstants.STACK_OVERFLOW_TEST_MIN_VIEWS);
 		assertNotNullOrEmpty(
 				String.format(RESOURCE_MISSING_MESSAGE, "Test min Answers."),
 				TestConstants.STACK_OVERFLOW_TEST_MIN_ANSWERS);
@@ -343,7 +343,27 @@ public class StackExchangeApiJsonClientTest extends StackExchangeApiClientTest {
 				String.format(RESOURCE_MISSING_MESSAGE, "Test Query param"),
 				TestConstants.STACK_OVERFLOW_TEST_QUERY);
 		PagedList<Question> questions = client
-				.searchQuestions(getTags().get(0));
+				.advanceSearchQuestions(
+						TestConstants.STACK_OVERFLOW_TEST_QUERY,
+						null,
+						null,
+						null,
+						null,
+						getTags(),
+						null,
+						TestConstants.STACK_OVERFLOW_TEST_USER_FILTER,
+						null,
+						null,
+						null,
+						null,
+						null,
+						null,
+						Integer.parseInt(TestConstants.STACK_OVERFLOW_TEST_MIN_ANSWERS),
+						null,
+						null,
+						null,
+						Integer.parseInt(TestConstants.STACK_OVERFLOW_TEST_MIN_VIEWS));
+
 		handleBackoff(questions);
 		assertNotNullOrEmpty("Questions should never be null.", questions);
 	}

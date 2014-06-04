@@ -515,6 +515,35 @@ public interface StackExchangeApiClient extends
 			User.QuestionSortOrder sort, Paging paging);
 
 	/**
+	 * @param query
+	 * @param title
+	 * @param sort
+	 * @param paging
+	 * @param range
+	 * @param includeTags
+	 * @param excludeTags
+	 * @param filter
+	 * @param timePeriod
+	 * @param closed
+	 * @param migrated
+	 * @param wiki
+	 * @param notice
+	 * @param accepted
+	 * @param answers
+	 * @param body
+	 * @param user
+	 * @param url
+	 * @param views
+	 * @return
+	 */
+	public PagedList<Question> advanceSearchQuestions(String query,
+			String title, Question.SortOrder sort, Paging paging, Range range,
+			List<String> includeTags, List<String> excludeTags, String filter,
+			TimePeriod timePeriod, Boolean closed, Boolean migrated,
+			Boolean wiki, Boolean notice, Boolean accepted, Integer answers,
+			String body, Long user, String url, Integer views);
+
+	/**
 	 * Search questions.
 	 * 
 	 * @param query
@@ -1233,7 +1262,7 @@ public interface StackExchangeApiClient extends
 	 * @return the revision for post
 	 */
 	public PagedList<Revision> getRevisionByRevisionGuid(String revisionGuid);
-	
+
 	/**
 	 * Gets the revision for post.
 	 * 
@@ -1244,5 +1273,7 @@ public interface StackExchangeApiClient extends
 	 * 
 	 * @return the revision for post
 	 */
-	public PagedList<Revision> getRevisionForPost(long postId, String revisionGuid);
+	public PagedList<Revision> getRevisionForPost(long postId,
+			String revisionGuid);
+
 }

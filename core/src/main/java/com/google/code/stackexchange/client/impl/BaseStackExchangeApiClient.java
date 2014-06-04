@@ -30,6 +30,7 @@ import com.google.code.stackexchange.schema.Comment;
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.PostTimeline;
 import com.google.code.stackexchange.schema.Question;
+import com.google.code.stackexchange.schema.Question.SortOrder;
 import com.google.code.stackexchange.schema.Range;
 import com.google.code.stackexchange.schema.Reputation;
 import com.google.code.stackexchange.schema.Revision;
@@ -573,8 +574,8 @@ public abstract class BaseStackExchangeApiClient extends
 	public PagedList<Comment> getUsersMentions(TimePeriod timePeriod,
 			long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_USER_MENTIONS);
-		String apiUrl = builder.withIds("uid",userIds).withTimePeriod(timePeriod)
-				.buildUrl();
+		String apiUrl = builder.withIds("uid", userIds)
+				.withTimePeriod(timePeriod).buildUrl();
 
 		return unmarshallList(Comment.class, callApiMethod(apiUrl));
 	}
@@ -1116,7 +1117,7 @@ public abstract class BaseStackExchangeApiClient extends
 	@Override
 	public PagedList<Comment> getUsersMentions(long... userIds) {
 		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_USER_MENTIONS);
-		String apiUrl = builder.withIds("uid",userIds).buildUrl();
+		String apiUrl = builder.withIds("uid", userIds).buildUrl();
 
 		return unmarshallList(Comment.class, callApiMethod(apiUrl));
 	}
@@ -1759,6 +1760,87 @@ public abstract class BaseStackExchangeApiClient extends
 				.withParameters("nottagged", excludeTags, ";").withSort(sort)
 				.withPaging(paging).buildUrl();
 
+		return unmarshallList(Question.class, callApiMethod(apiUrl));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.code.stackexchange.client.StackExchangeApiClient#
+	 * advanceSearchQuestions(java.lang.String, java.lang.String,
+	 * com.google.code.stackexchange.schema.Question.SortOrder,
+	 * com.google.code.stackexchange.schema.Paging,
+	 * com.google.code.stackexchange.schema.Range, java.util.List,
+	 * java.util.List, java.lang.String,
+	 * com.google.code.stackexchange.schema.TimePeriod, java.lang.Boolean,
+	 * java.lang.Boolean, java.lang.Boolean, java.lang.Boolean,
+	 * java.lang.Boolean, java.lang.Integer, java.lang.String, java.lang.Long,
+	 * java.lang.String, java.lang.Integer)
+	 */
+	@Override
+	public PagedList<Question> advanceSearchQuestions(String query,
+			String title, SortOrder sort, Paging paging, Range range,
+			List<String> includeTags, List<String> excludeTags, String filter,
+			TimePeriod timePeriod, Boolean closed, Boolean migrated,
+			Boolean wiki, Boolean notice, Boolean accepted, Integer answers,
+			String body, Long user, String url, Integer views) {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.ADVANCE_SEARCH_QUESTIONS);
+		if (null != body) {
+			builder = builder.withParameter("body", body);
+		}
+		if (null != user) {
+			builder = builder.withParameter("user", user.toString());
+		}
+		if (null != url) {
+			builder = builder.withParameter("url", url);
+		}
+		if (null != views) {
+			builder = builder.withParameter("views", views.toString());
+		}
+		if (null != accepted) {
+			builder = builder.withParameter("accepted", accepted.toString());
+		}
+		if (null != notice) {
+			builder = builder.withParameter("notice", notice.toString());
+		}
+		if (null != answers) {
+			builder = builder.withParameter("answers", answers.toString());
+		}
+		if (null != wiki) {
+			builder = builder.withParameter("wiki", wiki.toString());
+		}
+		if (null != migrated) {
+			builder = builder.withParameter("migrated", migrated.toString());
+		}
+		if (null != closed) {
+			builder = builder.withParameter("closed", closed.toString());
+		}
+		if (null != timePeriod) {
+			builder = builder.withTimePeriod(timePeriod);
+		}
+		if (null != filter) {
+			builder = builder.withParameter("filter", filter);
+		}
+		if (null != includeTags) {
+			builder = builder.withParameters("tagged", includeTags, ";");
+		}
+		if (null != excludeTags) {
+			builder = builder.withParameters("nottagged", excludeTags, ";");
+		}
+		if (null != query) {
+			builder = builder.withParameter("q", query);
+		}
+		if (null != title) {
+			builder = builder.withParameter("title", title);
+		}
+		if (null != sort) {
+			builder = builder.withSort(sort);
+		}
+		if (null != paging) {
+			builder = builder.withPaging(paging);
+		}
+
+		String apiUrl = builder.buildUrl();
 		return unmarshallList(Question.class, callApiMethod(apiUrl));
 	}
 }

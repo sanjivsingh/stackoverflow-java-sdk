@@ -77,7 +77,7 @@
         	<classpath refid="stackoverflow-java-sdk.classpath"/>
         </java>
     </target>
-    <target name="AsyncApiExample (1)">
+    <target name="AsyncApiExample">
         <java classname="com.google.code.stackexchange.client.examples.AsyncApiExample" failonerror="true" fork="yes">
             <arg line="-key  d*e3BW8LD1uD7ZxzWeY39g((  -site stackoverflow"/>
             <classpath refid="stackoverflow-java-sdk.classpath"/>
