@@ -24,7 +24,7 @@ import java.util.List;
 public interface PagedList<E> extends List<E> {
 
 	/**
-	 * @return
+	 * @return hasMore
 	 */
 	public boolean hasMore();
 
