@@ -6,11 +6,28 @@ This project aims to provide a Java wrapper to the Stack Exchange ? API.
 * Cloned from : http://code.google.com/p/stackoverflow-java-sdk/
 * SDK supports **Stack Exchange API V2.2**
 
-### Getting Started
+### Interfaces
 There are two interfaces to the library.
 
 * Query Interface
 * Facade Interface
+
+### Get Started
+Clone repository and build.  
+   `git  clone https://github.com/sanjivsingh/stackoverflow-java-sdk.git`
+
+   ` cd stackoverflow-java-sdk`
+
+   `mvn clean install`
+
+Following 3 artifacts will be generated after maven build.
+
+* ./dist/target/stackoverflow-java-sdk-release-XXXX-release.jar
+* ./core/target/stackexchange-java-core-XXXX.jar
+* ./schema/target/stackexchange-java-schema-XXXX.jar
+
+Include all JARs three in your classpath, and start experimenting with SDK.
+
 
 
 ### Contributing
