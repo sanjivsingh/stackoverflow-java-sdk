@@ -8,12 +8,6 @@
   <inceptionYear>2010</inceptionYear>
   <description>A Java wrapper for StackExchange API.</description>
   <url>https://github.com/sanjivsingh/stackoverflow-java-sdk/</url>
-
-  <parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>7</version>
-  </parent>
   
   <licenses>
     <license>
@@ -99,6 +93,17 @@
 		     <autoReleaseAfterClose>true</autoReleaseAfterClose>
 		  </configuration>
 		</plugin> -->
+		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-release-plugin</artifactId>
+		  <version>2.5</version>
+		  <configuration>
+		    <autoVersionSubmodules>true</autoVersionSubmodules>
+		    <useReleaseProfile>false</useReleaseProfile>
+		    <releaseProfiles>release</releaseProfiles>
+		    <goals>deploy</goals>
+		  </configuration>
+		</plugin>
 	    <plugin>
 	      <groupId>org.apache.maven.plugins</groupId>
 	      <artifactId>maven-gpg-plugin</artifactId>
