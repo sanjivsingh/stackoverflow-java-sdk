@@ -88,6 +88,19 @@
 	<profiles>
 	  <profile> 
 	    <id>release</id>
+	    	  <distributionManagement>
+	        <snapshotRepository>
+	            <id>sonatype-nexus-snapshots</id>
+	            <name>Nexus Snapshots Repository</name>
+	            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+	            <uniqueVersion>false</uniqueVersion>
+	         </snapshotRepository>
+			 <repository>
+			      <id>sonatype-nexus-staging</id>
+			      <name>Nexus Staging Repository</name>
+			      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		    </repository>
+	  </distributionManagement>
 	    <build>
 		    <plugins>
 				<plugin>
@@ -98,7 +111,7 @@
 				    <autoVersionSubmodules>true</autoVersionSubmodules>
 				    <useReleaseProfile>false</useReleaseProfile>
 				    <releaseProfiles>release</releaseProfiles>
-				    <goals>deploy</goals>
+				    <goals>deploy nexus-staging:release</goals>
 				  </configuration>
 				</plugin>
 				<plugin>
@@ -136,7 +149,7 @@
 	        <snapshotRepository>
 	            <id>sonatype-nexus-snapshots</id>
 	            <name>Nexus Snapshots Repository</name>
-	            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+	            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 	            <uniqueVersion>false</uniqueVersion>
 	         </snapshotRepository>
 			 <repository>
