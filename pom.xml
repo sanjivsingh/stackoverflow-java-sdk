@@ -146,7 +146,6 @@
 		</profile>
 	</profiles>
 	
-	
 	<distributionManagement>
 		<snapshotRepository>
 			<id>sonatype-nexus-snapshots</id>
