@@ -35,6 +35,9 @@ public class StackExchangeApiClientFactory {
 	/** The application key. */
 	private String applicationKey;
 
+	/** The Access Token . */
+	private String accessToken = null;
+
 	private StackExchangeSite site;
 
 	/**
@@ -48,6 +51,23 @@ public class StackExchangeApiClientFactory {
 	private StackExchangeApiClientFactory(String applicationKey,
 			StackExchangeSite site) {
 		this.applicationKey = applicationKey;
+		this.site = site;
+	}
+
+	/**
+	 * Instantiates a new stack exchange api client factory.
+	 * 
+	 * @param applicationKey
+	 *            the application key
+	 * @param accessToken
+	 *            the access Token
+	 * @param site
+	 *            the stack exchange site
+	 */
+	private StackExchangeApiClientFactory(String applicationKey,
+			String accessToken, StackExchangeSite site) {
+		this.applicationKey = applicationKey;
+		this.accessToken = accessToken;
 		this.site = site;
 	}
 
@@ -77,13 +97,29 @@ public class StackExchangeApiClientFactory {
 	}
 
 	/**
+	 * New instance.
+	 * 
+	 * @param applicationKey
+	 *            the application key
+	 * @param site
+	 *            the stack exchange site
+	 * 
+	 * @return the stack exchange api client factory
+	 */
+	public static StackExchangeApiClientFactory newInstance(
+			String applicationKey, String accessToken, StackExchangeSite site) {
+		return new StackExchangeApiClientFactory(applicationKey, accessToken,
+				site);
+	}
+
+	/**
 	 * Creates a new StackExchangeApiClient object.
 	 * 
 	 * @return the stack exchange api client
 	 */
 	public StackExchangeApiClient createStackExchangeApiClient() {
 		final StackExchangeApiClient client = new StackExchangeApiJsonClient(
-				applicationKey, site);
+				applicationKey, accessToken, site);
 
 		return client;
 	}

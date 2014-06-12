@@ -23,7 +23,6 @@ import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.google.code.stackexchange.client.constant.ApplicationConstants;
@@ -36,23 +35,21 @@ import com.google.code.stackexchange.schema.Badge;
 import com.google.code.stackexchange.schema.BadgeRank;
 import com.google.code.stackexchange.schema.Comment;
 import com.google.code.stackexchange.schema.Error;
-import com.google.code.stackexchange.schema.Paging;
+import com.google.code.stackexchange.schema.Notification;
 import com.google.code.stackexchange.schema.PostTimeline;
 import com.google.code.stackexchange.schema.PostTimelineType;
 import com.google.code.stackexchange.schema.PostType;
 import com.google.code.stackexchange.schema.Question;
-import com.google.code.stackexchange.schema.Question.SortOrder;
-import com.google.code.stackexchange.schema.Range;
 import com.google.code.stackexchange.schema.Reputation;
 import com.google.code.stackexchange.schema.Revision;
 import com.google.code.stackexchange.schema.RevisionType;
 import com.google.code.stackexchange.schema.SchemaEntity;
+import com.google.code.stackexchange.schema.Site;
 import com.google.code.stackexchange.schema.SiteState;
 import com.google.code.stackexchange.schema.StackExchangeSite;
 import com.google.code.stackexchange.schema.Statistics;
 import com.google.code.stackexchange.schema.Tag;
 import com.google.code.stackexchange.schema.TagRestriction;
-import com.google.code.stackexchange.schema.TimePeriod;
 import com.google.code.stackexchange.schema.User;
 import com.google.code.stackexchange.schema.UserTimeline;
 import com.google.code.stackexchange.schema.UserTimelineType;
@@ -87,6 +84,8 @@ public class StackExchangeApiJsonClient extends BaseStackExchangeApiClient {
 		LIST_PLACE_HOLDERS.put(User.class, "items");
 		LIST_PLACE_HOLDERS.put(UserTimeline.class, "items");
 		LIST_PLACE_HOLDERS.put(Revision.class, "items");
+		LIST_PLACE_HOLDERS.put(Site.class, "items");
+		LIST_PLACE_HOLDERS.put(Notification.class, "items");
 	}
 
 	/** The parser. */
@@ -113,6 +112,21 @@ public class StackExchangeApiJsonClient extends BaseStackExchangeApiClient {
 	 * 
 	 * @param applicationKey
 	 *            the application key
+	 * @param accessToken
+	 *            the access Token
+	 * @param site
+	 *            the stack exchange site
+	 */
+	public StackExchangeApiJsonClient(String applicationKey,
+			String accessToken, StackExchangeSite site) {
+		super(applicationKey, accessToken, site);
+	}
+
+	/**
+	 * Instantiates a new stack exchange api json client.
+	 * 
+	 * @param applicationKey
+	 *            the application key
 	 * @param site
 	 *            the stack exchange site
 	 * @param apiVersion
@@ -121,6 +135,23 @@ public class StackExchangeApiJsonClient extends BaseStackExchangeApiClient {
 	public StackExchangeApiJsonClient(String applicationKey,
 			StackExchangeSite site, String apiVersion) {
 		super(applicationKey, site, apiVersion);
+	}
+
+	/**
+	 * Instantiates a new stack exchange api json client.
+	 * 
+	 * @param applicationKey
+	 *            the application key
+	 * @param accessToken
+	 *            the access Token
+	 * @param site
+	 *            the stack exchange site
+	 * @param apiVersion
+	 *            the api version
+	 */
+	public StackExchangeApiJsonClient(String applicationKey,
+			String accessToken, StackExchangeSite site, String apiVersion) {
+		super(applicationKey, accessToken, site, apiVersion);
 	}
 
 	protected <T> PagedList<T> unmarshallList(Class<T> clazz,

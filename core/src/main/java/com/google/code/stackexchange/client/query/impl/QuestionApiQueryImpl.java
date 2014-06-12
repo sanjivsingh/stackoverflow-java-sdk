@@ -304,7 +304,7 @@ public class QuestionApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 	}
 
 	@Override
-	public List<Question> listQuestionsByAnswer() {
+	public PagedList<Question> listQuestionsByAnswer() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_QUESTIONS_BY_ANSWER);
 		return super.list();
@@ -329,140 +329,140 @@ public class QuestionApiQueryImpl extends BaseStackOverflowApiQuery<Question>
 	}
 
 	@Override
-	public List<Question> listSimilarQuestions() {
+	public PagedList<Question> listSimilarQuestions() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_SIMILAR_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listLinkedQuestions() {
+	public PagedList<Question> listLinkedQuestions() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_LINKED_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listRelatedQuestions() {
+	public PagedList<Question> listRelatedQuestions() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_RELATED_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listUnAnsweredQuestions() {
+	public PagedList<Question> listUnAnsweredQuestions() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_UN_ANSWERED_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listUnAnsweredQuestionsByUser() {
+	public PagedList<Question> listUnAnsweredQuestionsByUser() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_UN_ANSWERED_USER_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listUnAcceptedQuestionsByUser() {
+	public PagedList<Question> listUnAcceptedQuestionsByUser() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_UN_ACCEPTED_USER_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listQuestionsWithNoAnswerByUser() {
+	public PagedList<Question> listQuestionsWithNoAnswerByUser() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_USER_QUESTIONS_WITH_NO_ANSWER);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listTopQuestionsWithTagPostedByUser() {
+	public PagedList<Question> listTopQuestionsWithTagPostedByUser() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_TOP_USER_QUESTIONS_WITH_TAG);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listUserFeaturedQuestions() {
+	public PagedList<Question> listUserFeaturedQuestions() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_USER_FEATURED_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listFeaturedQuestions() {
+	public PagedList<Question> listFeaturedQuestions() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_FEATURED_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listUnansweredUserQuestionWithFavoriteTags() {
+	public PagedList<Question> listUnansweredUserQuestionWithFavoriteTags() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_UNANSWERED_USER_QUESTIONS_WITH_FAV_TAGS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listMyFavoritesQuestions() {
+	public PagedList<Question> listMyFavoritesQuestions() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_MY_FAVORITE_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listMyQuestions() {
+	public PagedList<Question> listMyQuestions() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_MY_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listMyQuestionsWithNoAnswer() {
+	public PagedList<Question> listMyQuestionsWithNoAnswer() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_MY_QUESTIONS_WITN_NO_ANSWER);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listMyUnacceptedQuestions() {
+	public PagedList<Question> listMyUnacceptedQuestions() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_MY_UN_ACCEPTED_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listMyUnansweredQuestions() {
+	public PagedList<Question> listMyUnansweredQuestions() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_MY_UN_ANSWERED_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listMyFeaturedQuestions() {
+	public PagedList<Question> listMyFeaturedQuestions() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_MY_FEATURED_QUESTIONS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listMyTopQuestionsWithTag() {
+	public PagedList<Question> listMyTopQuestionsWithTag() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_MY_TOP_QUESTIONS_WITH_TAGS);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listQuestionsWithNoAnswer() {
+	public PagedList<Question> listQuestionsWithNoAnswer() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_QUESTIONS_WITH_NO_ANSWER);
 		return super.list();
 	}
 
 	@Override
-	public List<Question> listFrequentlyAskedQuestionsByTags() {
+	public PagedList<Question> listFrequentlyAskedQuestionsByTags() {
 		((DefaultApiUrlBuilder) apiUrlBuilder)
 				.withMethod(StackExchangeApiMethods.GET_FAQ_BY_TAGS);
 		return super.list();

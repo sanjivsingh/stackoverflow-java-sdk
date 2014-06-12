@@ -20,6 +20,7 @@ import com.google.code.stackexchange.client.query.impl.AdvanceSearchApiQueryImpl
 import com.google.code.stackexchange.client.query.impl.AnswerApiQueryImpl;
 import com.google.code.stackexchange.client.query.impl.BadgeApiQueryImpl;
 import com.google.code.stackexchange.client.query.impl.CommentApiQueryImpl;
+import com.google.code.stackexchange.client.query.impl.NotificationApiQueryImpl;
 import com.google.code.stackexchange.client.query.impl.PostApiQueryImpl;
 import com.google.code.stackexchange.client.query.impl.QuestionApiQueryImpl;
 import com.google.code.stackexchange.client.query.impl.QuestionTimelineApiQueryImpl;
@@ -295,6 +296,20 @@ public class StackExchangeApiQueryFactory {
 			return new UserApiQueryImpl(applicationKey, site, accessToken);
 		} else {
 			return new UserApiQueryImpl(applicationKey, site);
+		}
+	}
+
+	/**
+	 * New notification api query.
+	 * 
+	 * @return the notification api query
+	 */
+	public NotificationApiQuery newNotificationApiQuery() {
+		if (null != accessToken) {
+			return new NotificationApiQueryImpl(applicationKey, site,
+					accessToken);
+		} else {
+			return new NotificationApiQueryImpl(applicationKey, site);
 		}
 	}
 

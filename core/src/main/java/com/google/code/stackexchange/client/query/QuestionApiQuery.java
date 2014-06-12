@@ -252,7 +252,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listQuestionsByAnswer();
+	public PagedList<Question> listQuestionsByAnswer();
 
 	/**
 	 * List questions by user.
@@ -275,7 +275,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listSimilarQuestions();
+	public PagedList<Question> listSimilarQuestions();
 
 	/**
 	 * List linked questions by question Ids.
@@ -289,7 +289,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listLinkedQuestions();
+	public PagedList<Question> listLinkedQuestions();
 
 	/**
 	 * List related questions by question Ids.
@@ -303,7 +303,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listRelatedQuestions();
+	public PagedList<Question> listRelatedQuestions();
 
 	/**
 	 * List Un-Answered Questions
@@ -316,7 +316,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listUnAnsweredQuestions();
+	public PagedList<Question> listUnAnsweredQuestions();
 
 	/**
 	 * List Un-Answered Questions posted by User
@@ -330,7 +330,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listUnAnsweredQuestionsByUser();
+	public PagedList<Question> listUnAnsweredQuestionsByUser();
 
 	/**
 	 * List Un-Accepted Questions posted by User
@@ -345,7 +345,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * @return the paged list< question>
 	 */
 
-	public List<Question> listUnAcceptedQuestionsByUser();
+	public PagedList<Question> listUnAcceptedQuestionsByUser();
 
 	/**
 	 * List Questions with no answer posted by User
@@ -359,7 +359,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listQuestionsWithNoAnswerByUser();
+	public PagedList<Question> listQuestionsWithNoAnswerByUser();
 
 	/**
 	 * List Top Questions posted By User with the given tags
@@ -373,7 +373,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listTopQuestionsWithTagPostedByUser();
+	public PagedList<Question> listTopQuestionsWithTagPostedByUser();
 
 	/**
 	 * Gets the questions on which the users in {ids} have active bounties
@@ -387,7 +387,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listUserFeaturedQuestions();
+	public PagedList<Question> listUserFeaturedQuestions();
 
 	/**
 	 * Gets the questions with active bounties in the system.
@@ -399,7 +399,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listFeaturedQuestions();
+	public PagedList<Question> listFeaturedQuestions();
 
 	/**
 	 * Gets the questions the site considers to be unanswered, which are within
@@ -415,7 +415,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listUnansweredUserQuestionWithFavoriteTags();
+	public PagedList<Question> listUnansweredUserQuestionWithFavoriteTags();
 
 	/**
 	 * Returns the questions favorites by the user associated with the given
@@ -430,7 +430,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listMyFavoritesQuestions();
+	public PagedList<Question> listMyFavoritesQuestions();
 
 	/**
 	 * Returns the questions owned by the user associated with the given
@@ -445,7 +445,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listMyQuestions();
+	public PagedList<Question> listMyQuestions();
 
 	/**
 	 * Returns the questions owned by the user associated with the given
@@ -460,7 +460,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listMyQuestionsWithNoAnswer();
+	public PagedList<Question> listMyQuestionsWithNoAnswer();
 
 	/**
 	 * Returns the questions owned by the user associated with the given
@@ -475,7 +475,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listMyUnacceptedQuestions();
+	public PagedList<Question> listMyUnacceptedQuestions();
 
 	/**
 	 * Returns the questions owned by the user associated with the given
@@ -490,7 +490,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listMyUnansweredQuestions();
+	public PagedList<Question> listMyUnansweredQuestions();
 
 	/**
 	 * Returns the questions that have active bounties offered by the user
@@ -505,7 +505,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listMyFeaturedQuestions();
+	public PagedList<Question> listMyFeaturedQuestions();
 
 	/**
 	 * Returns the top 30 questions the user associated with the given
@@ -520,7 +520,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listMyTopQuestionsWithTag();
+	public PagedList<Question> listMyTopQuestionsWithTag();
 
 	/**
 	 * Returns questions which have received no answers
@@ -531,7 +531,7 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listQuestionsWithNoAnswer();
+	public PagedList<Question> listQuestionsWithNoAnswer();
 
 	/**
 	 * Returns the frequently asked questions for the given set of tags
@@ -544,9 +544,6 @@ public interface QuestionApiQuery extends StackExchangeApiQuery<Question> {
 	 * 
 	 * @return the paged list< question>
 	 */
-	public List<Question> listFrequentlyAskedQuestionsByTags();
-	
-	
-
+	public PagedList<Question> listFrequentlyAskedQuestionsByTags();
 
 }

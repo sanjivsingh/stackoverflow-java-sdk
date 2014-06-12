@@ -26,6 +26,7 @@ import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Answer;
 import com.google.code.stackexchange.schema.Badge;
 import com.google.code.stackexchange.schema.Comment;
+import com.google.code.stackexchange.schema.Notification;
 import com.google.code.stackexchange.schema.PostTimeline;
 import com.google.code.stackexchange.schema.Question;
 import com.google.code.stackexchange.schema.Reputation;
@@ -55,6 +56,7 @@ public class StackExchangeApiJsonQueryTest extends StackExchangeApiClientTest {
 
 		queryFactory = StackExchangeApiQueryFactory.newInstance(
 				TestConstants.STACK_OVERFLOW_TEST_API_KEY,
+				TestConstants.STACK_OVERFLOW_TEST_ACCESS_TOKEN,
 				StackExchangeSite.fromValue(TestConstants.STACK_EXCHANGE_SITE));
 	}
 
@@ -1234,4 +1236,47 @@ public class StackExchangeApiJsonQueryTest extends StackExchangeApiClientTest {
 		handleBackoff(revisions);
 		assertNotNullOrEmpty("Revisions should never be null.", revisions);
 	}
+
+	/**
+	 * Test get user notification accros Site
+	 */
+	@Test
+	public void testGetUserNotificationsAccrossSite() {
+		PagedList<Notification> notifications = queryFactory
+				.newNotificationApiQuery().list();
+		handleBackoff(notifications);
+		assertNotNullOrEmpty("Notifications should never be null.",
+				notifications);
+	}
+
+	/**
+	 * Test get my notification.
+	 */
+	@Test
+	public void testGetUserNotifications() {
+
+		PagedList<Notification> notifications = queryFactory
+				.newNotificationApiQuery().listMyNotifications();
+		handleBackoff(notifications);
+		assertNotNullOrEmpty("Notifications should never be null.",
+				notifications);
+	}
+
+	/**
+	 * Test get user notification by Ids.
+	 */
+	@Test
+	public void testGetUserNotificationsByIds() {
+		assertNotNullOrEmpty(
+				String.format(RESOURCE_MISSING_MESSAGE, "Test User Id."),
+				TestConstants.STACK_OVERFLOW_TEST_USER_IDS);
+		PagedList<Notification> notifications = queryFactory
+				.newNotificationApiQuery()
+				.withUserIds(getIds(TestConstants.STACK_OVERFLOW_TEST_USER_IDS))
+				.listUserNotifications();
+		handleBackoff(notifications);
+		assertNotNullOrEmpty("Notifications should never be null.",
+				notifications);
+	}
+
 }

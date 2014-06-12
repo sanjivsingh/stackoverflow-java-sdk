@@ -27,6 +27,7 @@ import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Answer;
 import com.google.code.stackexchange.schema.Badge;
 import com.google.code.stackexchange.schema.Comment;
+import com.google.code.stackexchange.schema.Notification;
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.PostTimeline;
 import com.google.code.stackexchange.schema.Question;
@@ -63,6 +64,28 @@ public abstract class BaseStackExchangeApiClient extends
 		// by default we compress contents
 		requestHeaders.put("Accept-Encoding", "gzip, deflate");
 		this.applicationKey = applicationKey;
+
+		this.site = site;
+	}
+
+	/**
+	 * Instantiates a new base stack exchange api client.
+	 * 
+	 * @param applicationKey
+	 *            the application key
+	 * @param accessToken
+	 *            the access Token
+	 * @param site
+	 *            the stack exchange site
+	 */
+	protected BaseStackExchangeApiClient(String applicationKey,
+			String accessToken, StackExchangeSite site) {
+		requestHeaders = new HashMap<String, String>();
+
+		// by default we compress contents
+		requestHeaders.put("Accept-Encoding", "gzip, deflate");
+		this.applicationKey = applicationKey;
+		this.accessToken = accessToken;
 		this.site = site;
 	}
 
@@ -79,6 +102,24 @@ public abstract class BaseStackExchangeApiClient extends
 	protected BaseStackExchangeApiClient(String applicationKey,
 			StackExchangeSite site, String apiVersion) {
 		this(applicationKey, site);
+		this.apiVersion = apiVersion;
+	}
+
+	/**
+	 * Instantiates a new base stack exchange api client.
+	 * 
+	 * @param applicationKey
+	 *            the application key
+	 * @param accessToken
+	 *            the access Token
+	 * @param site
+	 *            the stack exchange site
+	 * @param apiVersion
+	 *            the api version
+	 */
+	protected BaseStackExchangeApiClient(String applicationKey,
+			String accessToken, StackExchangeSite site, String apiVersion) {
+		this(applicationKey, accessToken, site);
 		this.apiVersion = apiVersion;
 	}
 
@@ -1842,5 +1883,111 @@ public abstract class BaseStackExchangeApiClient extends
 
 		String apiUrl = builder.buildUrl();
 		return unmarshallList(Question.class, callApiMethod(apiUrl));
+	}
+
+	@Override
+	public PagedList<Notification> getNotifications() {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_NOTIFICATIONS);
+		String apiUrl = builder.buildUrl();
+
+		return unmarshallList(Notification.class, callApiMethod(apiUrl));
+
+	}
+
+	@Override
+	public PagedList<Notification> getNotificationsUnread() {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_NOTIFICATIONS_UNREAD);
+		String apiUrl = builder.buildUrl();
+
+		return unmarshallList(Notification.class, callApiMethod(apiUrl));
+
+	}
+
+	@Override
+	public PagedList<Notification> getMyNotifications() {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_MY_NOTIFICATIONS);
+		String apiUrl = builder.buildUrl();
+
+		return unmarshallList(Notification.class, callApiMethod(apiUrl));
+
+	}
+
+	@Override
+	public PagedList<Notification> getMyNotificationsUnread() {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_MY_NOTIFICATIONS_UNREAD);
+		String apiUrl = builder.buildUrl();
+
+		return unmarshallList(Notification.class, callApiMethod(apiUrl));
+	}
+
+	@Override
+	public PagedList<Notification> getUserNotifications(long userId) {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_NOTIFICATIONS_BY_USER_IDS);
+		String apiUrl = builder.withField("id", String.valueOf(userId))
+				.buildUrl();
+		return unmarshallList(Notification.class, callApiMethod(apiUrl));
+
+	}
+
+	@Override
+	public PagedList<Notification> getUserNotificationsUnread(long userId) {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_UNREAD_NOTIFICATIONS_BY_USER_IDS);
+		String apiUrl = builder.withField("id", String.valueOf(userId))
+				.buildUrl();
+
+		return unmarshallList(Notification.class, callApiMethod(apiUrl));
+	}
+
+	@Override
+	public PagedList<Notification> getNotifications(Paging paging) {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_NOTIFICATIONS);
+		String apiUrl = builder.withPaging(paging).buildUrl();
+
+		return unmarshallList(Notification.class, callApiMethod(apiUrl));
+	}
+
+	@Override
+	public PagedList<Notification> getNotificationsUnread(Paging paging) {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_NOTIFICATIONS_UNREAD);
+		String apiUrl = builder.withPaging(paging).buildUrl();
+
+		return unmarshallList(Notification.class, callApiMethod(apiUrl));
+
+	}
+
+	@Override
+	public PagedList<Notification> getMyNotifications(Paging paging) {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_MY_NOTIFICATIONS);
+		String apiUrl = builder.withPaging(paging).buildUrl();
+
+		return unmarshallList(Notification.class, callApiMethod(apiUrl));
+
+	}
+
+	@Override
+	public PagedList<Notification> getMyNotificationsUnread(Paging paging) {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_MY_NOTIFICATIONS_UNREAD);
+		String apiUrl = builder.withPaging(paging).buildUrl();
+
+		return unmarshallList(Notification.class, callApiMethod(apiUrl));
+	}
+
+	@Override
+	public PagedList<Notification> getUserNotifications(long userId,
+			Paging paging) {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_NOTIFICATIONS_BY_USER_IDS);
+		String apiUrl = builder.withPaging(paging).withId(userId).buildUrl();
+
+		return unmarshallList(Notification.class, callApiMethod(apiUrl));
+
+	}
+
+	@Override
+	public PagedList<Notification> getUserNotificationsUnread(long userId,
+			Paging paging) {
+		ApiUrlBuilder builder = createStackOverflowApiUrlBuilder(StackExchangeApiMethods.GET_UNREAD_NOTIFICATIONS_BY_USER_IDS);
+		String apiUrl = builder.withPaging(paging).withId(userId).buildUrl();
+
+		return unmarshallList(Notification.class, callApiMethod(apiUrl));
 	}
 }

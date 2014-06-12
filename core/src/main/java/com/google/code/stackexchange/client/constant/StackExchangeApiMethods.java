@@ -240,6 +240,24 @@ public final class StackExchangeApiMethods {
 	/** The Constant GET_POSTS. */
 	public static final String GET_USER_POSTS = "com.google.code.stackexchange.client.getPostByUserIds";
 
+	/** The Constant GET_NOTIFICATIONS. */
+	public static final String GET_NOTIFICATIONS = "com.google.code.stackexchange.client.getUserNotitication";
+
+	/** The Constant GET_NOTIFICATIONS_UNREAD. */
+	public static final String GET_NOTIFICATIONS_UNREAD = "com.google.code.stackexchange.client.getUserNotiticationUnread";
+
+	/** The Constant GET_MY_NOTIFICATIONS. */
+	public static final String GET_MY_NOTIFICATIONS = "com.google.code.stackexchange.client.getMyNotitication";
+
+	/** The Constant GET_MY_NOTIFICATIONS_UNREAD. */
+	public static final String GET_MY_NOTIFICATIONS_UNREAD = "com.google.code.stackexchange.client.getMyNotiticationUnread";
+
+	/** The Constant GET_NOTIFICATIONS_BY_USER_IDS. */
+	public static final String GET_NOTIFICATIONS_BY_USER_IDS = "com.google.code.stackexchange.client.getUserNotiticationByUserId";
+
+	/** The Constant GET_UNREAD_NOTIFICATIONS_BY_USER_IDS. */
+	public static final String GET_UNREAD_NOTIFICATIONS_BY_USER_IDS = "com.google.code.stackexchange.client.getUserNotiticationUnreadByUserId";
+
 	/**
 	 * Instantiates a new stack exchange api methods.
 	 */

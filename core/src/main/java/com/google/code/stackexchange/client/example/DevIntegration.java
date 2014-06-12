@@ -3,8 +3,11 @@ package com.google.code.stackexchange.client.example;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.code.stackexchange.client.StackExchangeApiClient;
+import com.google.code.stackexchange.client.impl.StackExchangeApiJsonClient;
 import com.google.code.stackexchange.client.query.StackExchangeApiQueryFactory;
 import com.google.code.stackexchange.common.PagedList;
+import com.google.code.stackexchange.schema.Notification;
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.PostTimeline;
 import com.google.code.stackexchange.schema.Question;
@@ -15,14 +18,26 @@ import com.google.code.stackexchange.schema.User;
 public class DevIntegration {
 
 	public static void main(String[] args) {
-		boolean isAuth = true;
+
+		String accessToken = "accessToken";
+		String applicationKey = "applicationKey";
+		StackExchangeApiClient client = new StackExchangeApiJsonClient(
+				applicationKey, accessToken, StackExchangeSite.STACK_OVERFLOW);
+
+		/*
+		 * PagedList<Notification> notificationts = client
+		 * .getUserNotifications(
+		 * getIds(TestConstants.STACK_OVERFLOW_TEST_USER_IDS)[0]);
+		 * System.out.println(notificationts);
+		 */
+
 		StackExchangeApiQueryFactory queryFactory = null;
+		boolean isAuth = true;
 		if (isAuth) {
 			queryFactory = StackExchangeApiQueryFactory.newInstance(
 					"applicationKey", "accessToken",
 					StackExchangeSite.STACK_OVERFLOW);
 		} else {
-			
 			queryFactory = StackExchangeApiQueryFactory.newInstance();
 		}
 
@@ -31,7 +46,45 @@ public class DevIntegration {
 		List<String> tag = new ArrayList<String>();
 		tag.add("java");
 
+		System.out.println("listNotifications");
+		PagedList<Notification> notifications = queryFactory
+				.newNotificationApiQuery().withUserIds(2384778).list();
+		System.out.println(notifications);
+
+		System.out.println("listNotificationsUnread");
+		PagedList<Notification> notification1s = queryFactory
+				.newNotificationApiQuery().withUserIds(2384778)
+				.listNotificationsUnread();
+		System.out.println(notification1s);
+
+		System.out.println("listUserNotifications");
+		PagedList<Notification> notification2s = queryFactory
+				.newNotificationApiQuery().withUserIds(2384778)
+				.listUserNotifications();
+		System.out.println(notification2s);
+
+		System.out.println("listUserNotificationsUnread");
+		PagedList<Notification> notification3s = queryFactory
+				.newNotificationApiQuery().withUserIds(2384778)
+				.listUserNotificationsUnread();
+		System.out.println(notification3s);
+
+		System.out.println("listMyNotifications");
+		PagedList<Notification> notification4s = queryFactory
+				.newNotificationApiQuery().withUserIds(2384778)
+				.listMyNotifications();
+		System.out.println(notification4s);
+
+		System.out.println("listMyNotificationsUnread");
+		PagedList<Notification> notification5s = queryFactory
+				.newNotificationApiQuery().withUserIds(2384778)
+				.listMyNotificationsUnread();
+		System.out.println(notification5s);
+
 		System.out.println("get user by Id");
+		PagedList<Question> qqqqqs = queryFactory.newQuestionApiQuery()
+				.withPaging(paging).withUserIds(1934044).list();
+
 		/*
 		 * PagedList<User> users = queryFactory.newUserApiQuery()
 		 * .withUserIds(1934044).listUserByIds(); printUsers(users);
@@ -235,16 +288,15 @@ public class DevIntegration {
 
 		List<String> nottagged = new ArrayList<String>();
 		nottagged.add("php");
-		
-		  PagedList<Question> question13s = queryFactory
-		  .newAdvanceSearchApiQuery().withMinViews(100)
-		  .withAccepted(true).withClosed(true).withMigrated(true)
-		  .withMinViews(minViews).withMinAnswers(minAnswers)
-		  .withNotice(true).withFilter(filterName).withQuery(query)
-		  .withTags(tagged).withOutTags(nottagged).list();
-		 
-		  printQuestions(question13s);
-		 
+
+		PagedList<Question> question13s = queryFactory
+				.newAdvanceSearchApiQuery().withMinViews(100)
+				.withAccepted(true).withClosed(true).withMigrated(true)
+				.withMinViews(minViews).withMinAnswers(minAnswers)
+				.withNotice(true).withFilter(filterName).withQuery(query)
+				.withTags(tagged).withOutTags(nottagged).list();
+
+		printQuestions(question13s);
 
 		System.out.println("get My Questions");
 		PagedList<Question> question14s = (PagedList<Question>) queryFactory

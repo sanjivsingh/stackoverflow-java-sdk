@@ -22,6 +22,7 @@ import com.google.code.stackexchange.common.PagedList;
 import com.google.code.stackexchange.schema.Answer;
 import com.google.code.stackexchange.schema.Badge;
 import com.google.code.stackexchange.schema.Comment;
+import com.google.code.stackexchange.schema.Notification;
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.PostTimeline;
 import com.google.code.stackexchange.schema.Question;
@@ -1275,5 +1276,97 @@ public interface StackExchangeApiClient extends
 	 */
 	public PagedList<Revision> getRevisionForPost(long postId,
 			String revisionGuid);
+
+	/**
+	 * Get user notifications across site
+	 * 
+	 * @return the paged list< Notification>
+	 */
+	public PagedList<Notification> getNotifications();
+
+	/**
+	 * Get user notifications across site
+	 * 
+	 * @return the paged list< Notification>
+	 */
+	public PagedList<Notification> getNotificationsUnread();
+
+	/**
+	 * Get my notifications
+	 * 
+	 * @return the paged list< Notification>
+	 */
+
+	public PagedList<Notification> getMyNotifications();
+
+	/**
+	 * Get my notifications
+	 * 
+	 * @return the paged list< Notification>
+	 */
+
+	public PagedList<Notification> getMyNotificationsUnread();
+
+	/**
+	 * Get user notifications by user id
+	 * 
+	 * @return the paged list< Notification>
+	 */
+
+	public PagedList<Notification> getUserNotifications(long userId);
+
+	/**
+	 * Get user notifications by user id
+	 * 
+	 * @return the paged list< Notification>
+	 */
+	public PagedList<Notification> getUserNotificationsUnread(long userId);
+
+	/**
+	 * Get user notifications across site
+	 * 
+	 * @return the paged list< Notification>
+	 */
+	public PagedList<Notification> getNotifications(Paging paging);
+
+	/**
+	 * Get user notifications across site
+	 * 
+	 * @return the paged list< Notification>
+	 */
+	public PagedList<Notification> getNotificationsUnread(Paging paging);
+
+	/**
+	 * Get my notifications
+	 * 
+	 * @return the paged list< Notification>
+	 */
+
+	public PagedList<Notification> getMyNotifications(Paging paging);
+
+	/**
+	 * Get my notifications
+	 * 
+	 * @return the paged list< Notification>
+	 */
+
+	public PagedList<Notification> getMyNotificationsUnread(Paging paging);
+
+	/**
+	 * Get user notifications by user id
+	 * 
+	 * @return the paged list< Notification>
+	 */
+
+	public PagedList<Notification> getUserNotifications(long userId,
+			Paging paging);
+
+	/**
+	 * Get user notifications by user id
+	 * 
+	 * @return the paged list< Notification>
+	 */
+	public PagedList<Notification> getUserNotificationsUnread(long userId,
+			Paging paging);
 
 }

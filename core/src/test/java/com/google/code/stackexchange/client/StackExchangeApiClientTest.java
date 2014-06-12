@@ -81,6 +81,7 @@ public abstract class StackExchangeApiClientTest extends TestCase {
 				TestConstants.STACK_EXCHANGE_SITE);
 		factory = StackExchangeApiClientFactory.newInstance(
 				TestConstants.STACK_OVERFLOW_TEST_API_KEY,
+				TestConstants.STACK_OVERFLOW_TEST_ACCESS_TOKEN,
 				StackExchangeSite.fromValue(TestConstants.STACK_EXCHANGE_SITE));
 	}
 

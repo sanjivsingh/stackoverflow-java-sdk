@@ -41,6 +41,7 @@ import com.google.code.stackexchange.schema.Badge;
 import com.google.code.stackexchange.schema.BadgeRank;
 import com.google.code.stackexchange.schema.Comment;
 import com.google.code.stackexchange.schema.Error;
+import com.google.code.stackexchange.schema.Notification;
 import com.google.code.stackexchange.schema.Paging;
 import com.google.code.stackexchange.schema.PostTimeline;
 import com.google.code.stackexchange.schema.PostTimelineType;
@@ -101,6 +102,7 @@ public abstract class BaseStackOverflowApiQuery<T> extends
 		LIST_PLACE_HOLDERS.put(UserTimeline.class, "items");
 		LIST_PLACE_HOLDERS.put(Revision.class, "items");
 		LIST_PLACE_HOLDERS.put(Site.class, "items");
+		LIST_PLACE_HOLDERS.put(Notification.class, "items");
 	}
 
 	/** The handlers. */
