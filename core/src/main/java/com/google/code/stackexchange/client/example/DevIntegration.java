@@ -24,18 +24,15 @@ public class DevIntegration {
 		StackExchangeApiClient client = new StackExchangeApiJsonClient(
 				applicationKey, accessToken, StackExchangeSite.STACK_OVERFLOW);
 
-		/*
-		 * PagedList<Notification> notificationts = client
-		 * .getUserNotifications(
-		 * getIds(TestConstants.STACK_OVERFLOW_TEST_USER_IDS)[0]);
-		 * System.out.println(notificationts);
-		 */
+		PagedList<Notification> notificationts = client.getNotifications();
+		
+		System.out.println(notificationts);
 
 		StackExchangeApiQueryFactory queryFactory = null;
 		boolean isAuth = true;
 		if (isAuth) {
 			queryFactory = StackExchangeApiQueryFactory.newInstance(
-					"applicationKey", "accessToken",
+					applicationKey, accessToken,
 					StackExchangeSite.STACK_OVERFLOW);
 		} else {
 			queryFactory = StackExchangeApiQueryFactory.newInstance();
