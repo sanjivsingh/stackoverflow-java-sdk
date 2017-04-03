@@ -39,7 +39,7 @@ Or you simply maven dependency in your project
 **Repository**
 <pre  style="font-family:arial;font-size:12px;border:1px dashed #CCCCCC;width:99%;height:auto;overflow:auto;background:#f0f0f0;;background-image:URL(http://2.bp.blogspot.com/_z5ltvMQPaa8/SjJXr_U2YBI/AAAAAAAAAAM/46OqEP32CJ8/s320/codebg.gif);padding:0px;color:#000000;text-align:left;line-height:20px;"><code style="color:#000000;word-wrap:normal;">  &lt;repository&gt;                    
     &lt;id&gt;oss.sonatype&lt;/id&gt;                   
-    &lt;url&gt;https://oss.sonatype.org/content/repositories/releases/&lt;url&gt;     
+    &lt;url&gt;https://oss.sonatype.org/content/repositories/releases/&lt;/url&gt;     
     &lt;releases&gt;                             
        &lt;enabled&gt;true&lt;/enabled&gt;                       
     &lt;/releases&gt;                       
