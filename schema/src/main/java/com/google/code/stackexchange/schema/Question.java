@@ -291,6 +291,9 @@ public class Question extends SchemaEntity {
 	/** The question url. */
 	private String link;
 
+	/** The question is answered. */
+	private boolean isAnswered;
+
 	private Date protectedDate;
 
 	private Migration migrated;
@@ -852,5 +855,20 @@ public class Question extends SchemaEntity {
 	 */
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	/**
+	 * @return the IsAnswered
+	 */
+	public boolean getIsAnswered() {
+		return isAnswered;
+	}
+
+	/**
+	 * @param isAnswered
+	 *            the isAnswered to set
+	 */
+	public void setIsAnswered(boolean isAnswered) {
+		this.isAnswered = isAnswered;
 	}
 }
