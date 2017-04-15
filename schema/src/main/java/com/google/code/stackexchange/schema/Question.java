@@ -288,8 +288,11 @@ public class Question extends SchemaEntity {
 	/** The question answers url. */
 	private String questionAnswersUrl;
 
-	/** The question answers url. */
-	private String questionUrl;
+	/** The question url. */
+	private String link;
+
+	/** The question is answered. */
+	private boolean isAnswered;
 
 	private Date protectedDate;
 
@@ -840,17 +843,32 @@ public class Question extends SchemaEntity {
 	}
 
 	/**
-	 * @return the questionUrl
+	 * @return the link
 	 */
-	public String getQuestionUrl() {
-		return questionUrl;
+	public String getLink() {
+		return link;
 	}
 
 	/**
-	 * @param questionUrl
-	 *            the questionUrl to set
+	 * @param link
+	 *            the link to set
 	 */
-	public void setQuestionUrl(String questionUrl) {
-		this.questionUrl = questionUrl;
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	/**
+	 * @return the IsAnswered
+	 */
+	public boolean getIsAnswered() {
+		return isAnswered;
+	}
+
+	/**
+	 * @param isAnswered
+	 *            the isAnswered to set
+	 */
+	public void setIsAnswered(boolean isAnswered) {
+		this.isAnswered = isAnswered;
 	}
 }
